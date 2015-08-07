@@ -1,0 +1,8 @@
+<br>
+<b><?php echo $this->controller->classtemplate->text->paraminvalid;?></b>
+
+<?php printErrorsByField($this->form->idEntity(), $this->errorMessages);?>
+
+<a href="<?php echo $this->baseUrl;?><?php echo CLASS_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>">
+	<?php echo $this->labels->button->back; ?>
+</a>

@@ -1,0 +1,73 @@
+<?php echo $this->render('header/header.phtml');?>										 		  						
+									  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/subMenuRelationship.phtml');?>	
+
+	<!-- ============================================================================================== -->
+	<!-- É necessário informar o nome class da tabela em questão para carregar a cor background correta -->
+	<!-- Opções: 
+				#identification
+				#person
+				#education
+				#health
+				#income
+				#familyRelationship
+				#residence
+				#attendance
+				#activity	-->
+	<!-- ============================================================================================== -->
+	
+	
+		<table width="570" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="center">
+					<?php if($this->errorMessages):?>
+					
+					<h1 class="title"><?php echo $this->controller->bioRelation->search->title;?></h1>
+					
+					<div class="inputBox">
+						<table width="548" cellpadding="0" cellspacing="0" style="margin-top: 10px;">
+							<tr>
+								<td>
+									<table width="100%" cellpadding="0" cellspacing="0" >
+
+										<tr>
+											<td colspan="4">
+												<b><?php echo $this->controller->bioRelation->text->searchPerson;?></b>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="4">
+												<?php echo $this->controller->bioRelation->search->info;?>
+											</td>
+										</tr>
+									</table>
+									
+									<table width="100%" cellpadding="0" cellspacing="0">
+										<?php echo $this->render('biological-relationship/_name_form.phtml'); ?>
+									</table>
+									
+									<table width="100%" cellpadding="0" cellspacing="0">
+										<?php echo $this->render('biological-relationship/_document_form.phtml'); ?>
+									</table>
+									
+								</td>
+							</tr>
+						</table>
+					</div>
+					<?php else:?>
+						<?php echo $this->render('biological-relationship/_form.phtml'); ?>
+					<?php endif;?>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>																  
+<!-- =================================== -->
+<!-- fim : específico para cada template -->					
+<!-- =================================== -->		
+					
+<?php echo $this->render('footer/footer.phtml');?>	

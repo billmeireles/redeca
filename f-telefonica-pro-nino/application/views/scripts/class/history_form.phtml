@@ -1,0 +1,86 @@
+	
+	<tr>
+		<td><h1 class="title"><?php echo $this->controller->classtemplate->text->newclass;?></h1></td>
+	</tr>	
+
+	<tr><td>
+	<div class="inputBox">
+		<table style="margin-top: 10px;" >
+		<thead>
+			<tr>
+				<td class="label" width="90%">
+					Data
+				</td>
+				<td class="label"  width="10%">
+					Usuário
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach($this->history as $history) : ?>
+			<?php $id = $history['id_class_history'];?>
+			<tr>
+				<td>
+				<a href="#" onclick="openClose(<?php echo $id?>);"><?php echo $this->date[$id] ." - ". $history['type_operation']?>  </a>
+				</td>
+				<td>
+				<a href="#" onclick="openClose(<?php echo $id?>);"><?php echo $this->user[$id][0]['name']?>  </a>
+				</td>
+			</tr>
+			
+			<tr>
+			<td>
+			<div id="<?php echo $id?>" style="display:none;">
+					Alteração feita em: <?php echo $this->date[$id]?><br />
+					Modificado por: <?php echo $this->user[$id][0]['name']?><br />
+					<!-- Verifica se foi alterado propriedade -->
+					<?php if($history ['type_operation'] != "Propriedades"):?>
+					Pessoa: <?php echo $this->person[$id][0]['name']?><br />
+					<?php endif;?>
+					<?php if($history ['type_operation'] == "Propriedades"):?>
+					Programa: <?php echo $this->program[$id][0]['program_type']?><br />
+					Nome: <?php echo $history['name']?><br />
+					Vagas: <?php echo $history['vacancy']?><br />
+					Período: <?php if($history['period'] == 1) echo "Manhã";
+						if($history['period'] == 2) echo "Tarde";
+						if($history['period'] == 3) echo "Noite";
+						if($history['period'] == 4) echo "Integral";
+					?><br />
+					<?php if(!empty($this->activity)):?>
+					<?php $i = 0?>
+						Atividades cadastradas para a turma:<br />
+						<?php foreach($this->activity as $activity) : ?>
+						<?php echo $this->activity[$i]['category'] .' - '. $this->activity[$i]['activity_detail']?><br/>
+						<?php $i++?>
+						<?php endforeach;?>
+					<?php endif;?>
+					<?php endif;?>
+			</div>
+			</td>
+			</tr>
+			<?php endforeach;?>
+		</tbody>
+		</table>
+		
+		<a href="#" onclick="submitForm('/class/properties','action_<?php echo $iterator?>');">Voltar</a>
+		<?php echo "<form id='";echo "action_"; echo "' method='post'>";
+			echo "<input type='hidden' name='";
+				echo ClassForm::idEntity(); 
+				echo "' value='";
+				echo $this->entity; 
+			echo "'/>";
+			echo "<input type='hidden' name='";
+				echo ClassForm::idClass(); 
+				echo "' value='";
+				echo $this->class->{CLS_ID_CLASS};
+			echo "'/>";
+			echo "<input type='hidden' name='";
+				echo ClassForm::idProgram(); 
+				echo "' value='";
+				echo $this->class->{CLS_ID_PROGRAM}; 
+			echo "'/>";
+			echo "";
+			echo "<tr>";
+		echo "</form>";?>
+	</div>
+	</td></tr>

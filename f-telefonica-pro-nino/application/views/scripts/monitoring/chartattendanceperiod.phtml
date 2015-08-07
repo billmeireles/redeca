@@ -1,0 +1,121 @@
+<?php echo $this->render('header/header.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<?php if(UserLogged::isAdministrator() && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') === false)){?>						  
+	<div>
+<?php } else {?>
+	<div style="margin-left:123px;">
+<?php }?>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+</div>
+
+<div class="graphic">
+		
+	<div id="container" class="div" style="height: <?php echo $this->height; ?>px;">
+	
+	</div>
+	<script type="text/javascript">
+		$(function () {
+		    var chart;
+		    $(document).ready(function() {
+		        chart = new Highcharts.Chart({
+		            chart: {
+		                renderTo: 'container',
+		                type: 'bar'
+		            },
+		            title: {
+	                text: 'Quantidade Pessoas: Entidade x Atendimento'
+		            },
+		            subtitle: {
+						text: 'Periodo de <?php echo $this->initial ?> até <?php echo $this->final ?>',
+						x: -20
+					},
+			        xAxis: {
+		            	categories: [<?php foreach ($this->attendanceperiods as $key => $attendanceperiod): ?>
+							'<?php echo $attendanceperiod->getName() ?>'
+							<?php if (count($this->attendanceperiods) > ($key+1)){ ?>
+								,
+							<?php } ?>	
+						<?php endforeach ?>],
+		                title: {
+		                    text: null
+		                }
+		            },
+		            yAxis: {
+		            	allowDecimals: false,
+		                min: 0,
+		                title: {
+		                    text: 'Número Pessoas',
+		                    align: 'high'
+		                }
+		            },
+		            tooltip: {
+		                formatter: function() {
+		                    return ''+
+		                        this.series.name +': '+ this.y +' pessoa(s)';
+		                }
+		            },
+		            plotOptions: {
+		                bar: {
+		                    dataLabels: {
+		                        enabled: true
+		                    }
+		                }
+		            },
+		            legend: {
+		            	width: 200,
+		            	itemStyle: {
+			                width: '180px'
+			            },
+		                layout: 'vertical',
+		                align: 'right',
+		                verticalAlign: 'top',
+		                x: -70,
+		                y: 70,
+		                floating: true,
+		                borderWidth: 1,
+		                backgroundColor: '#FFFFFF',
+		                shadow: true
+		            },
+		            credits: {
+		                enabled: false
+		            },
+		            series: [
+		            <?php foreach ($this->view as $key => $entity): ?>
+					    {
+					        name: '<?php echo $entity->getName() ?>',
+					        data: [
+								<?php foreach ($entity->getCategorys() as $keyC => $category): ?>
+									<?php echo $category->getTotal() ?>
+									<?php if (count($entity->getCategorys()) > ($keyC+1)){ ?>
+										,
+									<?php } ?>
+								<?php endforeach ?>
+								]
+					    }
+					    <?php if (count($this->view) > ($key+1)){ ?>
+							,
+						<?php } ?>	
+					<?php endforeach ?>
+		            ],
+		            exporting: {
+	                	url: 'http://export.highcharts.com/index-utf8-encode.php'
+	                }
+		        });
+		    });
+	    
+		});
+	</script>
+	
+	<div class="back">
+		<input class="button" style="float:left;" type="button" value="Voltar" onclick="window.location = '<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/attendanceperiod';"/>
+	</div>
+</div>
+
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+<?php echo $this->render('footer/footer.phtml');?>

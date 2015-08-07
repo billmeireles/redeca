@@ -1,0 +1,184 @@
+	
+	<tr>
+		<td><h1 class="title"><?php echo $this->controller->classtemplate->text->newclass;?></h1></td>
+	</tr>	
+
+	<tr><td>
+	<div class="inputBox">
+		<table style="margin-top: 10px;" >
+			<?php printErrorsByField($this->form->idEntity(), $this->errorMessages);?>
+				<?php if(sizeof($this->programs) > 0 ):?>
+					
+					<?php			
+						if($this->errorMessages[$this->form->idProgram()])
+						{
+							$existActivityAssociated = true;
+						}
+						else
+						{
+							foreach($this->activities as $activity)
+							{
+								$aad = $activity->findDependentRowset(CLS_ACTIVITYDETAIL);
+								foreach($aad as $act)
+								{
+									$existActivityAssociated = true;
+									break;
+								}	
+							}
+						}
+						
+					?>
+				
+						<tr>
+							<td class="label" width="30%">
+								<?php echo $this->controller->classtemplate->text->classdescription;?>:
+							</td>
+							
+							<td class="label" width="45%">
+								<label><?php echo $this->classes->{CLS_NAME}?></label>
+							</td>
+							
+							<td class="label" >
+								<a href="/class/classHistory/class/<?php echo $this->classes->{CLS_ID_CLASS}?>"><font size="2">&nbsp<?php echo $this->controller->classtemplate->text->history;?></font></a>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="label">
+								<?php echo $this->controller->classtemplate->text->vacanciesTotal;?>:
+							</td>
+							
+							<td class="label">
+								<label><?php echo $this->classes->{CLS_VACANCY}?></label>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="label">
+								<?php echo $this->controller->classtemplate->text->vacanciesDisp;?>:
+							</td>
+							
+							<td class="label">
+								<?php 
+									if($this->vacancy > 0)
+										echo $this->vacancy;
+									else
+									{
+										echo 0;
+									}
+								?>
+							</td>
+						</tr>
+						
+						<tr>
+							<td class="label">
+								<?php echo $this->controller->classtemplate->text->wait;?>:
+							</td>
+							<td class="label">
+								<?php 
+									if($this->wait == 0){
+										echo ($this->wait);
+									}
+									else{
+										echo ($this->wait).'    '.$this->controller->classtemplate->text->waitMsg.' <a href="/class/wait/id_class/'. $this->classes->{CLS_ID_CLASS}.'/vacancy/'.($this->vacancy).'/entity/'.$this->form->getIdEntity().'">Ver Fila</a>';
+									}
+									
+									
+								?>
+							</td>
+						</tr>
+						
+						<?php endif;?>
+		</table>
+		<br />
+		<hr>
+		<br />
+		<table>
+			<thead>
+				<tr>
+					<td class="label" width="45%">
+						<?php echo $this->controller->classtemplate->text->person;?>
+					</td>
+					<td class="label"width="45%"">
+						<?php echo $this->controller->classtemplate->text->includeDate;?>
+					</td>
+					<td class="label">
+						<?php echo $this->controller->classtemplate->text->action;?>
+					</td>
+				</tr>
+			</thead>
+			
+			<tbody>
+			<?php $i = 0?>
+				<?php foreach($this->person as $persons) : ?>
+				<?php if($persons['id_status'] == 1):?>
+					<tr>
+						<td>
+							<?php echo $this->escape($persons['name'])?>
+						</td>
+						<td>
+							<?php echo $this->date[$i];?>
+						</td>
+						<td>
+							<a href="/class/delete/person/<?php echo $this->escape($persons['id_person'])?>/class/<?php echo $this->classes->{CLS_ID_CLASS}?>"><font size="2">&nbsp<?php echo $this->controller->classtemplate->text->delete;?></font></a>
+						</td>
+						<td>
+							<a href="/class/migratePerson/person/<?php echo $this->escape($persons['id_person'])?>/class/<?php echo $this->classes->{CLS_ID_CLASS}?>"><font size="2">&nbsp<?php echo $this->controller->classtemplate->text->transfer;?></font></a>
+						</td><tr></tr>
+					</tr>
+					<?php $i++?>
+				<?php endif;?>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+				<?php echo "<form id='";echo "action_"; echo "' method='post'>";
+									echo "<input type='hidden' name='";
+										echo ClassForm::idEntity(); 
+										echo "' value='";
+										echo $this->form->getIdEntity(); 
+									echo "'/>";
+									echo "<input type='hidden' name='";
+										echo ClassForm::idClass(); 
+										echo "' value='";
+										echo $this->classes->{CLS_ID_CLASS};
+									echo "'/>";
+									echo "<input type='hidden' name='";
+										echo ClassForm::idProgram(); 
+										echo "' value='";
+										echo $this->classes->{CLS_ID_PROGRAM}; 
+									echo "'/>";
+									echo "";
+									echo "<tr>";
+									echo "<td class='middleValign' >";
+									echo "<input class='button' style='width: 83px;' type='button' onclick=\"submitForm('";
+												echo $this->baseUrl;
+												echo CLASS_CONTROLLER;
+												echo "/";
+												echo "generateCsv/class/".$this->classes->{CLS_ID_CLASS};
+												echo "','";
+												echo "action_"; 
+												echo $iterator;
+												echo "');\"";
+												echo " value='";
+												echo $this->controller->classtemplate->button->export;
+											echo "'/>";
+										if($this->readOnly == FALSE)
+										{
+											echo "<input class='button' style='margin-left: 5px; width: 128px;' type='button' onclick=\"submitForm('";
+												echo $this->baseUrl;
+												echo CLASS_CONTROLLER;
+												echo "/";
+												echo DEFAULT_CONFIRM_ACTION;
+												echo "','";
+												echo "action_"; 
+												echo $iterator;
+												echo "');\"";
+												echo " value='";
+												echo $this->controller->classtemplate->button->close;
+											echo "'/>";
+										}
+									echo "</td>";
+									echo "</tr>";
+								echo "</form>";?>
+	</div>
+	</tr></td>

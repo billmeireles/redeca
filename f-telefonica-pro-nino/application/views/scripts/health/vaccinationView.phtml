@@ -1,0 +1,24 @@
+<tr>
+	<td width="30%">
+		<b><?php echo $this->controller->health->text->vaccin;?></b>
+	</td>
+	<td colspan="2">
+		<?php echo $this->vaccine->name . " (" . $this->vaccine->description . ")"; ?>
+	</td>	
+</tr>
+<tr>
+	<td>
+		<b><?php echo $this->controller->health->text->date;?></b>
+	</td>
+	<td colspan="2">
+		<?php echo $this->form->dateFormatForm($this->vaccinationByPerson->date); ?>
+	</td>	
+</tr>
+<tr>
+	<td>
+		<b><?php echo $this->controller->health->text->lot;?></b>
+	</td>
+	<td colspan="2">
+		<?php echo $this->vaccinationByPerson->lot; ?>
+	</td>	
+</tr>

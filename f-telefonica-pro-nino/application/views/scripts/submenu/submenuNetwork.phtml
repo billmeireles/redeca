@@ -1,0 +1,40 @@
+<?php 
+	//variável utilizada para setar background do submenu 
+	$stringUri = $_SERVER["REQUEST_URI"];
+?>
+
+<table width="570" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<div style="width: 570px;">
+		
+					<?php if(ResourcePermission::isAllowResource(NETWORK_CONTROLLER)){?>
+					<ul class="submenuCentral adm" style="text-align: left;">
+						<li <?php 
+							$stringmatch = DEFAULT_VIEWENTITY_ACTION; if (preg_match("%($stringmatch)%", "$stringUri")){
+								echo "class='current'";}
+							?>>
+							<a href="<?php echo $this->baseUrl;?><?php echo NETWORK_CONTROLLER;?>/<?php echo DEFAULT_VIEWENTITY_ACTION;?>">
+								<div class="menuTexto menuEntity ">
+									<?php echo $this->controller->network->text->entities;?>
+								</div>
+							</a>
+						</li>
+						
+						<li <?php $stringmatch = DEFAULT_VIEWACTIVITY_ACTION; if (preg_match("%($stringmatch)%", "$stringUri")){
+							echo "class='current'";}
+							?>>
+							<a href="<?php echo $this->baseUrl;?><?php echo NETWORK_CONTROLLER;?>/<?php echo DEFAULT_VIEWACTIVITY_ACTION;?>">
+								<div class="menuTexto menuActivity">
+									<?php echo $this->controller->network->text->activities;?>
+								</div>
+							</a>
+						</li>
+					</ul>
+				  <?php }?>
+				
+			</div>
+		</td>
+	</tr>
+</table>
+

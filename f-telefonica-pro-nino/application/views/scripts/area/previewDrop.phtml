@@ -1,0 +1,40 @@
+<tr>
+	<td>		
+		<h1 class="title" style="margin-top: 33px;">
+			<?php echo ($this->labels->confirm->disable->title);?>
+		</h1>
+	</td>
+</tr>
+
+<tr>
+	<td width="100%" align="center">
+		<div class="inputBox">
+			<table width="548" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+
+						<form action="<?php echo $this->baseUrl;?><?php echo AREA_CONTROLLER;?>/<?php echo DEFAULT_DROP_ACTION;?>" method="post">
+							<p style="margin-top: 10px;">
+								<?php echo $this->labels->confirm->disable->text;?>&nbsp;<?php echo $this->escape($this->form->getId());?>&nbsp;?<br>
+								<?php 
+									foreach($this->result as $result)
+									{
+										echo "<br>".$this->controller->area->text->name.":&nbsp;";
+										echo "<input type='hidden' name='".$this->form->id()."[]' value='".$result->{EAT_ID_ENTITY_AREA}."'/>";
+										echo "<b>". $result->{EAT_ENTITY_AREA}."</b><br>";
+									}
+								?>
+							</p>
+							<div style="height: 50px">
+								<?php if(!$this->errorMessages){?>
+								<input class="button" type="submit" name="<?php echo E_CONFIRM; ?>" value="<?php echo $this->labels->confirm->button->yes;?>" />
+								<?php }?>
+								<input class="button" style="margin-left: 5px" type="button" onClick="document.location='<?php echo $this->baseUrl;?><?php echo AREA_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>'" value="<?php echo $this->labels->confirm->button->cancel;?>" />
+							</div>
+						</form>		
+					</td>
+				</tr>
+			</table>
+		</div>
+	</td>
+</tr>

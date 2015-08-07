@@ -1,0 +1,156 @@
+<?php $show = Zend_Registry::get(CONFIG)->container->residence;?>
+<script type="text/javascript">		
+	$('#imgFakeHideRes').hide();
+	<?php if($show):?>
+		$().ajaxSend(function(){$('#loading6').show();});		
+		$.post('<?php echo $this->baseUrl;?><?php echo RESIDENCE_CONTROLLER;?>/<?php echo DEFAULT_CONTAINER_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>', function(data){ $('#residence').append(data);$('#loading6').hide();});
+	<?php else:?>
+		function showResidence()
+		{
+			$('#maxResidence').hide();
+			$('#mainResidence').show();
+			$().ajaxSend(function(){$('#loading6').show();$('#imgHideRes').hide();$('#imgFakeHideRes').show();$('#tableHideRes').hide();$('#tableFakeHideRes').show();});		
+			$.post('<?php echo $this->baseUrl;?><?php echo RESIDENCE_CONTROLLER;?>/<?php echo DEFAULT_CONTAINER_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>', 
+				function(data)
+				{ 
+					if(data.search(/<?php echo $this->labels->login->title;?>/i) != -1)
+					{
+						window.location.reload();
+					}
+					else
+					{
+						$('#residence').append(data);
+						$('#loading6').hide();
+						$('#imgFakeHideRes').hide();						
+						$('#imgHideRes').show();
+						$('#tableFakeHideRes').hide();
+						$('#tableHideRes').show();
+					}
+				}
+			);
+		}
+		
+		function hideResidence()
+		{
+			$('#maxResidence').show();
+			$('#residence').empty();
+			$('#mainResidence').hide();
+		}
+	<?php endif;?>	
+	
+</script>
+
+<?php if(!$show):?>
+<!-- Antigo --
+<div id="maxResidence" class="health">
+	<table class="residence" width="100%">
+		<tr>
+			<td>
+				
+				<table width="100%" class="tableContainer" onClick="showResidence()">
+					<tr>
+						<td width="10%" class="fontContainer">
+							<img src="<?php echo $this->baseUrl;?>/public/images/show.png" title="<?php echo $this->labels->title->show;?>"/>
+						</td>				
+						<td width="90%" class="fontContainer">
+							<b><?php echo $this->labels->title->residence;?></b>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+-->
+
+<div id="maxResidence">
+	<div class="container containerDesatived containerMarginLeft" onClick="showResidence()" cellpadding="0" cellspacing="0">
+		<div class="title">
+			<span><?php echo $this->labels->title->residence;?></span>
+		</div>
+		<div class="borderBottom"></div>	
+	</div>
+</div>
+
+<?php endif;?>
+
+<!-- Antigo --
+<div id="mainResidence" <?php if(!$show):?>style="display: none;"<?php endif;?>>
+	<table class="residence" width="100%">
+		<tr>
+			<td class="container">
+				
+				<?php if(!$show):?>
+					<table width="100%" class="tableContainer" id="tableHideRes" onClick="hideResidence()">
+						<tr>
+							<td width="10%" class="fontContainer">
+								<img id="imgHideRes" src="<?php echo $this->baseUrl;?>/public/images/hide.png" title="<?php echo $this->labels->title->hide;?>"/>
+								<img id="imgFakeHideRes" src="<?php echo $this->baseUrl;?>/public/images/hide.png" title="<?php echo $this->labels->title->hide;?>"/>
+							</td>				
+							<td width="90%" class="fontContainer">
+								<b><?php echo $this->labels->title->residence;?></b>
+							</td>
+						</tr>
+					</table>
+					<table width="100%" class="tableContainer" id="tableFakeHideRes">
+						<tr>
+							<td width="10%" class="fontContainer">
+								<img id="imgHideRes" src="<?php echo $this->baseUrl;?>/public/images/hide.png" title="<?php echo $this->labels->title->hide;?>"/>								
+							</td>				
+							<td width="90%" class="fontContainer">
+								<b><?php echo $this->labels->title->residence;?></b>
+							</td>
+						</tr>
+					</table>
+				<?php else:?>
+					<table width="100%" class="tableContainer">
+						<tr>
+							<td width="10%" class="fontContainer">								
+							</td>				
+							<td width="90%" class="fontContainer">
+								<b><?php echo $this->labels->title->residence;?></b>
+							</td>
+						</tr>
+					</table>
+				<?php endif;?>
+				<p>				
+				<div id="loading6">
+					<center><img src="<?php echo $this->baseUrl;?>/public/images/loading.gif"/></center>
+				</div>
+			
+				<div id="residence"></div>
+											
+			</td>
+		</tr>
+	</table>
+</div>
+-->
+
+<div id="mainResidence" <?php if(!$show):?>style="display: none;"<?php endif;?>>
+	<div class="container containerMarginLeft">
+		<?php if(!$show):?>
+			<div class="containerFake" id="tableHideRes" onClick="hideResidence()">
+				<div class="title">
+					<span><?php echo $this->labels->title->residence;?></span>
+				</div>						
+			</div>
+			
+			<div class="containerFake" id="tableFakeHideRes">
+				<div class="title">
+					<span><?php echo $this->labels->title->residence;?></span>
+				</div>
+				<div id="loading6" class="loading"></div>
+			</div>
+			
+		<?php else:?>
+			<div class="container">
+				<div class="textTitle">
+					<?php echo $this->labels->title->residence;?>
+				</div>
+			</div>
+		<?php endif;?>				
+			<div id="residence"></div>
+			<div class="borderBottom"></div>				
+	</div>		
+</div>
+

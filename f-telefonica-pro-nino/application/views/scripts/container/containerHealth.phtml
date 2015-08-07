@@ -1,0 +1,152 @@
+<?php $show = Zend_Registry::get(CONFIG)->container->health;?>
+<script type="text/javascript">		
+	$('#imgFakeHideHealth').hide();
+	<?php if($show):?>
+		$().ajaxSend(function(){$('#loading2').show();});		
+		$.post('<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_CONTAINER_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>', function(data){ $('#health').append(data);$('#loading2').hide();});
+	<?php else:?>
+		function showHealth()
+		{
+			$('#maxHealth').hide();
+			$('#mainHealth').show();
+			$().ajaxSend(function(){$('#loading2').show();$('#imgHideHealth').hide();$('#imgFakeHideHealth').show();$('#tableHideHealth').hide();$('#tableFakeHideHealth').show();});		
+			$.post('<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_CONTAINER_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>', 
+				function(data)
+				{  
+					if(data.search(/<?php echo $this->labels->login->title;?>/i) != -1)
+					{
+						window.location.reload();
+					}
+					else
+					{
+						$('#health').append(data);
+						$('#loading2').hide();
+						$('#imgFakeHideHealth').hide();
+						$('#imgHideHealth').show();
+						$('#tableFakeHideHealth').hide();
+						$('#tableHideHealth').show();
+					}
+				}
+			);
+		}
+		
+		function hideHealth()
+		{
+			$('#maxHealth').show();
+			$('#health').empty();
+			$('#mainHealth').hide();
+		}
+	<?php endif;?>
+	
+</script>
+
+<?php if(!$show):?>
+<!-- Antigo --
+<div id="maxHealth" class="health">
+	<table class="health" width="100%" >
+		<tr>
+			<td>
+				<table width="100%" class="tableContainer" onClick="showHealth()">
+					<tr>
+						<td width="10%" class="fontContainer">
+							<img src="<?php echo $this->baseUrl;?>/public/images/show.png" title="<?php echo $this->labels->title->show;?>"/>							
+						</td>				
+						<td width="90%" class="fontContainer">
+							<b><?php echo $this->labels->title->health;?></b>
+						</td>
+					</tr>
+				</table>
+			</td>				
+		</tr>
+	</table>
+</div>
+-->
+
+<div id="maxHealth">
+	<div class="container containerDesatived" onClick="showHealth()">
+		<div class="title">
+			<span><?php echo $this->labels->title->health;?></span>
+		</div>
+		<div class="borderBottom"></div>	
+	</div>
+</div>
+
+<?php endif;?>
+
+<!-- Antigo --
+<div id="mainHealth" <?php if(!$show):?>style="display: none;"<?php endif;?>>
+	<table class="health" width="100%">
+		<tr>
+			<td class="container">
+				<?php if(!$show):?>
+					<table width="100%" class="tableContainer" id="tableHideHealth" onClick="hideHealth()">
+						<tr>
+							<td width="10%" class="fontContainer">
+								<img id="imgHideHealth" src="<?php echo $this->baseUrl;?>/public/images/hide.png" title="<?php echo $this->labels->title->hide;?>" />
+								<img id="imgFakeHideHealth" src="<?php echo $this->baseUrl;?>/public/images/hide.png" title="<?php echo $this->labels->title->hide;?>"/>
+							</td>				
+							<td width="90%" class="fontContainer">
+								<b><?php echo $this->labels->title->health;?></b>
+							</td>
+						</tr>
+					</table>
+					<table width="100%" class="tableContainer" id="tableFakeHideHealth">
+						<tr>
+							<td width="10%" class="fontContainer">
+								<img id="imgHideHealth" src="<?php echo $this->baseUrl;?>/public/images/hide.png" title="<?php echo $this->labels->title->hide;?>" />								
+							</td>				
+							<td width="90%" class="fontContainer">
+								<b><?php echo $this->labels->title->health;?></b>
+							</td>
+						</tr>
+					</table>
+				<?php else:?>
+					<table width="100%" class="tableContainer">
+						<tr>
+							<td width="10%" class="fontContainer">								
+							</td>				
+							<td width="90%" class="fontContainer">
+								<b><?php echo $this->labels->title->health;?></b>
+							</td>
+						</tr>
+					</table>
+				<?php endif;?>
+				<p>
+				<div id="loading2">
+					<center><img src="<?php echo $this->baseUrl;?>/public/images/loading.gif"/></center>
+				</div>
+				<div id="health"></div>
+											
+			</td>
+		</tr>
+	</table> 
+</div>
+-->
+
+<div id="mainHealth" <?php if(!$show):?>style="display: none;"<?php endif;?>>
+	<div class="container">
+		<?php if(!$show):?>
+			<div class="containerFake" id="tableHideHealth" onClick="hideHealth()">
+				<div class="title">
+					<span><?php echo $this->labels->title->health;?></span>
+				</div>						
+			</div>
+			
+			<div class="containerFake" id="tableFakeHideHealth">
+				<div class="title">
+					<span><?php echo $this->labels->title->health;?></span>
+				</div>
+				<div id="loading2" class="loading"></div>
+			</div>
+			
+		<?php else:?>
+			<div class="container">
+				<div class="textTitle">
+					<?php echo $this->labels->title->health;?>
+				</div>
+			</div>
+		<?php endif;?>				
+			<div id="health"></div>
+			<div class="borderBottom"></div>				
+	</div>		
+</div>

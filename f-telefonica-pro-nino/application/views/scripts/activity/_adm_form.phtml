@@ -1,0 +1,317 @@
+<!-- ==================================================== -->
+<!-- formulário que visualiza as informações para edição =-->
+<!-- este formulário é visualizado a partir do view.phtml -->					
+<!-- ==================================================== -->
+<?php	
+$activityType 	= $this->form->getActivityType();
+$panel 			= $this->panel;
+$association 	= ActivityForm::ASSOCIATION_FLAG;
+$cadastre		= ActivityForm::CADASTRE_FLAG;
+?>
+	<tr>
+		<td>
+			<h1 class="title"><?php echo $this->labels->create->activity;?></h1><hr>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<?php echo $this->helpcontroller->text1?>
+			<hr>
+		</td>
+	</tr>
+	<tr>
+		<td align="right">
+			<?php echo $this->render('navigation/navigationEntity.phtml');?>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<div class="inputBox">
+			<table cellpadding="0" cellspacing="0" style="width: 548px">
+				<tbody>
+				<tr>
+					<td height="30">
+						<h1 class="title">Atividades</h1>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<?php echo $this->helpcontroller->text2?>
+					</td>
+				</tr>
+				<tr>
+					<td height="40">
+						<input class="button" style="width:265px" type="button" onClick="javascript: showDiv('registerActivity','associationActivity');" value="<?php echo $this->controller->activity->button->register;?>"/>
+						<input class="button" style="float:right; width:265px" type="button" onClick="javascript: showDiv('associationActivity','registerActivity');" value="<?php echo $this->controller->activity->button->association;?>"/>
+					</td>
+				</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<?php printError($this->businessMessage); ?>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<!-- Inicio da Tab de Cadastro de Atividade -->
+			<div id="registerActivity">
+			<form action="<?php echo $this->baseUrl;?><?php echo ACTIVITY_CONTROLLER;?>/<?php if($this->form->getIdActivity() > 0) echo DEFAULT_EDIT_ACTION; else echo DEFAULT_ADD_ACTION;?>" method="post">
+				<div class="inputBox">
+					<table cellpadding="0" cellspacing="0" width="548"> 
+						<tr>
+							<td class="label" width="42%" align="right"><?php echo $this->controller->activity->text->admin->descriptionselect;?>:</td>
+							<!-- Radio Buttons de tipo de atividades -->
+							<td width="58%">
+								<div class="radioCenter">							
+									<input type="radio" name="<?php echo ActivityForm::activityType();?>" value="0" checked onclick="hide(['select_Ativity', 'label_macroactivity'])" />&nbsp;<?php echo $this->controller->activity->text->admin->macroactivity;?>&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="<?php echo ActivityForm::activityType();?>" value="1" <?php if($activityType == 1) echo 'checked';?> onclick="show(['select_Ativity', 'label_macroactivity'])"/>&nbsp;<?php echo $this->controller->activity->text->activity;?>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td class="label">
+								<p id="label_macroactivity" <?php if( $activityType == 1){ echo 'style=\'display:inline\''; } else{ echo 'style=\'display:none\'';  } ?> >
+									<?php echo $this->controller->activity->text->admin->registeredmacroactivity;?>:</p>
+							</td>
+							<td>
+								<!-- Combo de macro-atividades -->
+								<select class="bigInput" id="select_Ativity" name="<?php echo ActivityForm::idMacroActivity(); ?>" <?php if( $activityType == 1){ echo 'style=\'display:inline\''; } else{ echo 'style=\'display:none\'';  } ?> >
+									<option value="">
+										<?php echo $this->controller->activity->text->admin->macroactivityselect; ?>
+									</option>
+									<?php foreach ($this->macroActivities as $activity) { ?>
+									<option value="<?php echo $activity->{CAT_ID_CATEGORY}?>" <?php if($activity->{CAT_ID_CATEGORY} == $this->form->getIdMacroActivity()) echo 'selected';?> ><?php echo $activity->{CAT_CATEGORY}?></option>
+									<?php }?>
+								</select>
+								
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<?php 
+									/* Mensagens de erro */
+									if($panel == $cadastre)
+										printErrorsByField($this->form->idMacroActivity(), $this->errorMessages); 
+								?>
+							</td>
+						</tr>
+						<tr>
+							<td class="label">
+								<?php echo $this->controller->activity->text->admin->pleaseactivity;?>:
+							</td>
+							<td>
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+										<td>
+											<!-- Campo Hidden para edição de uma atividade (necessário) -->
+											<input type="hidden" name="<?php echo ActivityForm::idActivity(); ?>" value="<?php echo $this->form->getIdActivity(); ?>"/>
+											<!-- Campo para cadastro/edição de uma atividade -->
+											<input style="width: 130px" type="text" size="38" name="<?php echo ActivityForm::activityName(); ?>" value="<?php if($this->escape($this->form->getActivityName()) != '' ) echo $this->form->getActivityName(); else echo $this->controller->activity->text->admin->pleaseactivity;?>" onclick="if(this.value=='<?php echo $this->controller->activity->text->admin->pleaseactivity;?>') this.value=''"/>										
+										</td>
+										<td>
+											<select style="width: 100px" name="<?php echo $this->form->status();?>">
+												<option value="<?php echo Constants::ENABLE;?>"><?php echo $this->labels->text->enable;?></option>
+												<option value="<?php echo Constants::DISABLE;?>" <?php if($this->form->getStatus() == Constants::DISABLE) echo "selected";?>><?php echo $this->labels->text->disable;?></option>
+											</select>
+										</td>
+										<td>
+											<input class="button" style="margin-top: -1px;" float: right;" type="submit" value="<?php echo $this->labels->button->save;?>"/>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<?php 
+									printErrorsByField($this->form->activityName(), $this->errorMessages);
+									printErrorsByField($this->form->status(), $this->errorMessages);
+								?>
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+</form>
+				
+				<div class="inputBox">
+					<table width="548" cellpadding="0" cellspacing="0" style="margin-top: 10px;" >
+
+						<tr>
+							<td colspan="2" >
+								<table width="548" cellpadding="0" cellspacing="0">
+									<tr>
+										<td width="50%" ><?php echo $this->controller->activity->text->admin->registeredmacroactivity;?></td>
+										<td width="50%" ><?php echo $this->controller->activity->text->admin->registeredactivity;?></td>
+									</tr>
+									<tr>
+										<td colspan="2" align="center">
+											<?php 
+												if($panel == $cadastre)
+													printErrorsByField($this->form->idActivity(), $this->errorMessages); 
+											?>
+										</td>
+									</tr>
+									<tr>
+										<td>
+	<form action="<?php echo $this->baseUrl;?><?php echo ACTIVITY_CONTROLLER;?>/<?php echo DEFAULT_CONFIRM_ACTION;?>" method="post">
+											<!-- Combo de macro-atividades -->
+											<select id="typeMacro" name="<?php echo ActivityForm::idActivity();?>[]" size="15" multiple>
+												<?php foreach ($this->macroActivities as $activity) { ?>
+													<option value="<?php echo $activity->{CAT_ID_CATEGORY};?>" title="<?php echo $activity->{CAT_CATEGORY};?>">
+														<?php echo $activity->{CAT_CATEGORY};?>
+														<?php if($activity->{CAT_STATUS} == Constants::DISABLE):?>
+															&nbsp;*&nbsp;<?php echo $this->labels->text->disable;?>&nbsp;*
+														<?php endif;?>
+													</option>
+												<?php }?>
+											</select>
+											<p>
+												<!-- Botão de edição de macro-atividades -->
+												<input class="button" type="submit" value="<?php echo $this->labels->button->edit;?>"
+												onClick="javascript: return reportMultipleSelected('<?php echo $this->baseUrl;?><?php echo ACTIVITY_CONTROLLER;?>/<?php echo DEFAULT_VIEW_ACTION;?>',this.form, 'typeMacro');"/>
+											
+												<!-- Botão de exclusão de macro-atividades -->
+												<input class="button" style="margin-left: 5px;" type="submit" value="<?php echo $this->labels->button->disable;?>"/>
+											</p>
+	</form>
+										</td>
+									
+										<td>
+	<form action="<?php echo $this->baseUrl;?><?php echo ACTIVITY_CONTROLLER;?>/<?php echo DEFAULT_CONFIRM_ACTION;?>" method="post">
+											<!-- Combo de atividades -->
+											<select name="<?php echo ActivityForm::idActivity();?>[]" size="15" multiple>
+												<?php foreach ($this->activities as $activity) { ?>
+													<option value="<?php echo $activity->{CAT_ID_CATEGORY}?>" title="<?php echo $activity->{CAT_CATEGORY}?>">
+														<?php echo $activity->{CAT_CATEGORY}?>
+														<?php if($activity->{CAT_STATUS} == Constants::DISABLE):?>
+															&nbsp;*&nbsp;<?php echo $this->labels->text->disable;?>&nbsp;*
+														<?php endif;?>
+													</option>
+												<?php }?>
+											</select>
+											<p>
+												<!-- Botão de edição de atividades -->
+												<input class="button" type="submit" value="<?php echo $this->labels->button->edit;?>" 
+												onClick="javascript: return reportMultipleSelected('<?php echo $this->baseUrl;?><?php echo ACTIVITY_CONTROLLER;?>/<?php echo DEFAULT_VIEW_ACTION;?>',this.form, 'typeActivity');"/>
+											
+												<!-- Botão de exclusão de atividades -->
+												<input class="button" style="margin-left: 5px" type="submit" value="<?php echo $this->labels->button->disable;?>" />
+												<br />
+											</p>
+	</form>
+										</td>
+									</tr>
+
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				</div></td></tr>
+			
+<!-- Fim da Tab de Cadastro de Atividade -->
+
+<!-- Formulário de associação de atividades -->
+<tr>
+<td>
+<form action="<?php echo $this->baseUrl;?><?php echo ACTIVITY_CONTROLLER;?>/<?php echo DEFAULT_ASSOCIATION_ACTION ?>" method="post">
+			<div id="associationActivity" style="display: <?php if($panel == $association) echo 'inline'; else echo'none'; ?>">
+				<div class="inputBox">
+				<table cellpadding="0" cellspacing="0" width="548">
+					<tr>
+						<td colspan="2" class="label"><?php echo $this->controller->activity->text->admin->descriptionselectmacro;?>:</td>
+					</tr>
+					<tr>
+						<td>
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tr>
+									<td width="100%">
+										<select name="<?php echo ActivityForm::idMacroActivity();?>" onChange=" actionName('<?php echo $this->baseUrl;?><?php echo ACTIVITY_CONTROLLER;?>/<?php echo DEFAULT_ACTIVITY_ACTION;?>',this.form); this.form.submit();">
+											<option value=""><?php echo $this->labels->text->select?>...</option>
+											<?php foreach ($this->macroActivities as $activity) { ?>
+												<option value="<?php echo $activity->{CAT_ID_CATEGORY}?>"
+													<?php if($activity->{CAT_ID_CATEGORY} == $this->form->getIdMacroActivity()) echo 'selected'; ?>
+												><?php echo $activity->{CAT_CATEGORY}?></option>												
+											<?php }?>
+										</select>										
+									</td>
+								</tr>
+								<tr>
+									<td width="50%">
+										<?php 
+											/* Mensagens de erro */
+											if($panel == $association)
+												printErrorsByField($this->form->idMacroActivity(), $this->errorMessages); 
+										?>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table class="withoutEdge" width="100%" cellpadding="0" cellspacing="0">
+								<tr>
+									<td width="45%"><b><?php echo $this->controller->activity->text->admin->allregisteredactivity;?></b></td>
+									<td width="10%">&nbsp;</td>
+									<td width="45%"><b><?php echo $this->controller->activity->text->admin->chosenregisteredactivity;?></b></td>
+								</tr>
+								<tr>
+									<td width="50%" colspan="2">						
+										<?php 
+											/* Mensagens de erro */
+											if($panel == $association)
+												printErrorsByField($this->form->idActivity(), $this->errorMessages); 
+										?>
+									</td>
+								</tr>
+								<tr>
+									<td width="45%">
+										<select name="" size="15" multiple id="activityOption" ondblclick="moveSelectedOptions(this.form['activityOption'],this.form['optionAssociated'],true);selected(this.form['optionAssociated']);">
+											<?php foreach ($this->activities as $activity) { ?>
+												<?php if($activity->{CAT_ID_CATEGORY_FATHER} != $this->form->getIdMacroActivity()):?>
+													<option value="<?php echo $activity->{CAT_ID_CATEGORY}?>" title="<?php echo $activity->{CAT_CATEGORY}?>"><?php echo $activity->{CAT_CATEGORY}?></option>
+												<?php endif;?>
+											<?php }?>
+										</select>
+									</td>
+									<td class="middleValign" width="10%">
+										<input class="small" type="button" value="&gt;" onclick="moveSelectedOptions(this.form['activityOption'],this.form['optionAssociated'],true);selected(this.form['optionAssociated']);"/><br><br>
+										<input class="small" type="button" value="&gt;&gt;" onclick="moveAllOptions(this.form['activityOption'],this.form['optionAssociated'],true);selected(this.form['optionAssociated']);"/><br><br>
+										<input class="small" type="button" value="&lt;&lt;" onclick="moveAllOptions(this.form['optionAssociated'],this.form['activityOption'],true);selected(this.form['optionAssociated']);"/><br><br>
+										<input class="small" type="button" value="&lt;" onclick="moveSelectedOptions(this.form['optionAssociated'],this.form['activityOption'],true);selected(this.form['optionAssociated']);"/>
+									</td>
+									<td width="45%">
+										<!-- Combobox de Atividades -->  
+										<select name="<?php echo ActivityForm::idActivity();?>[]" size="15" multiple id="optionAssociated" ondblclick="moveSelectedOptions(this.form['optionAssociated'],this.form['activityOption'],true)">
+										<?php 
+										foreach ($this->activities as $activity) 
+										{
+											if($activity->{CAT_ID_CATEGORY_FATHER} == $this->form->getIdMacroActivity())
+												echo "<option value='".$activity->{CAT_ID_CATEGORY}."' title='".$activity->{CAT_CATEGORY}."'>".$activity->{CAT_CATEGORY}."</option>";
+										} /*end foreach*/
+										?>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3"><input class="button" type="submit" value="<?php echo $this->controller->activity->button->associationabove;?>"/></td>
+								</tr>
+								<tr>
+									<td>
+										<br />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+				</div>
+			</div>
+</form>
+<!-- Fim da Tab de Associação de Atividade -->
+		</td>
+	</tr>

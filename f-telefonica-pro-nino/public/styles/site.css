@@ -1,0 +1,1926 @@
+/* =================================================================== */
+/* FONTE PADRÃO */
+/* =================================================================== */
+@font-face {
+	font-family: 'KreonRegular';
+	src: url('../fontes/kreon-regular-webfont.eot');
+	src: url('../fontes/kreon-regular-webfont.eot?#iefix')
+		format('embedded-opentype'),
+		url('../fontes/kreon-regular-webfont.woff') format('woff'),
+		url('../fontes/kreon-regular-webfont.ttf') format('truetype'),
+		url('../fontes/kreon-regular-webfont.svg#KreonRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* =================================================================== */
+/* TABELA BASE. TODAS AS OUTRAS TABELAS HERDAM OS ESTILOS DESSA TABELA */
+/* =================================================================== */
+/*
+table {
+	border: 1px solid #BFBFBF;
+}
+*/
+
+/* =========================== */
+/* Estilo de tabela sem bordas */
+/* =========================== */
+
+table.withoutEdge {
+	border: 0;
+	margin: 0 auto;
+}
+
+table.menuPartner {	
+	float: left;	
+}
+
+table.withoutEdge .buttonMenu {
+	background-color: #FFFFFF;
+	float: left;
+	margin-right: 7px;
+	height: 31px;
+	border: 1px solid #F3F3F3;
+	padding: 0 10px;
+}
+
+table.withoutEdge .menuPartner .buttonMenu a {
+	line-height: 33px;
+	padding: 0 15px;
+}
+
+table.withoutEdge .menuPartner .buttonMenu a:HOVER {
+	text-decoration: underline;
+}
+
+.menuEdit {
+	float: right;
+	margin-bottom: 20px;
+}
+
+tr.tdMiddle td {
+	vertical-align: middle;
+}
+
+.buttonGreen {
+	text-align: center;
+	float: left;
+	background: url("../images/icone_comando.png") no-repeat #2B4F65;
+	height: 33px;
+	margin: 0px 3px;
+}
+
+.buttonGreen a {
+	padding: 0 10px 0 45px;
+	font-size: 10pt;
+	line-height: 33px;
+	color: #99C78D;
+}
+
+.menuEdit div.buttonGreen:hover {
+	background-color: #99C78D;
+}
+
+.menuEdit div.buttonGreen:hover a {
+	color: #2B4F65;
+}
+
+.edit {
+	background-position: 6px -45px;
+}
+
+.activate {
+	background-position: 6px 2px;
+}
+
+.deactivate {
+	background-position: 6px -96px;
+	margin-right: 0 !important;	 
+}
+
+.changesHistory {
+	background-position: 6px -147px;
+	margin-right: 0 !important;
+}
+
+.search {
+	background-position: 6px -194px;
+}
+
+.new {
+	background-position: 6px -246px;
+}
+
+
+table.withoutEdge tbody tr td .buttonMenu a { 
+	line-height: 30px;
+	color: #2B4F65;
+	font-size: 9pt;
+}
+
+table.userLogged {
+	height: 30px;
+	border: 0px;
+	text-align: left;
+	vertical-align: bottom;
+	padding: 0;
+	margin: 10px auto 0 auto;
+}
+
+table.userLogged td p {
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	font-size: 16px;
+	padding: 10px 0 0 0;
+	color: #2b4f65;
+}
+
+.userPadding {
+	padding: 10px 0 0 0;
+}
+
+/* ================================== */
+/* Estilo de tabela com bordas pretas */
+/* ================================== */
+table.borderBlack {
+	border: 1px solid #000000;
+}
+
+/* ================================== */
+/* Estilo para destaque azuis 		  */
+/* ================================== */
+
+.featuredBlue table {
+	background: #2b4f65;
+	padding: 5px;
+}
+
+
+
+.featuredBlue td, .featuredBlue b {
+	color: #fff;
+}
+
+.menuFeature {
+	height: 30px;
+	background-color:  #2b4f65;
+	width: 100%
+}
+
+.menuFeature a {
+	color: #FFFFFF;
+	padding: 5px 0;
+	line-height: 30px;
+}
+
+.menuFeature a:hover {
+	color: #9DCA90;
+}
+
+/* ====================================================== */
+/* Estilo aplicado para tag " H1 " - escrito centralizado */
+/* ====================================================== */
+h1 {
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	font-size: 14px;
+	color: #9dca90;
+	text-align: center;
+}
+
+h1.title {
+	font-size: 16px;
+	text-transform: uppercase;
+	padding-bottom: 30px;
+	font-weight: normal !important;
+	
+}
+
+/* ==================================================== */
+/* Estilo aplicado para tag " H1 " - escrito a esquerda */
+/* ==================================================== */
+h1.left {
+	text-align: left;
+}
+
+/* =============================== */
+/* Estilo aplicado para tag " TR " */
+/* =============================== */
+tr {
+	height: 5px;
+	
+}
+
+/* ====================================================================== */
+/* Estilo aplicado para tag " TR - utilizado na listagem de informações " */
+/* Pode ser usada para intercalar cor de fundo das linhas =============== */
+/* ====================================================================== */
+tr.write {
+	height: 15px;
+	
+}
+
+td.heightThirty {
+	height: 30px;
+}
+
+table tr.lineGrid td {
+	border-top: 1px solid #CCCCCC;
+	vertical-align: middle;
+}
+
+table tr.lineGrid {
+	background-color: #FFFFFF;	
+}
+
+table tr.selectedIndex {
+	background-color: #F0F0F0 !important;
+}
+
+table.tdZero td {
+	vertical-align: top !important;
+}
+
+.space {
+	height: 3px;
+}
+
+.space td {
+	border-top: 1px solid #CCCCCC;
+}
+
+.borderLeft {
+	border-left: 1px solid #CCCCCC;
+	height: 65px;
+}
+
+.borderRight {
+	border-right: 1px solid #CCCCCC;
+	
+}
+
+.subGrid {
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	margin-bottom: 2px;
+}
+
+.gridContent {
+	font-size: 14px !important;
+	font-family: "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	color: #2B4F65;	
+}
+
+.gridContent strong {
+	font-weight: normal;
+	padding-bottom: 10px;
+	padding-top: 5px;
+	color: #9DCA90;
+}
+
+.lineWithLabel {
+	text-align: left;
+}
+
+td.lineWithLabel span, td.lineWithLabel a {
+	height: 10px;
+	
+}
+
+.navBar {
+	width: 100%;
+}
+
+.navBar p,
+.navBar .navButton input{
+	font-family: "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	font-size: 10pt !important;
+	color: #2B4F65;
+	float: left;
+	
+}
+
+.navBar .navButton input[disabled],
+.navBar .navButton input[disabled=""],
+.navBar .navButton input[disabled="disabled"],
+.navBar .navButton input.light[disabled],
+.navBar .navButton input.light[disabled=""],
+.navBar .navButton input.light[disabled="disabled"] {
+	color: #CCCCCC;
+	line-height: 20px;
+	cursor: default;
+}
+
+.navBar p {
+	float: left !important;
+	margin: 0;
+	line-height: 20px;
+}
+
+.navBar p span, .navBar .navButton input.light {
+	color: #99C78D;
+	line-height: 20px;
+}
+
+.navBar .navButton input.nextNav, .navBar .navButton input.previousNav {
+	line-height: 20px;
+}
+
+.navBar .navButton input {
+	border: 0;
+	background: none;
+	cursor: pointer;
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+	height: 20px;
+
+}
+
+.navButton {
+	text-align: right !important;
+	float: right !important;
+	height: 20px;
+	padding: 0;
+	margin: 0;
+
+}
+
+.success {
+	width: 230px; 
+	margin: 10px auto 0 auto;
+}
+
+.sucess img{
+	float: left;
+}
+
+
+/* ================================ */
+/* Estilo aplicado para tag " TD "  */
+/* ================================ */
+td {
+	vertical-align: top;
+	font: 12px "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	padding: 0 ;
+	color: #2B4F65;
+}
+
+/* ====================================================== */
+/* Estilo aplicado para tag " TD " com escrito em negrito */
+/* ====================================================== */
+td.bold {
+	vertical-align: top;
+	font: bold 10px verdana, arial, helvetica, sans-serif;
+}
+
+/* =========================================================================================== */
+/* Estilo aplicado para tag " TD " com cor background e escrito verticalmente alinhado no meio */
+/* =========================================================================================== */
+td.boldWithBackground {
+	height: 15px;
+	vertical-align: middle;
+	font: bold 11px verdana, arial, helvetica, sans-serif;
+	color: #D0F500;
+	background: #00086E;
+}
+
+/* =============================================================================== */
+/* Estilo aplicado para tag " TD " com cor background e escrito alinhado no centro */
+/* =============================================================================== */
+td.alignCenter {
+	text-align: center;
+}
+
+/* =========================================================== */
+/* Estilo aplicado para tag " TD ". Escrito alinhado a direita */
+/* =========================================================== */
+td.alignRight {
+	text-align: right !important;
+	padding-right: 10px !important;
+}
+
+/* ================================================================================ */
+/* Estilo aplicado para tag " TD " com cor background e escrito alinhado Ã  esquerda */
+/* ================================================================================ */
+td.alignLeft {
+	text-align: left !important;
+}
+
+/* ======================================================= */
+/* Estilo aplicado para tag " TD " com escrito em vermelho */
+/* ======================================================= */
+td.writeRed {
+	font: bold 11px verdana, arial, helvetica, sans-serif;
+	color: #FF0000;
+	background: #C2C2E0;
+}
+
+/* ========================================================= */
+/* Estilo aplicado para tag " TD " dos containers carregados */
+/* ========================================================= */
+.container {
+	width: 187px;
+	text-align: left;
+	margin: 0;
+	float: left;
+	background: #fff;
+}
+
+.containerMarginTop {
+	margin-top: 33px;
+}
+
+.containerMarginLeft {
+	margin-left: 13px;
+}
+
+.container .imgTitle, .borderTitle, .textTitle, .borderBottom, .loading, .containerDesatived, .containerFake  {
+	float: left;
+}
+ 
+.icontainer, .container .textTitle, .loading  {
+	border-left: 1px #ebebeb solid;
+	border-right: 1px #ebebeb solid;
+	float: left;
+}
+
+.icontainer {
+	width: 187px;
+}
+
+.container .imgTitle {
+	width: 16px;
+	height: 18px;
+	background: url("../images/containerBorder.png") no-repeat left top;
+}
+.container .borderTitle {
+	width: 170px;
+	height: 17px;
+	border-top: 1px #ebebeb solid;
+	border-right: 1px #ebebeb solid;
+}
+
+.container .textTitle {
+	width: 169px;
+	font: 16px 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	padding: 0 0 0 16px;
+}
+
+.container .loading {
+	width: 185px;
+	height: 21px;
+	background: url("../images/loading.gif") no-repeat center center;
+}
+
+.container .borderBottom {
+	width: 185px;
+	height: 12px;
+	background: url("../images/containerButton.png") no-repeat left top;
+}
+
+.container td {
+	height: 30px;
+	vertical-align: middle;
+}
+
+.container td span, .container td a {
+	padding: 0 0 0 16px;
+	font: 12px "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	display: block;
+}
+
+.container td i {
+	margin: 0 0 12px 16px;
+	display: block;
+}
+
+.container td a {
+	text-decoration: underline;
+	color: #2b4f65;
+}
+
+.container td p {
+	color: #9bc78f;
+	text-align: left;
+	padding: 0 0 0 5px;
+}
+.container input[type=submit] {
+	width: 153px;
+	height: 30px;
+	border: 1px #ebebeb solid;
+	background: none;
+	cursor: pointer;
+	margin: 0 0 12px 0;
+}
+
+
+/*---------------Desativo---------------------*/
+.containerDesatived {
+	width: 187px;
+	cursor: pointer;
+	text-align: left;
+}
+
+.containerDesatived .title {
+	background: url("../images/show.png") no-repeat 160px center;
+}
+
+.containerDesatived .title, .containerFake .title {
+	width: 185px;
+	border-top: 1px #ebebeb solid;
+	border-left: 1px #ebebeb solid;
+	border-right: 1px #ebebeb solid;
+}
+
+.containerDesatived .title span, .containerFake .title span{
+	font: 16px 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	margin: 0 0 0 10px;
+	line-height: 40px;
+	padding: 0px;
+}
+
+/*------------------Em processamento----------------------*/
+.containerFake {
+	cursor: pointer;
+}
+
+.containerFake .title {
+	background: url("../images/hide.png") no-repeat 160px center;
+}
+
+
+div.scroll {
+	width: 100%;
+	height: 300px;
+	background-color: #E2F0D5;
+	scrollbar-arrow-color: #00086E;
+	scrollbar-3dlight-color: #E2F0D5;
+	scrollbar-highlight-color: #E2F0D5;
+	scrollbar-face-color: #E2F0D5;
+	scrollbar-shadow-color: #E2F0D5;
+	scrollbar-darkshadow-color: #E2F0D5;
+	scrollbar-track-color: transparent;
+	
+}
+
+/* =========================== */
+/* Estilo aplicado no menu PAI */
+/* =========================== */
+table.menuParent {
+	border: 0px;
+}
+
+/* ============================= */
+/* Estilo aplicado no menu FILHO */
+/* ============================= */
+table.menuChild {
+	border: 0px;
+}
+
+/* ==================================== */
+/* IDENTIFICAÃ‡ÃƒO : estilos relacionados */
+/* ==================================== */
+table.identification {
+	background-color: #EEF4F8;
+}
+
+/* ============================= */
+/* PESSOA : estilos relacionados */
+/* ============================= */
+table.person {
+	background-color: #FFFFE8;
+	text-align: center;
+}
+
+/* =============================== */
+/* EDUCAÃ‡ÃƒO : estilos relacionados */
+/* =============================== */
+table.education {
+	background-color: #E6E6E6;
+}
+
+/* ============================== */
+/* NETWORK : estilos relacionados */
+/* ============================== */
+table.network {
+	background-color: #CBCBB1;
+}
+
+/* ============================ */
+/* SAÃšDE : estilos relacionados */
+/* ============================ */
+table.health {
+	background-color: #FFFFFF;
+}
+
+/* ============================ */
+/* RENDA : estilos relacionados */
+/* ============================ */
+table.income {
+	background-color: #CCCCCC;
+}
+
+/* ============================== */
+/* FAMÃ�LIA : estilos relacionados */
+/* ============================== */
+table.familyRelationship {
+	background-color: #E2F0D5;
+}
+
+/* ============================== */
+/* MORADIA : estilos relacionados */
+/* ============================== */
+table.residence {
+	background-color: #E6E6CC;
+}
+
+/* =================================== */
+/* ATENDIMENTOS : estilos relacionados */
+/* =================================== */
+table.attendance {
+	background-color: #D7EBFF;
+}
+
+/* ================================= */
+/* ATIVIDADES : estilos relacionados */
+/* ================================= */
+table.activity {
+	background-color: #A7C0EC;
+}
+
+/* ================================ */
+/* ENTIDADE : estilos relacionados */
+/* ================================ */
+table.entity {
+	background: none;
+	border: 0;
+	margin: 0 !important;
+}
+
+table.entityData {
+	border: none;
+}
+
+
+table.noBorderGrid, table.noBorderGrid tr, table.noBorderGrid tr td  {
+	border: 0 !important;
+}
+
+
+
+/* ============================== */
+/* USUÃ�RIO : estilos relacionados */
+/* ============================== */
+table.user {
+	background-color: #E7E7DF;
+}
+
+/* ================================= */
+/* BENEFICIOS : estilos relacionados */
+/* ================================= */
+table.benefit {
+	background-color: #DAE6FC;
+}
+
+/* ================================= */
+/* HISTORICO : estilos relacionados  */
+/* ================================= */
+table.history {
+	background-color: #D3D3D3;
+}
+
+/* ================================ */
+/* RELATORIO : estilos relacionados */
+/* ================================ */
+table.report {
+	background-color: #CBCBB1;
+}
+
+table.doubleSpace tr td{
+	height: 30px;
+	vertical-align: middle;
+}
+
+
+/* ======================================= */
+/* Estilo para tags " INPUT " e " BUTTON " */
+/* ======================================= */
+
+input,button {
+	background-color: #eee;
+	font: 12px "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	outline: none;
+	color: #2b4f65;
+}
+
+.inputBox {
+	background: #FFFFFF;
+	border: 1px #f0f0f0 solid;
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	width: 548px;
+	padding: 0 10px 10px 10px;
+	margin-top: 10px;
+}
+
+.inputBox td  {
+	vertical-align: top;
+	text-align: left;
+}
+
+.inputBox td.inputMiddle {
+	vertical-align: middle !important;
+}
+
+.inputBox p {
+	clear: both;
+}
+
+.inputBox h1 {
+	margin: 10px 0 0 0;
+}
+
+.inputBox input, .inputBox select {
+	font-size: 12px;
+	border: 0;
+	float: left;
+}
+
+.inputBox input[type=text],.inputBox input[type=password], .inputBox select, .inputBox textarea, .inputBox .inputs {
+	padding: 8px 0;
+	width: 100%;
+	float: left;	
+}
+
+.inputBox input[type=text], .inputBox input[type=password] {
+	padding-left: 5px;
+	width: 99%;
+}
+
+.inputBox input[type=button], .inputBox input[type=submit], .inputBox input[type=radio], .inputBox .radioCenter, .inputBox .checkCenter  {
+	font-size: 16px;
+	line-height: 32px;
+}
+
+.inputBox select {	
+	padding-right: 5px !important;
+}
+
+.inputBox input[type=radio] {
+	background: none;
+	float: none;
+}
+
+.inputBox input[type=checkbox] {
+	float: none;
+	background: none;
+}
+
+/* ======================================= */
+/* Largura do textarea " */
+/* ======================================= */
+.inputBox textarea {
+	height: 60px;
+}
+
+/* ======================================= */
+/* Margin para os campos inputs" */
+/* ======================================= */
+
+.inputBox .inputs {
+	padding: 2px 0 2px 0;
+}
+
+
+/* ======================================= */
+/* Classe para rádio Box e Checkbox " */
+/* ======================================= */
+
+.inputBox .radioCenter, .inputBox .checkCenter {
+	color: #000;
+}
+
+.inputBox .checkCenter span {
+	margin: 0 15px 0 0;
+}
+
+
+/* ======================================= */
+/* Label chamado do título " */
+/* ======================================= */
+.inputBox .label {
+	text-align: left;
+	font-size: 16px;
+	color: #2b4f65;
+	line-height: 32px;
+	margin: 0px;
+}
+
+.tdToTop {
+	vertical-align: top;
+}
+
+/* =================================================== */
+/* Estilo para tag "INPUT" "Minúsculo"  */
+/* =================================================== */
+
+input[type=text].tinyInput, select.tinyInput {
+	width: 50px !important;
+}
+
+/* =================================================== */
+/* Estilo para tag "INPUT" "Pequeno"  */
+/* =================================================== */
+
+input[type=text].smallInput, select.smallInput {
+	width: 100px !important;
+}
+
+
+/* =================================================== */
+/* Estilo para tag "INPUT" "Médio"  */
+/* =================================================== */
+
+input[type=text].middleInput, input[type=password].middleInput, select.middleInput, .middleLabel {
+	width: 200px !important;
+}
+
+/* =================================================== */
+/* Estilo para tag "INPUT" "Grande"  */
+/* =================================================== */
+
+input[type=text].bigInput, select.bigInput {
+	width: 300px !important;
+}
+
+
+/* =================================================== */
+/* Estilo para tag "INPUT" utilizado pelos containers  */
+/* =================================================== */
+input.small {
+	width: 100%;
+	background: none;
+	cursor: pointer;
+}
+
+
+
+/* ============================================ */
+/* Estilo para tag "INPUT" com tamanho reduzido */
+/* ============================================ */
+input.age {
+	width: 15%;
+}
+
+/* ============================ */
+/* Estilo para tag " TEXTAREA " */
+/* ============================ */
+textarea {
+	background-color: #eee;
+	font-size: 12px;
+	border: none;
+	outline: none;
+}
+
+/* ============================================= */
+/* Estilo para tag " TEXTAREA com tamanho máximo */
+/* ============================================= */
+textarea.small {
+	width: 100%;
+}
+
+/* ========================== */
+/* Estilo para tag " SELECT " */
+/* ========================== */
+select {
+	background-color: #eee;
+	font: 10px verdana, arial, helvetica, sans-serif;
+	color: #000000;
+	width: 100%;
+	outline: none;
+}
+
+
+/* =============================================================================== */
+/* Estilos utilizados no id "menuParent" que é referenciado dentro de "menu/menu.phtml" */
+/* =============================================================================== */
+.menuRoot {
+	padding: 4px 0 0 0;
+	margin: 0;
+	list-style: none;
+	height: 36px;
+	float: right;
+}
+
+.menuRoot li a.semMarginEsq {
+	margin: 0px;
+}
+
+.menuRoot li {
+	display: inline;
+}
+
+.menuRoot li a {
+	float: left;
+	height: 26px;
+	color: #2b4f65;
+	text-align: center;
+	padding: 0 0 8px 0;
+	cursor: pointer;
+	font-size: 14px;
+	margin: 0 2px 0 0;
+}
+
+.menuRoot li a:hover,.menuRoot li.current a {
+	background: url("../images/backgroundSetaHover.png") no-repeat center
+		bottom;
+	color: #fff;
+}
+
+.menuRoot li a .menuTexto {
+	padding: 0 19px 0 19px;
+	border: 1px #ebebeb solid;
+	line-height: 26px;
+}
+
+.menuRoot li a:hover .menuTexto {
+	background: url("../images/backgroundHover.png") no-repeat center top;
+	border: none;
+	margin: 1px 1px 0px 1px;
+	color: #fff;
+}
+
+.menuRoot li.current a .menuTexto {
+	background: url("../images/backgroundHover.png") no-repeat
+		center top;
+	border: none;
+	padding: 0 19px 0 19px;
+	margin: 1px 1px 0px 1px;
+}
+
+/* =============================================================================== */
+/* SubmenuCentral chamado em -> /application/views/scripts/submenu/*/
+/* =============================================================================== */
+
+.personMenu, .simpleEntity {
+	height: 80px;	
+}
+
+.adm, .extended {
+	height: 40px;
+}
+
+.submenuCentral{
+	 text-align: left;
+}
+
+.submenuCentral b, .submenuCentral {
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	font-weight: normal !important;
+	font-size: 16px;
+}
+
+.submenuCentral {	
+	list-style: none;
+	width: 100%;
+	margin: 33px 0;
+}
+
+
+.submenuCentral li {
+	display: inline !important;
+	float: left;
+	width: 138px;
+	margin: 2px;
+	height: 36px;
+	background-color: #FFFFFF;
+}
+
+.extended li{
+	width: 186px
+}
+
+.submenuCentral li.current a {	
+	color: #fff;
+	border: none;
+}
+
+.submenuCentral li:hover , .submenuCentral li.current {
+	background: url("../images/menuMeioHover.png") no-repeat center center;
+}
+
+.extended li:hover , .extended li.current {
+	background: url("../images/menu_hover_extended.jpg") no-repeat center center;
+}
+
+/*ul.ultraExtended li.ultraExtended {
+	width: 226px !important;
+}*/
+
+/*ul.ultraExtended li.ultraExtended:hover, ul.ultraExtended .current.ultraExtended {
+	background: url("../images/menu_hover_ultra_extended.jpg") no-repeat center center;
+}*/
+
+.submenuCentral li:hover a {
+	color: #FFFFFF;
+	font-weight: lighter !important;
+}
+
+.submenuCentral .menuTexto {
+	border: 1px #ebebeb solid;
+	background: url("../images/submenu.png") no-repeat center center;
+	padding-left: 36px;
+	line-height: 35px;
+}
+
+/* Entidades */
+.submenuCentral li .menuEntity {
+	background-position: 0px -4px;
+}
+
+.submenuCentral .menuEntity:hover, .submenuCentral li.current .menuEntity{
+	background-position: 0px -84px;
+}
+
+/* Entidades Rede */
+.submenuCentral li .menuEntityNetwork {
+	background-position: 0px -1762px;
+}
+
+.submenuCentral .menuEntityNetwork:hover, .submenuCentral li.current .menuEntityNetwork {
+	background-position: 0px -1842px;
+}
+
+/* Usuários */
+.submenuCentral li .menuUser {
+	background-position: 0px -164px;
+}
+
+.submenuCentral .menuUser:hover, .submenuCentral li.current .menuUser{
+	background-position: 0px -244px;
+}
+
+/* Atividades */
+.submenuCentral li .menuActivity {
+	background-position: 0px -324px;
+}
+
+.submenuCentral .menuActivity:hover, .submenuCentral li.current .menuActivity{
+	background-position: 0px -404px;
+}
+
+/* Setup */
+.submenuCentral li .setup {
+	background-position: 0px -484px;
+}
+
+.submenuCentral .setup:hover, .submenuCentral li.current .setup{
+	background-position: 0px -564px;
+}
+
+/* Monitoramento */
+.submenuCentral li .monitoramento {
+	background-position: 0px -2248px;
+}
+
+.submenuCentral .monitoramento, .submenuCentral li.current .monitoramento{
+	background-position: 0px -2248px;
+}
+
+/* Person geral */
+.submenuCentral li .general {
+	background-position: 0px -644px;
+}
+
+.submenuCentral .general:hover, .submenuCentral li.current .general{
+	background-position: 0px -724px;
+}
+
+/* Person Educacao */
+.submenuCentral li .menuEducation {
+	background-position: 0px -804px;
+}
+
+.submenuCentral .menuEducation:hover, .submenuCentral li.current .menuEducation{
+	background-position: 0px -884px;
+}
+
+
+/* Person saude */
+.submenuCentral li .menuHealth {
+	background-position: 0px -964px;
+}
+
+.submenuCentral .menuHealth:hover, .submenuCentral li.current .menuHealth{
+	background-position: 0px -1044px;
+}
+
+/* Person Beneficio */
+.submenuCentral li .menuBenefit{
+	background-position: 0px -1124px;
+}
+
+.submenuCentral .menuBenefit:hover, .submenuCentral li.current .menuBenefit{
+	background-position: 0px -1204px;
+}
+
+/* Person Renda */
+.submenuCentral li .menuIncome, .submenuCentral li .familyIncome{
+	background-position: 0px -1284px;
+}
+
+.submenuCentral .menuIncome:hover, 
+.submenuCentral li.current .menuIncome,
+.submenuCentral .familyIncome:hover, 
+.submenuCentral li.current .familyIncome {
+	background-position: 0px -1364px;
+}
+
+/* Person Moradia */
+.submenuCentral li .habitation {
+	background-position: 0px -1444px;
+}
+
+.submenuCentral .habitation:hover, .submenuCentral li.current .habitation{
+	background-position: 0px -1524px;
+}
+
+/* Person Atendimento */
+.submenuCentral li .treatment {
+	background-position: 0px -1604px;
+}
+
+.submenuCentral .treatment:hover, .submenuCentral li.current .treatment {
+	background-position: 0px -1684px;
+}
+
+/* Person Familia Rela��o biol�gica */
+.submenuCentral li .biology {
+	background-position: 0px -1923px;
+}
+
+.submenuCentral .biology:hover, .submenuCentral li.current .biology {
+	background-position: 0px -2003px;
+}
+
+
+/* Person Familia */
+.submenuCentral li .family {
+	background-position: 0px -2093px;
+}
+
+.submenuCentral .family:hover, .submenuCentral li.current .family {
+	background-position: 0px -2173px;
+}
+
+/* Turmas */
+.submenuCentral li .group {
+	background-position: 0px -2093px;
+}
+
+.submenuCentral .group:hover, .submenuCentral li.current .group {
+	background-position: 0px -2173px;
+}
+
+
+
+/*########### END SUB-MENU #############*/
+
+
+/* =============================================================================== */
+/* Imagem utilizada no  "menuParent" que é referenciado dentro de "menu/menu.phtml" */
+/* =============================================================================== */
+#logoImage {
+	width: 180px;
+	height: 40px;
+	background: url('../images/logo.png') no-repeat left bottom;
+}
+
+#logoImageBig {
+	background-image: url('redeBig.gif');
+	background-repeat: no-repeat
+}
+
+/* ================================================ */
+/* ======== Estilo aplicado na tag <a href> ======= */
+/* ================================================ */
+a {
+	font-size: 16px; 
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	color: #9dca90;
+	text-decoration: none;
+	padding: 0;
+	height: 30px;
+}
+
+a.blue {
+	font: bold 9px verdana, arial, helvetica, sans-serif;
+	color: blue;
+}
+
+/* Estilo para o relat�rio */
+/* ================================================================================================== */
+/* Estilos utilizados nas linhas e colunas do relatÃ³rio exibido em html - template export/index.phtml */
+/* ================================================================================================== */
+
+.resultReport {
+	width: 970px;
+	background: #fff;
+	height: 300px;
+	overflow: auto;
+	border: 1px #f0f0f0 solid;
+}
+
+.COL,.LIN {
+	background: #f0f0f0;
+	border: 1px #fff solid;
+	color: #2b4f65;
+	padding: 2px;
+	text-align: center;
+	font: bold 9px verdana, arial, helvetica, sans-serif;
+	vertical-align: middle;
+}
+
+.CEL {
+	border-bottom: 1px dotted #CCCCCC;
+	border-right: 1px dotted #CCCCCC;
+	font-size: 12px;
+	padding: 2px;
+}
+
+.inputText {
+	width: 400px;
+	text-align: center;
+}
+
+.reportLine {
+	position: relative;
+	left: 0px;
+	top: -2px;
+	width: 100%;
+	border-width: 0;
+	border-top-width: 2px;
+}
+
+.errorValidate {
+	position: relative;
+	left: 0px;
+	top: -5px;
+	font: bold 10px verdana, arial, helvetica, sans-serif;
+	color: #FF0000;
+	width: 100%;
+	height: 25px;
+	background: #FFFF66;
+	text-align: center;
+	display: none;
+}
+
+.error {
+	width: 89%;
+	background-color: #FFF7F7;
+	margin: 5px auto;
+	border: 1px solid red;
+	padding: 10px 5%;
+}
+
+.error span {
+	color: red;
+	line-height: 15px;
+}
+
+/* ======================================================================= */
+/* Estilos utilizados nas bordas das tabelas de informações complementares */
+/* ======================================================================= */
+.noBorder {
+	border: none;
+}
+
+.alert {
+	background: #2b4f65;
+}
+
+.alert td {
+	color: #fff;
+	padding-left: 5px;
+}	
+
+
+/* ======================================================================= */
+/* Estilos utilizados especificamente no caso de uso Gerenciar Atividades  */
+/* ======================================================================= */
+/* ========================== */
+/* Estilo para tag " SELECT " no template de Gerenciar Atividades*/
+/* ========================== */
+select.activity {
+	width: 200px;
+	display: none;
+}
+
+#label_macroactivity {
+	display: none;
+}
+
+/* ========================================================== */
+/* Estilo aplicado para tag " TD " - alinhando tag no rodapé  */
+/* ========================================================== */
+td.middleValign, .labelHeight {
+	height: 30px;
+	vertical-align: middle;
+}
+
+input.small.activity {
+	width: 40%;
+}
+
+/* ========================================================= */
+/*        estilo de font para identificação de menu          */
+/* ========================================================= */
+.fontMenu {
+	font: bold 13px verdana, arial, helvetica, sans-serif;
+	color: #D0F500;
+}
+
+/* =================================================== */
+/*        estilos utilizados em "Gerenciar Turma"      */
+/* =================================================== */
+select.schedule {
+	background-color: #eee;
+	font: 10px verdana, arial, helvetica, sans-serif;
+	color: #000000;
+	width: 7%;
+}
+
+input.nameClass {
+	width: 50%;
+}
+
+input.buttonFinish {
+	width: 100%;
+}
+
+input.time {
+	width: 50%;
+}
+
+input.vacancy {
+	width: 10%;
+}
+
+input.dateFinish {
+	width: 15%;
+}
+
+select.period {
+	width: 15%;
+}
+
+/* =================================================== */
+/*        estilos utilizados em "Gerenciar Educação"   */
+/* =================================================== */
+input.education {
+	width: 5%;
+}
+
+/* ================================================ */
+/*        estilos utilizados em "Gerenciar SaÃºde"   */
+/* ================================================ */
+input.health {
+	width: 15%;
+}
+
+input.beginPregnancy {
+	width: 10%;
+}
+
+/* ================================================== */
+/*        estilos utilizados em "Gerenciar Benefício" */
+/* ================================================== */
+input.dateBenefit {
+	width: 20%;
+}
+
+input.valueBenefit {
+	width: 30%;
+}
+
+input.phoneNumber {
+	width: 70%;
+}
+
+input.codePhone {
+	width: 100%;
+}
+
+.selectLength {
+	width: 40%;
+}
+
+/* ================================================ */
+/*		  Estilos da Importação de arquivos			*/
+/* ================================================ */
+.step {
+	font: bold 14px verdana, arial, helvetica, sans-serif;
+	text-align: left;
+	color: blue;
+	float: left;
+}
+
+.stepTitle {
+	font: bold 14px verdana, arial, helvetica, sans-serif;
+	text-align: left;
+	color: #000;
+	float: left;
+	width: 100px;
+}
+
+.importStep {
+	letter-spacing: 2px;
+	font: italic 14px verdana, arial, helvetica, sans-serif;
+	text-align: center;
+	color: #000;
+	background: #FFF;
+	float: left;
+	width: 25px;
+}
+
+.importStep.in {
+	color: #D0F500;
+	background: #00086E;
+	float: left;
+}
+
+.importStep.out {
+	font: bold 14px verdana, arial, helvetica, sans-serif;
+	color: #000;
+	background: #FFF;
+	float: left;
+}
+
+.writeRed {
+	color: red;
+	background: #C0FF3E;
+}
+
+.bigWriteRed {
+	font: bold 10px verdana, arial, helvetica, sans-serif;
+	color: red;
+}
+
+.bigWriteRedBackground {
+	color: red;
+}
+
+.bigWrite {
+	font: bold 10px verdana, arial, helvetica, sans-serif;
+}
+
+.bigWriteBackground {
+	font: bold 10px verdana, arial, helvetica, sans-serif;
+	background: #C0FF3E;
+}
+
+input.isRepresentative {
+	width: 100%;
+	background-color: #FF6600;
+	font: bold 10px verdana, arial, helvetica, sans-serif;
+	border: 1px solid #CC3333;
+}
+
+td.middleCenterObject {
+	vertical-align: middle;
+	text-align: center;
+}
+
+input.middleCenterObject {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.loadingBox {
+	font: bold 14px verdana, arial, helvetica, sans-serif;
+	color: #FFFFFF;
+	width: 150px;
+	background: RED;
+	border: 1px solid RED;
+}
+
+.centerObject {
+	vertical-align: middle;
+	text-align: center;
+}
+
+/* ==================
+============================== */
+/*		  Estilos de cores de letras				*/
+/* ================================================ */
+.azul {
+	color: #2b4f65;
+}
+
+.verde {
+	color: #9ac78e;
+}
+
+html {
+	background: #fff url("../images/fundo.jpg") repeat left top;
+}	
+body {
+	background: url("../images/fundo.png") repeat-x left top transparent;
+	text-align: center;
+}
+
+select.slctRegion {
+	/*height: 90%;*/
+	height: 167px;
+	width: 100%;
+}
+
+/* ================================================ */
+/*		  Estilos de Endereço Temporário			*/
+/* ================================================ */
+input.liveSince {
+	width: 13%;
+}
+
+input.numberAddress {
+	width: 13%;
+}
+
+/* =============================== */
+/*		  Tela de Autenticaçao	   */
+/* =============================== */
+.ctr {
+	text-align: center;
+}
+
+.login-borda {
+	border: 1px #ebebeb solid;
+	padding: 0 0 10px 0;
+	margin: 10px auto 0 auto;
+	width: 460px;
+	background: url("../images/logo.png") no-repeat 45px 40px #FFFFFF;
+}
+
+.login , .ajuda{	
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	font-size: 14px;
+	color: #2b4f65;
+}
+
+.login {
+	width: 600px;
+	margin: 78px auto;
+	text-align: center;
+}
+
+.ajuda h1 {
+	font-size: 26px !important;
+	margin: 0;
+}
+
+.ajuda p {
+	margin: 10px 0 0 0;
+}
+
+.login-form {
+	width: 210px;
+	margin: 10px 0 0 240px;
+	padding: 0px;
+	font-size: 16px;
+}
+
+.login-form .campos input, .errorLogin {
+
+	margin: 0;
+}
+
+.login-form  .campos {
+	width: 210px;
+	border: 1px #f0f0f0 solid;
+	margin: 0 0 5px 0;
+}
+
+.login-form .campos  input{
+	border: none;
+	width: 200px;
+	padding: 8px 5px;
+	font-size: 12px;
+	outline: none;
+}
+
+.login-form .error {
+	width: 202px;
+	text-align: left;
+	color: red;
+	font-size: 12px;
+	padding: 5px;
+	background-color: #FFF8F8;
+	margin: -5px 0 5px 0;
+	border: 0;
+	border-top: 1px #CCC solid;
+}
+
+.button {
+	padding: 0 15px;
+	height: 35px;
+	background: #E9ECEF;
+	border: none;
+	color: #666666;
+	font: 16px 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	line-height: 30px;
+	cursor: pointer;
+	margin: 5px 0 0 0;
+}
+
+.login-form .button {
+	float: right;
+}	
+
+.clr {
+	clear: both;
+}
+
+.userBackground {
+	background-image: url('user.gif');
+	background-repeat: no-repeat;
+}
+
+.auth {
+	text-align: left;
+	font-size: 16px;
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	color: #2b4f65;
+	vertical-align: bottom;
+}
+
+/* ----------------------------------------------------------- */
+/* ------------ Habilita | Desabilita usuario ---------------- */
+/* ------------ Ativa | Desativa entidade -------------------- */
+/* ----------------------------------------------------------- */
+
+.styleRedWrite, .styleGreenWrite {
+	background: url("../images/ativo_inativo.png") no-repeat ;	
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+}
+
+.styleRedWrite {	
+	background-position: 0px -32px
+}
+
+.styleGreenWrite {
+	background-position: 0px 4px
+}
+
+.greenWrite {
+	color: green;
+}
+
+.styleGreenWrite span, .styleRedWrite span {
+	display: none;
+	position: absolute;
+	width: 82px;
+	color: #FFFFFF;
+	font-size: 11px;
+	height: 36px;
+	line-height: 25px;
+	background: url("../images/tool_tipe.png") no-repeat;
+	text-align: center;
+	padding-right: 15px;
+	margin: -28px 0 0 -30px;
+}
+
+.styleGreenWrite span {
+	background-position: 0px -62px;	
+}
+
+.styleRedWrite span {
+	background-position: 0px 1px;	
+}
+
+.styleGreenWrite:hover span,
+.styleRedWrite:hover span {
+	display: block;
+}
+/* ----------------------------------------------------------- */
+/* ------------ Alteração de Senha do usuário ---------------- */
+/* ----------------------------------------------------------- */
+input.changePassword {
+	width: 45%;
+}
+
+.alignDivCenter {
+	width: 970px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.tableContainer {
+	text-align: center;
+	font-size: 16px 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+	color: #2b4f65;
+}
+
+/*
+.fontContainer {
+	font: bold 11px verdana, arial, helvetica, sans-serif;
+	vertical-align: middle;
+}
+*/
+
+.iframeSeachAddress  {
+	width: 100%;
+	height: 580px;
+	background-color: #FFFFFF !important;
+}
+
+
+.iframeContent , #iframeSearch {
+	background: #FFFFFF !important; 
+	margin: 0; 
+	height:550px; 
+	text-align: left !important;
+	padding-bottom: 20px;
+}
+
+.iframeADD {
+	height: auto !important;
+}
+
+.rodape {
+	display: inline;
+	color: #2b4f65;
+}
+
+.rodape .titulo {
+	font: 12px "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	width: 220px;
+	float: left;
+	padding: 13px 0 0 28px;
+	background: url("../images/fone.png") no-repeat left 15px;
+	text-align: left;
+	font-size: 26px;
+}
+
+.rodape .titulo a {
+	color: #2b4f65;
+}
+
+.rodape .titulo .menor {
+	font-size: 12px;
+	vertical-align: top;
+}
+
+.rodape .versao {
+	float: right;
+	margin: 30px 0 0 0;
+	font-size: 16px;
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif;
+}
+
+
+.centerControls {	
+	padding: 57px 5px;
+}
+
+.centerControls p input{
+	line-height: 25px !important;
+}
+
+/* Monitoramento */
+.rel{
+	color: #000000;
+	text-align: left;	
+}
+
+.rel div{
+	position: relative;
+	float: left;	
+}
+
+.rel .title{
+	background-color: #CCFF9A;
+	width: 100%;
+	margin-top: 8px;
+	font-size: 16px;
+	padding: 5px;
+}
+
+.rel .category{
+	background-color: #F2F9FF;
+	width: 100%;
+	margin-top: 8px;
+	font-size: 16px;
+	padding: 5px;
+}
+
+.rel .subTotal{
+	background-color: #FDF3F2;
+	width: 100%;
+	text-align:right;
+	margin-top: 8px;
+	font-size: 16px;
+	padding: 5px;
+}
+
+.rel .total{
+	background-color: #FFFE00;
+	width: 100%;
+	text-align:right;
+	margin-top: 8px;
+	font-size: 16px;
+	padding: 5px;
+}
+
+.rel .registro{
+	width: 100%;
+	text-align:left;
+	margin-top: 8px;
+	font-size: 14px;
+	padding: 5px;
+}
+
+.rel .gridTop{
+	width: 100%;
+	height:22px;
+	margin-top: 2px;
+	font-size: 16px;
+	padding: 5px;
+	border-bottom: 1px solid #000000;
+}
+
+.rel .gridTop div{
+	position: relative;
+	float: left;
+}
+
+.rel .grid{
+	width: 100%;
+	font-size: 14px;
+	padding: 5px;
+	border-bottom: 1px dashed #CCCCCC;
+}
+
+/*Monitoring Grafico*/
+.graphic{
+	width: 800px;
+}
+
+.graphic div{
+	position: relative;
+}
+
+.graphic .nav, .graphic .back{
+	width: 800px;
+}
+
+.graphic .nav{
+	height:30px;
+}
+
+.graphic .nav .page{
+	width: 400px;
+	text-align:left;
+	float: left;
+}
+
+.graphic .nav .navs{
+	width: 400px;
+	text-align:right;
+	float: right;
+}
+
+.graphic .div{
+	width: 800px;
+	min-height: 300px;
+	margin: 0 auto;
+}
+
+a.disable{
+	color: #CCCCCC;	
+}
+
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background: #000;
+
+  display:none;
+}
+  
+#boxes .window {
+  position:absolute;
+  width:440px;
+  height:200px;
+  z-index:9999;
+}
+
+.close{display:block; text-align:right; }

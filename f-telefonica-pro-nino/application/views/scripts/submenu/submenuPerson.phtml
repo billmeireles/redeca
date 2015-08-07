@@ -1,0 +1,119 @@
+<?php 
+	//variável utilizada para setar background do submenu
+	
+	$partialUriHistory	= '/history/view/history_id/';
+	$addressUri			= $_SERVER["REQUEST_URI"];
+	$resultMatch		= stripos($addressUri, $partialUriHistory);
+	
+	$resultMatch === false ? $stringUri = $_SERVER["REQUEST_URI"] : $stringUri = $_SERVER["HTTP_REFERER"];
+?>
+
+<table class="withoutEdge tdZero" width="570" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<div style="width: 570px">
+				<ul class="submenuCentral personMenu">
+				  <?php if(ResourcePermission::isAllowResource(PERSON_CONTROLLER)){?>				  
+				  <li <?php 
+						$stringmatch = PERSON_CONTROLLER; 
+						if (preg_match("%($stringmatch.*$stringmatch)|($stringmatch/edit)%", "$stringUri")){
+							echo "class='current'";
+					}?> >
+						<a class="tt" href="<?php echo $this->baseUrl;?><?php echo PERSON_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>">
+							<div class="menuTexto general">
+								<b><?php echo $this->labels->title->common;?></b>
+							</div>
+						</a>
+					</li>
+				  <?php }?>
+				  
+				  <?php if(ResourcePermission::isAllowResource(EDUCATION_CONTROLLER)){?>
+				  
+				  <li <?php 
+				  	$stringmatch = EDUCATION_CONTROLLER; 
+				  	if (preg_match("%($stringmatch)%", "$stringUri")){
+				  		echo "class='current'";
+				  }?> >
+				  		<a class="tt" href="<?php echo $this->baseUrl;?><?php echo EDUCATION_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>">
+				  			<div class="menuTexto menuEducation">
+				  				<b><?php echo $this->labels->title->education;?></b>
+				  			</div>
+				  		</a>
+				  	</li>
+				  <?php }?>
+				  
+				  <?php if(ResourcePermission::isAllowResource(HEALTH_CONTROLLER)){?>
+				  <li <?php 
+				  		$stringmatch = HEALTH_CONTROLLER; 
+				  		if (preg_match("%($stringmatch)%", "$stringUri")){
+				  			echo "class='current'";
+				  	}?> >
+				  		<a class="tt" href="<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>">
+				  			<div class="menuTexto menuHealth">
+				  				<b><?php echo $this->labels->title->health;?></b>
+				  			</div>
+				  		</a>				  		
+				  	</li>
+				  <?php }?>
+				  
+				  <?php if(ResourcePermission::isAllowResource(BENEFIT_CONTROLLER)){?>
+				  <li <?php 
+				  	$stringmatch = BENEFIT_CONTROLLER; 
+				  	if (preg_match("%($stringmatch)%", "$stringUri")){
+				  			echo "class='current'";
+				  	}?> >
+				  		<a class="tt" class="semMarginEsq" href="<?php echo $this->baseUrl;?><?php echo BENEFIT_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>">
+				  			<div class="menuTexto menuBenefit">
+				  				<b><?php echo $this->labels->title->benefit;?></b>
+				  			</div>
+				  		</a>
+				  	</li>
+				  <?php }?>
+				  
+				  <?php if(ResourcePermission::isAllowResource(INCOME_CONTROLLER)){?>
+				  <li <?php 
+				  	$stringmatch = INCOME_CONTROLLER; 
+				  	if (preg_match("%($stringmatch)%", "$stringUri")){
+				  			echo "class='current'";
+				  	}?> >
+				  		<a class="tt" href="<?php echo $this->baseUrl;?><?php echo INCOME_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>">
+				  			<div class="menuTexto menuIncome">
+				  				<b><?php echo $this->labels->title->income;?></b>
+				  			</div>
+				  		</a>
+				  	</li>
+				  <?php }?>
+				  
+				  <?php if(ResourcePermission::isAllowResource(RESIDENCE_CONTROLLER)){?>
+				  	<li <?php 
+				  		$stringmatch = RESIDENCE_CONTROLLER; 
+				  		if (preg_match("%($stringmatch)%", "$stringUri")){
+				  			echo "class='current'";
+				  		}?> >
+				  		<a class="tt" href="<?php echo $this->baseUrl;?><?php echo RESIDENCE_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>">
+				  			<div class="menuTexto habitation">
+				  				<b><?php echo $this->labels->title->residence;?></b>
+				  			</div>
+				  		</a>
+				  	</li>
+				  <?php }?>
+				  
+				  <?php if(ResourcePermission::isAllowResource(ATTENDANCE_CONTROLLER)){?>
+				  <li <?php 
+				  	$stringmatch = ATTENDANCE_CONTROLLER; 
+				  	if (preg_match("%($stringmatch)%", "$stringUri")){
+				  		echo "class='current'";
+				  	}?> >
+				  		<a class="tt" href="<?php echo $this->baseUrl;?><?php echo ATTENDANCE_CONTROLLER;?>/<?php echo DEFAULT_ATTENDANCE_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>">
+				  			<div class="menuTexto treatment">
+				  				<b><?php echo $this->labels->title->attendance;?></b>
+				  			</div>
+				  		</a>
+				  	</li>
+				  <?php }?>
+				</ul>
+			</div>
+			<input type="hidden" id="baseurl" value="<?php echo $this->baseUrl;?>"/>
+		</td>
+	</tr>
+</table>

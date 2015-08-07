@@ -1,0 +1,64 @@
+<tr>
+	<td>
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<!-- =========================================================== -->
+			<!-- ============= form que busca pelo documento =============== -->
+			<!-- =========================================================== -->
+			<form action="<?php echo $this->baseUrl;?><?php echo BIOLOGICALRELATIONSHIP_CONTROLLER;?>/<?php echo DEFAULT_SEARCH_BY_DOCUMENT_ACTION;?>" method="post">
+				<input type="hidden" name="<?php echo SearchForm::idPerson();?>" value="<?php echo $this->form->getIdPerson();?>"/>
+				<?php printErrorsByField($this->form->idPerson(), $this->errorMessages);?>
+				<tr>
+					<td colspan="4" class="middleValign">
+						<h1 class="title"><?php echo $this->controller->bioRelation->search->typeDoc;?></h1>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="4">
+						<?php echo $this->controller->bioRelation->search->doc;?>
+					</td>
+				</tr>
+				
+				<tr>
+					<td width="18%" class="label">
+						<?php echo $this->controller->bioRelation->text->number;?>
+					</td>
+					
+					<td width="25%">
+						<input class="smallInput" size="30" type="text" name="<?php echo $this->form->docNumber();?>" value=""/>
+					</td>
+					
+					<td class="label" width="20%">
+						<?php echo $this->controller->bioRelation->text->document;?>
+					</td>
+					
+					<td class="middleValign">
+						<select class="middleInput" name="<?php echo $this->form->docType();?>">
+							<?php foreach($this->documentOptions as $k=>$v):?>
+								<option value="<?php echo $k;?>"><?php echo $v;?></option>
+							<?php endforeach;?>
+						</select>
+					</td>
+				</tr>
+			
+				<tr>
+					<td colspan="4">
+						<?php printErrorsByField($this->form->docNumber(), $this->errorMessages);?>
+						<?php printErrorsByField($this->form->docType(), $this->errorMessages);?>
+					</td>
+				</tr>
+					
+				<tr>
+					<td colspan="4">
+						<input class="button" type="submit" value="<?php echo $this->labels->button->filter;?>"/>
+						<input class="button" style="margin-left: 5px;" type="button" value="<?php echo $this->labels->button->back;?>" onClick="document.location='<?php echo $this->baseUrl;?><?php echo BIOLOGICALRELATIONSHIP_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php echo SearchForm::idPerson();?>/<?php echo $this->form->getIdPerson();?>'"/>
+					</td>
+				</tr>
+				
+			</form>
+			<!-- ======================================================== -->
+			<!-- ============= fim do form que busca pelo nome ========== -->
+			<!-- ======================================================== -->
+		</table>
+	</td>
+</tr>

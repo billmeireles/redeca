@@ -1,0 +1,88 @@
+<?php $case = false;?>
+<?php $show = Zend_Registry::get(CONFIG)->container->health;?>
+<?php if(!$show):?>
+	<?php echo $this->render('header/head.phtml');?>
+<?php endif;?>
+<?php $random = Zend_Registry::get(CONFIG)->container->random;?>
+<?php if($random && $case == false):?>
+	<?php echo $this->render('header/head.phtml');?>
+<?php endif;?>
+<table class="icontainer" cellpadding="0" cellspacing="0">
+	<?php $levelInstruction = $this->levelInstruction;?>
+	<tr>
+		<td width="30%">
+			<span><?php echo $this->controller->health->container->vaccination;?></span>
+		</td>
+		<td>
+			<p>
+				<?php 
+					if($this->healthByPerson->{HLT_VACCINE_TO_DATE})
+					{
+						if($this->healthByPerson->{HLT_VACCINE} == 1)
+						{
+							echo $this->labels->text->not;
+						}
+						else
+						{
+							echo $this->labels->text->not;
+						}					
+					}
+					else
+					{
+						echo $this->labels->text->nodata;
+					}
+				?>
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span>
+				<?php echo $this->controller->health->container->information; ?>:
+			</span>
+		</td>
+		<td>
+			<p>
+				<?php
+					if($this->healthByPerson->{HLT_VACCINE_TO_DATE})
+					{
+						echo $this->form->dateFormatForm($this->healthByPerson->{HLT_VACCINE_TO_DATE});
+					} else {
+						echo $this->labels->text->nodata;
+					}
+		
+				?>
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<span>
+				<?php echo $this->controller->health->container->agreement;?>
+			</span>
+		</td>
+		<td>
+			<p>
+				<?php 
+					if(sizeof($this->healthByPerson) <= 0)
+					{
+						echo $this->labels->text->nodata;
+					}
+					elseif($this->healthByPerson->{HLT_HEALTH_PLAN} != null)
+					{
+						echo $this->healthByPerson->{HLT_HEALTH_PLAN};
+					}
+					else
+					{
+						echo $this->labels->text->not;
+					}
+				?>
+			</p>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="alignCenter">
+			<input type="submit" onclick="parent.document.location='<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>'" value="<?php echo $this->labels->button->showDetail;?>"/>
+		</td>
+	</tr>
+</table>

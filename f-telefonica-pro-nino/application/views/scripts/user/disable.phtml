@@ -1,0 +1,41 @@
+<?php echo $this->render('header/header.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+	
+	<!-- ============================================================================================== -->
+	<!-- É necessário informar o nome class da tabela em questão para carregar a cor background correta -->
+	<!-- Opções: 
+				#identification
+				#person
+				#education
+				#health
+				#income
+				#familyRelationship
+				#residence
+				#attendance
+				#activity	-->
+	<!-- ============================================================================================== -->
+	
+	<table width="570" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<table width="570" cellpadding="0" cellspacing="0">
+					<?php echo $this->render('user/_admin_privilege.phtml');?>
+				</table>
+			</td>
+		</tr>
+	</table>
+	
+</div>																  
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+
+<?php echo $this->render('footer/footer.phtml');?>

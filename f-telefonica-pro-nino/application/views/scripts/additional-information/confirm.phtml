@@ -1,0 +1,82 @@
+<?php echo $this->render('header/header.phtml');?>
+<?php echo $this->render('submenu/submenuAdm.phtml');?>
+
+	<h1 class="title">
+		<?php echo ($this->labels->confirm->disable->title);?>
+	</h1>
+
+	<div class="inputBox">
+		<table width="548" cellpadding="0" cellspacing="0" >
+			<tr>
+				<td width="100%" align="center" cellpadding="0" cellpadding="0">
+
+					<?php printErrorsByField($this->form->id(), $this->errorMessages);?>
+					<form action="" method="post">
+						<p style="margin-top: 10px;">
+							<?php echo $this->labels->confirm->disable->text;?>&nbsp;<?php echo $this->escape($this->form->getId());?>&nbsp;?<br>
+							<?php 
+								$id = $this->form->getTableId();
+								if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE))
+								{
+									$value1 = $this->form->getTableFirstValue();
+									$value2 = $this->form->getTableSecondValue();
+								}
+								else
+								{
+									$value = $this->form->getTableValue();
+								}
+								foreach($this->result as $result):
+									echo "<br>".$this->controller->additional->information.":&nbsp;";
+									echo "<input type='hidden' name='".$this->form->id()."' value='".$result->$id."'/>";?>
+									<b>
+										<?php
+											if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){
+												echo $result->$value2." = ";
+												if($this->form->getTableName() == TBL_PROGRAM_TYPE){
+													foreach($this->targetMarket as $targetMarket):
+														if($result->$value1 == $targetMarket->{TMK_ID_TARGET_MARKET}) echo $targetMarket->{TMK_TARGET_MARKET};
+													endforeach;
+												}
+												if($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE){
+													foreach($this->socialProgramOrigen as $socialProgramOrigen):
+														if($result->$value1 == $socialProgramOrigen->{SPO_ID_ORIGIN}) echo $socialProgramOrigen->{SPO_ORIGIN};
+													endforeach;
+												}
+											}
+											
+											else if($this->form->getTableName() == TBL_AGE_GROUP){
+												echo "Faixa etária. De ".$result->begin_age." a ".$result->end_age." Ano(s)";
+											}
+											else
+											{
+												echo ($this->form->getTableName() == TBL_VACCINE) ? $result->name : $result->$value;
+											}
+										?>
+									</b>
+							<?php endforeach;?>
+						</p>
+						<div>
+							<input type="hidden" value="<?php echo $this->form->getTableName();?>" name="<?php echo $this->form->tableName();?>"/>
+							<input type="hidden" value="<?php echo $this->form->getTableId();?>" name="<?php echo $this->form->tableId();?>"/>
+							<?php if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){?>
+								<input type="hidden" value="<?php echo $this->form->getTableFirstValue();?>" name="<?php echo $this->form->tableFirstValue();?>"/>
+								<input type="hidden" value="<?php echo $this->form->getTableSecondValue();?>" name="<?php echo $this->form->tableSecondValue();?>"/>
+							<?php }else{?>
+								<input class="button" type="hidden" value="<?php echo $this->form->getTableValue();?>" name="<?php echo $this->form->tableValue();?>"/>
+							<?php }?>
+							<?php if(!$this->errorMessages){?>
+							<input class="button" type="submit" value="<?php echo $this->labels->confirm->button->yes;?>" name="<?php echo E_CONFIRM; ?>"
+								onClick="javascript: return actionName('<?php echo $this->baseUrl;?><?php echo ADDITIONALINFORMATION_CONTROLLER;?>/<?php echo DEFAULT_DROP_ACTION;?>', this.form);">
+							<?php }?>
+							<input class="button" style="margin-left: 5px;" type="submit" value="<?php echo $this->labels->confirm->button->cancel;?>" 
+								onClick="javascript: return actionName('<?php echo $this->baseUrl;?><?php echo ADDITIONALINFORMATION_CONTROLLER;?>/<?php echo DEFAULT_SEARCH_ACTION;?>', this.form);">
+						</div>
+					</form>			
+				</td>
+			</tr>
+		</table>
+	</div>
+
+<?php echo $this->render('footer/footer.phtml');?>
+ 
+

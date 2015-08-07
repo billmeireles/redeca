@@ -1,0 +1,37 @@
+<tr>
+	<td width="30%">
+		<b><?php echo $this->controller->health->text->careUnit;?></b>
+	</td>
+	<td colspan="2">
+		<?php 
+			if(sizeof($this->healthByPerson) <= 0 || $this->healthByPerson->{HLT_ENTITY} == 0)
+			{
+				echo $this->labels->text->nodata;
+			}
+			else
+			{
+				echo $this->careUnit->name;
+				if(!$this->careUnit->status){
+					echo " - <b>desativada</b>";
+				}
+			}
+		?>
+	</td>
+</tr>
+<tr>
+	<td>
+		<b><?php echo $this->controller->health->text->num;?></b>
+	</td>
+	<td colspan="2">
+		<?php 
+			if(sizeof($this->healthByPerson) <= 0 || strlen($this->healthByPerson->{HLT_PRONTUARY}) == 0)
+			{
+				echo $this->labels->text->nodata;
+			}
+			else
+			{
+				echo $this->healthByPerson->{HLT_PRONTUARY};
+			}
+		?>
+	</td>
+</tr>

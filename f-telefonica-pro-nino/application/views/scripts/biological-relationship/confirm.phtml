@@ -1,0 +1,22 @@
+<?php echo $this->render('header/header.phtml');?>
+
+<div>
+	<?php echo $this->render('submenu/subMenuRelationship.phtml');?>
+	
+			<?php 
+				if(!$this->errorMessages)
+				{
+					echo $this->render('biological-relationship/previewDrop.phtml');
+				}
+				else
+				{
+					echo $this->render('biological-relationship/invalidParam.phtml');
+				}
+			?>
+		
+
+</div>
+
+<?php echo $this->render('footer/footer.phtml');?>
+ 
+

@@ -1,0 +1,21 @@
+<?php echo $this->render('header/headerClass.phtml');?>
+
+<!-- ====================================== -->
+<!-- inicio : específico para cada template -->					
+<!-- ====================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+										 		  						
+	<?php
+		if(!$this->errorMessages)
+		{	
+			echo $this->render('class/classPreview.phtml');
+		}
+		else
+		{
+			echo $this->render('class/invalidParam.phtml');
+		}
+	?>
+</div>			
+					
+<?php echo $this->render('footer/footerSearch.phtml');?>

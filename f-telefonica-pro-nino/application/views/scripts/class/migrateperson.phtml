@@ -1,0 +1,88 @@
+<?php echo $this->render('header/headerClass.phtml');?>
+
+<form action="/class/migratePerson" method="post" name="formRegister" id="formRegister">
+<div class="inputBox">
+
+		<?php foreach($this->programs as $pr):?>
+			<?php if(sizeof($pr->findDependentRowset(CLS_CLASSMODEL) > 0 ) ): ?>
+				<?php $cl = $pr->findDependentRowset(CLS_CLASSMODEL);?>
+					<?php foreach($cl as $uniqueCl):?>
+							<?php if(!$uniqueCl->{CLS_END_DATE} && $uniqueCl->{CLS_ID_CLASS} != $this->form->getIdClass()): ?>
+								<?php 
+									$objectClass = array();
+									$objectClass[CLS_ID_CLASS]	= $uniqueCl->{CLS_ID_CLASS};
+									$objectClass[CLS_NAME]		= $uniqueCl->{CLS_NAME};
+									$collClass[] = $objectClass;
+								?>
+							<?php else:?>
+								<?php if(!$uniqueCl->{CLS_END_DATE} && $uniqueCl->{CLS_ID_CLASS} == $this->form->getIdClass()): ?>
+									<?php $nameClass = $uniqueCl->{CLS_NAME};?>
+								<?php endif;?>
+							<?php endif;?>
+					<?php endforeach;?>
+			<?php endif;?>
+		<?php endforeach;?>
+					<table class="withOutEdge" width="100%">
+						<!-- ============================================================================= -->
+						<!-- =================== turma que receberá a migração =========================== -->
+						<!-- ============================================================================= -->
+						<tr>
+							<td class="alignRight" height="35">
+								<?php echo "<b>".$this->controller->classtemplate->text->namePerson."</b>";?>
+							</td>
+							<td>
+							<?php if($this->person[0]['name'] != ''):?>
+								<b class="bigWriteRed"><?php echo $this->person[0]['name']?></b></br>
+								<input type="hidden" name="id_person" value="<?php echo $this->person[0]['id_person']?>">
+								<input type="hidden" name="oldClass" value="<?php echo $this->oldClass->{CLS_ID_CLASS}?>">
+							<?php elseif ($this->personEr[0]->{'name'}):?>
+							<b class="bigWriteRed"><?php echo $this->personEr[0]->{'name'}?></b></br>
+								<input type="hidden" name="id_person" value="<?php echo $this->personEr[0]->{'id_person'}?>">
+								<input type="hidden" name="oldClass" value="<?php echo $this->oldClassEr->{CLS_ID_CLASS}?>">
+							<?php endif;?>
+							</td>
+						</tr>
+						<tr>
+							<td class="alignRight">
+								<?php echo "<b>".$this->controller->classtemplate->text->personTo."</b>"; ?>
+							</td>
+							<td>	
+								<select id="idNewClass" name="<?php echo ClassForm::idNewClass();?>">
+									<option value="">Selecione a Turma</option>
+									<?php
+										foreach($collClass as $obj)
+										{	
+											echo "<option value='";echo $obj[CLS_ID_CLASS]."'";
+											if($obj[CLS_ID_CLASS] == $this->escape($this->form->getIdNewClass()))
+											{
+												echo "selected";
+											}
+											echo ">"; 	
+											echo $obj[CLS_NAME];
+											echo "</option>";
+										}
+									?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+							<td>
+							<?php if($this->errorMessages != '') :?>
+							<div class="error"><span><?php echo $this->errorMessages?></span></div>
+							<?php endif;?>
+							</td>
+						</tr>
+						
+						<!-- ============================================================================= -->
+						<!-- =================================== botão =================================== -->
+						<!-- ============================================================================= -->
+						<tr>
+							<td align="right" colspan="2" class="centerObject" height="40">
+								<input value="Transferir" type="submit" class="button">		
+							</td>
+						</tr>
+					</table>
+</div>
+</form>
+<?php echo $this->render('footer/footerSearch.phtml');?>

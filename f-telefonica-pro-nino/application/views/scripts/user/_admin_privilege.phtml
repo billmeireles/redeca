@@ -1,0 +1,121 @@
+<form id="navigation" method="post">
+
+<tr>
+	<td colspan="5" height="30">
+		<h1 class="title"><?php echo $this->controller->user->text->admin->title;?></h1>
+	</td>
+</tr>
+
+
+<tr>
+	<td align="right" colspan="5" height="30">				
+		<div class="menuEdit">
+			<div class="buttonGreen activate">
+				<a href="javascript: submitForm('<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_ENABLE_ACTION;?>','navigation');"><?php echo $this->controller->user->link->enable;?></a>
+			</div>
+			
+			<div class="buttonGreen deactivate">
+				<a href="javascript: submitForm('<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_DISABLE_ACTION;?>','navigation');"><?php echo $this->controller->user->link->disable;?></a>
+			</div>
+			
+			<div class="buttonGreen new">
+				<a href="<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_NEW_ACTION;?>"><?php echo $this->controller->user->link->newuser;?></a>
+			</div>
+		</div>		
+	</td>
+</tr>
+
+
+<tr>
+	<td align="center">
+		
+		<tr>
+			<td colspan="5">
+				<?php echo $this->helpcontroller->user1?>				
+			</td>
+		</tr>
+		<tr>
+			<td aling="left" colspan="5">
+				<?php if($this->errorMessages) printErrorsByField($this->form->id(), $this->errorMessages);?>
+			</td>
+		</tr>
+		<p>		
+		<!--  <tr class="write">
+			<td class="bold" align="center" width="3%" height="20">&nbsp;</td>
+			<td class="bold" align="center" width="35%">< ?php echo $this->controller->user->text->user;?></td>
+			<td class="bold" align="center" width="30%">< ?php echo $this->controller->user->text->add->select;?></td>
+			<td class="bold" align="center" width="25%">< ?php echo $this->controller->user->text->email;?></td>
+			<td class="bold" align="center" width="7%">< ?php echo $this->controller->user->text->status;?></td>
+		</tr>-->
+			<?php 
+				$class = 1;
+				foreach($this->users as $user)
+				{
+					if($class == 0){$type = 'write';$class= 1;}	else{$type='';	$class= 0;}										
+			?>
+			<tr class="lineGrid <?php echo $type;?>">
+				<td class="borderLeft" width="50">
+					<input type="checkbox" name="<?php echo UserForm::id();?>[]" value="<?php echo $user->{AUTH_ID_USER}?>" />
+				</td>		
+				<td class='gridContent' valign="center" width='490'>
+					<table class='noBorderGrid' width='100%'>
+						<!--<tr>
+							<td align='left' colspan="3">		
+								<a href="< ?php echo $this->baseUrl;?>< ?php echo USER_CONTROLLER;?>/< ?php echo DEFAULT_VIEW_ACTION;?>/< ?php echo $this->form->id();?>/< ?php echo $user->{AUTH_ID_USER}?>">
+									< ?php echo $user->{AUTH_NAME_USER}?>
+								</a>
+							</td>
+						</tr>-->
+						<tr>
+							<td class="lineWithLabel" width="200">
+								<a href="<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_VIEW_ACTION;?>/<?php echo $this->form->id();?>/<?php echo $user->{AUTH_ID_USER}?>">
+									<?php echo $user->{AUTH_NAME_USER}?>
+								</a><br />
+								<span><?php echo $this->controller->user->text->admin->entity;?>:</span>
+								<a href='<?php echo $this->baseUrl;?><?php echo ENTITY_CONTROLLER;?>/<?php echo DEFAULT_VIEW_ACTION;?>/<?php echo $this->form->entityId();?>/<?php
+										foreach($this->entities as $entity)
+											if($entity->{ENT_ID_ENTITY} == $user->{AUTH_ID_ENTITY_USER})
+												echo $entity->{ENT_ID_ENTITY};
+									?>'>
+									<?php
+										foreach($this->entities as $entity)
+											if($entity->{ENT_ID_ENTITY} == $user->{AUTH_ID_ENTITY_USER})
+												echo $entity->{ENT_NAME};
+									?>
+								</a>
+							</td>
+							<td class='gridContent' valign="top" width="89" >
+								<?php
+									foreach($this->roles as $group)
+										if($group->{AUTH_ID_ROLE} == $user->{AUTH_ID_ROLE_USER})
+											echo $group->{AUTH_ROLE};
+								?>
+							</td>
+							<td class='gridContent' valign="top" width="200" >
+								<?php echo $user->{AUTH_EMAIL_USER};?>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class='centerObject borderRight'>
+					<?php
+						if($user->{AUTH_ACTIVE_USER} ==  1)	{
+							echo "<div class='styleGreenWrite'><span>".$this->controller->user->text->add->enable."</span></div>";
+						} else {
+							echo "<div class='styleRedWrite'><span>".$this->controller->user->text->add->disable."</span></div>";
+						}
+					?>
+				</td>
+			</tr>
+			<tr class="space"><td colspan="3">&nbsp;</td></tr>							
+		<?php
+			}
+		?>
+	</td>
+</tr>
+<tr>
+	<td align='center' colspan='5'>
+		<?php echo $this->render('/navBar.phtml');?>
+	</td>
+</tr>
+</form>

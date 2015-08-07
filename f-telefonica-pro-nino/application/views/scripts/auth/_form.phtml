@@ -1,0 +1,56 @@
+<div class="ctr">
+	<div class="login ajuda">
+		<h1><?php echo $this->escape($this->labels->login->title);?></h1>
+		
+		<p>
+			<?php echo $this->helpcontroller->text1;?><?php echo "<b>".$this->helpcontroller->text2."</b>";?><br />
+			<?php echo $this->helpcontroller->text3;?>
+		</p>
+		
+		<div class="login-borda">
+			<div class="login-form">
+				<form action="<?php echo $this->baseUrl?><?php echo AUTH_CONTROLLER;?>/login" method="post">
+					
+					<?php printMessage($this->message);?>
+					
+					<!-- ======== -->
+					<!-- username -->
+					<!-- ======== -->
+					<div class="campos">
+					
+						<div>
+							<label style="display: none" for="<?php echo $this->form->username();?>"><?php echo $this->controller->login->username;?></label>
+							<input id="<?php echo $this->form->username();?>" name="<?php echo $this->form->username();?>" value="<?php echo ($this->escape(trim($this->form->getUsername())) == '')? $this->controller->login->username : $this->escape(trim($this->form->getUsername()));?>" type="text" size="15"/>
+						</div>
+			
+					</div>
+					
+					<?php
+						$errorStatus = printErrorsByField($this->form->username(), $this->errorMessages);
+						if($errorStatus){
+					?>
+							
+								<?php $errorStatus; ?>
+							
+					<?php } ?>
+					<!-- ======== -->
+					<!-- password -->
+					<!-- ======== -->
+					<div class="campos">
+
+						<div class="inputbox">
+							<!--input type="password" class="senha" name="< ?php echo $this->form->password();?>" style="display: none;" value="< ?php echo $this->escape(trim($this->form->getUsername()));?>" --> 
+							<input type="password" class="senha" name="<?php echo $this->form->password();?>" style="display: none;" > 
+							<input class="senha" id="<?php echo $this->form->password();?>" value="<?php echo $this->controller->login->password;?>" type="text" />
+						</div>
+					</div>
+								
+					<input type="submit" class="button" value="<?php echo $this->controller->login->submit; ?>"/>
+					
+				</form>
+			</div>
+		
+			<div class="clr"></div>
+		</div>
+	</div>
+</div>

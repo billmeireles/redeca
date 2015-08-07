@@ -1,0 +1,48 @@
+<?php echo $this->render('header/header.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+</div>
+<div style="text-align: left; margin-top:15px;">
+	<h3>Filtro Selecionado: Número de Atendimentos</h3>
+	<form name="opcoes" id="opcoes" action="<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/attendanceperiod" method="post">
+		<div style="height: auto; overflow: auto; margin:8px 0px; padding:2px;">
+
+		<label style="vertical-align: 6px;">Data inicial:</label> <input maxlength="10" type="text" class="datepicker" name="initial" id="initial" style="vertical-align: 6px;" value="<?php echo $this->value?>">
+
+		<label style="vertical-align: 6px; margin-left: 50px;">Data final:</label> <input maxlength="10" type="text" class="datepicker" name="final" id="final" style="vertical-align: 6px;" value="<?php echo $this->valuef?>">
+		
+		<div style="display: none;" id="dateError" class="error">
+		<label id="error1" style="display: none;" ><font color="red">Data final deve ser maior que a inicial</font></label>
+		<div id="initError" style="display: none;"><font color="red">Data inicial inválida</font></div>
+		<div id="finaError" style="display: none;"><font color="red">Data final inválida</font></div>
+		</div>
+		
+		</div>
+		<?php if($this->msg){ ?>		
+			<div class="error">
+				<span>
+					<?php echo $this->msg ?>
+					<br/>
+				</span>	
+			</div>
+		<?php } ?>
+		<div style="height:50px">
+			<input style="margin-top:10px;;" type="checkbox" name="qtde" id="qtde" value="qtde"> Somente quantidade.
+		</div>
+		<input type="hidden" name="opcao" id="opcao" value=""/>
+		<input class="button" type="button" value="Gerar gráfico" onclick="document.opcoes.opcao.value = 'graphic'; document.opcoes.submit();"/>
+		<input class="button" type="button" value="Visualizar na Tela" onclick="document.opcoes.opcao.value = 'view'; document.opcoes.submit();"/>
+		<input class="button" type="button" value="Download Planilha" onclick="document.opcoes.opcao.value = 'csv'; document.opcoes.submit();"/>
+		<input class="button" type="button" value="Voltar" onclick="window.location = '<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>';"/>
+	</form>
+</div>
+
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+<?php echo $this->render('footer/footer.phtml');?>

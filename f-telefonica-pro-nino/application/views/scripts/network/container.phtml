@@ -1,0 +1,30 @@
+<?php $case = false;?>
+<?php $show = Zend_Registry::get(CONFIG)->container->network;?>
+<?php if(!$show):?>
+	<?php echo $this->render('header/head.phtml');?>
+<?php endif;?>
+<?php $random = Zend_Registry::get(CONFIG)->container->random;?>
+<?php if($random && $case == false):?>
+	<?php echo $this->render('header/head.phtml');?>
+<?php endif;?>
+<table class="icontainer" cellpadding="0" cellspacing="0">
+	<?php $i = 0;?>
+	<?php foreach($this->entity as $entity):?>
+		<tr>
+			<td>
+				<span class="verde">
+					<?php if($i < 4):?>				
+						<?php echo "&loz;&nbsp;".abbreviate($entity->{ENT_NAME}, 20);?>
+					<?php else: echo "..."; break;?>
+					<?php endif;?>
+					<?php $i++;?>
+				</span>
+			</td>
+		</tr>		
+	<?php endforeach;?>
+	<tr>
+		<td class="alignCenter">
+			<input type="submit" onclick="parent.document.location='<?php echo $this->baseUrl;?><?php echo NETWORK_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>'" value="<?php echo $this->labels->button->showDetail;?>"/>
+		</td>
+	</tr>
+</table>

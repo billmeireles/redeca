@@ -1,0 +1,129 @@
+<tr>
+	<td class="bold">
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<h1 class="title"><?php echo $this->labels->create->activity;?></h1><hr>
+				</td>
+			</tr>
+			<tr>
+				<td><?php echo $this->helpcontroller->text1;?><hr></td>
+			</tr>
+			<tr>
+				<td >
+					<?php echo $this->render('navigation/navigationEntity.phtml');?>
+				</td>
+			</tr>
+		</table>
+		
+		<div class="inputBox">
+			<table cellpadding="0" cellspacing="0" width="548">
+				<tr>
+					<td colspan="4" height="30">
+						<h1 class="title">
+							<?php echo $this->controller->area->text->expertisearea;?>
+						</h1>
+					</td>
+				</tr>
+				<!-- =================================================================================================================== -->
+				<!-- ============= FORM utilizado para persistir uma classificação:  salvar e editar um programa ======================= -->
+				<!-- =================================================================================================================== -->
+				<?php if($this->form->getId()):?>
+				<form action="<?php echo $this->baseUrl;?><?php echo AREA_CONTROLLER;?>/<?php echo DEFAULT_EDIT_ACTION;?>" method="post">
+				<?php else:?>
+				<form action="<?php echo $this->baseUrl;?><?php echo AREA_CONTROLLER;?>/<?php echo DEFAULT_ADD_ACTION;?>" method="post">
+				<?php endif;?>
+					<tr>
+						<td colspan="4" height="30">
+							<?php echo $this->helpcontroller->text2?>
+						</td>
+					</tr>
+					<tr>
+						<td class="label" width="35%">
+							<?php echo $this->controller->area->text->typeexpertise;?>:
+						</td>
+						<td width="30%">
+							<input style="width: 95%;" maxlength="50" type="text" value="<?php echo $this->escape($this->form->getAreaName());?>" name="<?php echo $this->form->areaName();?>"/>
+							<input type="hidden" value="<?php echo $this->form->getId();?>" name="<?php echo $this->form->id();?>"/>
+						</td>
+						<td width="25%">
+							<select style="width: 90%; margin-left: 5px;"  name="<?php echo $this->form->status();?>">
+								<option value="<?php echo Constants::ENABLE;?>"><?php echo $this->labels->text->enable;?></option>
+								<option value="<?php echo Constants::DISABLE;?>" <?php if($this->form->getStatus() == Constants::DISABLE) echo "selected";?>><?php echo $this->labels->text->disable;?></option>
+							</select>
+						</td>
+						<td width="10%" align="left" style="vertical-align: top;" >
+							<input class="button" style="margin-top: -1px;" type="submit" value="<?php echo $this->labels->button->save;?>" />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" align="left">
+							<?php 
+								printErrorsByField($this->form->areaName(), $this->errorMessages);
+								printErrorsByField($this->form->status(), $this->errorMessages);
+							?>
+						</td>
+					</tr>
+				</form>
+				<!-- =================================================================================================================== -->
+				<!-- ===================================================== fim do FORM ================================================= -->
+				<!-- =================================================================================================================== -->
+			</table>
+		</div>
+		<br><br>
+	</td>
+</tr>
+			
+<tr>
+	<td class="inputBox">
+
+			<table width="548" cellpadding="0" cellspacing="0">
+				<tr>
+					<td colspan="2">
+						<h1 class="left"><?php echo $this->controller->area->text->manage;?></h1>
+					</td>
+				</tr>
+				
+				<!-- =================================================================================================================== -->
+				<!-- ============== FORM utilizado para carregar uma ou mais áreas à serem excluídas =================================== -->
+				<!-- ================== FORM utilizado para carregar uma área à ser excluída =========================================== -->
+				<!-- =================================================================================================================== -->
+				<form id="areaFrm" method="post">
+					<tr>
+						<td width="160" class="label" style="vertical-align: top !important">
+							<?php echo $this->controller->area->text->registeredarea;?>:
+						</td>
+						<td width="388" >
+							<select id="typeArea" size="10" name="<?php echo $this->form->id();?>[]" multiple>
+								<?php 
+										foreach($this->areas as $area)
+										{
+											echo "<option value='".$area->{EAT_ID_ENTITY_AREA}."' title='".$area->{EAT_ENTITY_AREA}."'>".$area->{EAT_ENTITY_AREA};
+											if($area->{EAT_STATUS} == Constants::DISABLE)
+												echo "&nbsp;*&nbsp;".$this->labels->text->disable."&nbsp;*";
+											echo "</option>";
+										}
+									?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<?php printErrorsByField($this->form->id(), $this->errorMessages);?>
+						</td>
+					</tr>
+					</tr>
+						
+						<td colspan="2" class="alignLeft">
+							<input class="button" type="submit" value="<?php echo $this->labels->button->edit;?>" onClick="javascript: return reportMultipleSelected('<?php echo $this->baseUrl;?><?php echo AREA_CONTROLLER;?>/<?php echo DEFAULT_VIEW_ACTION;?>',this.form, 'typeArea');">
+							<input class="button" style="margin-left: 5px;" type="submit" value="<?php echo $this->labels->button->disable;?>" onClick="javascript: return actionName('<?php echo $this->baseUrl;?><?php echo AREA_CONTROLLER;?>/<?php echo DEFAULT_CONFIRM_ACTION;?>', this.form);">
+						</td>
+					</tr>
+				</form>
+				<!-- =================================================================================================================== -->
+				<!-- ===================================================== fim do FORM ================================================= -->
+				<!-- =================================================================================================================== -->
+			</table>
+		
+	</td>
+</tr>

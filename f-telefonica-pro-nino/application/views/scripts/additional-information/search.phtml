@@ -1,0 +1,46 @@
+<?php echo $this->render('header/header.phtml');?>
+
+<!-- ====================================== -->
+<!-- inicio : específico para cada template -->					
+<!-- ====================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	
+	<!-- ============================================================================================== -->
+	<!-- É necessário informar o nome class da tabela em questão para carregar a cor background correta -->
+	<!-- Opções: 
+				#identification
+				#person
+				#education
+				#health
+				#income
+				#familyRelationship
+				#residence
+				#attendance
+				#activity	-->
+	<!-- ============================================================================================== -->
+	<table width="570" cellpadding="0" cellspacing="0">
+		<tr>
+			<td align="center">
+				<?php echo $this->render('navigation/navigationSetup.phtml');?>
+			</td>
+		</tr>
+	</table>
+	
+	<div class="inputBox">
+		<table width="548" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="center">
+					<?php echo $this->render('additional-information/_form.phtml');?>
+					<?php echo $this->render('additional-information/_formSearch.phtml');?>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+</div>																  
+<!-- =================================== -->
+<!-- fim : específico para cada template -->					
+<!-- =================================== -->		
+					
+<?php echo $this->render('footer/footer.phtml');?>

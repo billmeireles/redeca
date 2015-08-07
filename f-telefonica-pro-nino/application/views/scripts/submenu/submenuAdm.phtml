@@ -1,0 +1,111 @@
+<?php 
+	//variável utilizada para setar background do submenu
+	$stringUri = $_SERVER["REQUEST_URI"];
+	
+	$controllerAssociate = ASSOCIATE_ENTITY_CONTROLLER;
+?>
+
+<?php if(UserLogged::isLogged()):?>
+	<?php if(UserLogged::isAdministrator()):?>
+	<table class="withoutEdge" width="570" height="" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<div>
+					<ul class="submenuCentral adm">
+					  <?php if(ResourcePermission::isAllowResource(ENTITY_CONTROLLER)){?>
+						<li style="width:110px;" <?php 
+					  		$stringmatch = ENTITY_CONTROLLER; 
+					  		if (  preg_match("%($controllerAssociate)|($stringmatch)%", "$stringUri") && !preg_match("%(".USER_CONTROLLER.ENTITY_CONTROLLER.")%", "$stringUri"))
+					  		{
+					  			echo "class='current'";
+					  		}
+					  	  ?>>
+							<a href="<?php echo $this->baseUrl;?><?php echo ENTITY_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>">
+								<div class="menuTexto menuEntity">
+									<?php echo $this->labels->title->entities;?>
+								</div>
+							</a>
+						</li>
+					  <?php }?>
+					
+					  <?php if(ResourcePermission::isAllowResource(USER_CONTROLLER)){?>
+					  <li style="width:100px;" <?php $stringmatch = USER_CONTROLLER; if (preg_match("%($stringmatch)%", "$stringUri")){echo "class='current'";}?> >
+						<a href="<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>">
+							<div class="menuTexto menuUser">
+								<?php echo $this->labels->title->users;?>
+							</div>
+						</a>
+					  </li>
+					  <?php }?>
+						  
+					  <?php if(ResourcePermission::isAllowResource(AREA_CONTROLLER)){?>
+					  <li style="width:110px;" <?php 
+					  			$stringmatch = AREA_CONTROLLER; 
+					  			$stringmatchClassification = CLASSIFICATION_CONTROLLER; 
+					  			$stringmatchProgram = PROGRAM_CONTROLLER; 
+					  			$stringmatchActivity = ACTIVITY_CONTROLLER; 
+					  			
+					  			if (preg_match("%($stringmatch)|($stringmatchClassification)|($stringmatchProgram)|($stringmatchActivity)%", "$stringUri"))
+					  			{
+					  				echo "class='current'";
+					  			}
+					  		?> >
+							<a href="<?php echo $this->baseUrl;?><?php echo AREA_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>">
+								<div class="menuTexto menuActivity">
+									<?php echo $this->labels->title->activities;?>
+								</div>
+							</a>
+						</li>
+					  <?php }?>
+					
+					  <?php if(ResourcePermission::isAllowResource(REGION_CONTROLLER)){?>
+					  <li style="width:80px;" <?php 
+					  			$stringmatch = REGION_CONTROLLER; 
+					  			$stringmatchProfile = PROFILE_CONTROLLER; 
+					  			$stringmatchAddInf = ADDITIONALINFORMATION_CONTROLLER; 
+					  			$stringmatchImport = IMPORT_CONTROLLER;
+					  			$stringmatchGroup = GROUP_CONTROLLER;
+					  			
+					  			if (preg_match("%($stringmatch)|($stringmatchProfile)|($stringmatchAddInf)|($stringmatchImport)|($stringmatchGroup)%", "$stringUri") && !preg_match("%($controllerAssociate)%", "$stringUri") )
+					  			{
+					  				echo "class='current'";
+					  			}
+					  		?>>
+							<a class="semMarginEsq" href="<?php echo $this->baseUrl;?><?php echo REGION_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>">
+								<div class="menuTexto setup">
+									<div>
+										<?php echo $this->labels->title->setup;?>
+									</div>
+								</div>
+							</a>
+						</li>
+					  <?php }?>
+
+					  <?php 
+					   /*RF001 - Adicionar botao monitoramento no sub menu administracao*/
+					   if(ResourcePermission::isAllowResource(MONITORING_CONTROLLER)){?>
+					  <li style="width:150px;" <?php 
+					  			$stringmatch = MONITORING_CONTROLLER; 
+					  						
+					  			if (preg_match("%($stringmatch)%", "$stringUri"))
+					  			{
+					  				echo "class='current'";
+					  			}
+					  		?>> 
+							<a class="semMarginEsq" href="<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>">
+								<div class="menuTexto monitoramento">
+									<div>
+										<?php echo $this->labels->title->monitoring;?>
+									</div>
+								</div>
+							</a>
+						</li>
+					  <?php }?>
+					</ul>
+					
+				</div>
+			</td>
+		</tr>
+	</table>
+	<?php endif;?>
+<?php endif;?>

@@ -1,0 +1,66 @@
+<?php 
+	//variável utilizada para setar background do submenu 
+	$stringUri = $_SERVER["REQUEST_URI"];
+	
+	$controllerReport = REPORT_CONTROLLER;
+	$stringmatchEntity = ENTITY_CONTROLLER; 
+	$stringmatchRegion = REGION_CONTROLLER; 
+	$stringmatchUser = USER_CONTROLLER; 
+	$stringmatchArea = AREA_CONTROLLER; 
+	$stringmatchClassification = CLASSIFICATION_CONTROLLER; 
+	$stringmatchProgram = PROGRAM_CONTROLLER; 
+	$stringmatchActivity = ACTIVITY_CONTROLLER; 
+	$stringmatchProfile = PROFILE_CONTROLLER;
+	$stringmatchAddInf = ADDITIONALINFORMATION_CONTROLLER;
+	$stringmatchImport = IMPORT_CONTROLLER;
+	$stringmatchGroup = GROUP_CONTROLLER;
+	$controllerNetwork = NETWORK_CONTROLLER;
+	$controllerSearch = SEARCH_CONTROLLER;
+	
+	if(preg_match("%($controllerSearch)|($controllerNetwork)|($stringmatchEntity)|($stringmatchRegion)|($stringmatchUser)|($stringmatchArea)|($stringmatchClassification)|($stringmatchProgram)|($stringmatchActivity)|($stringmatchProfile)|($stringmatchAddInf)|($stringmatchImport)|($stringmatchGroup)%", "$stringUri"))
+	{
+		$setAdministrator = TRUE;
+	}
+?>
+
+<?php if($this->user):?>
+	<!--
+	<table class="userLogged" 
+		< ?php if(!$setAdministrator !== TRUE){ 
+			//echo 'width="970"';
+			echo 'width="570"';
+		} else { 
+			echo 'width="570"';
+		} ?> cellpaddisng="0" cellspacing="0" align="center">
+	-->
+	
+	<table class="userLogged" width="570" cellpadding="0" cellspacing="0" align="center">
+		<tr>
+		
+			<td width="33">
+				<img src="<?php echo $this->baseUrl;?>/public/images/logado.png">
+			</td>
+			
+			<td style="padding: 0px;">
+				<p><?php echo $this->labels->auth->logged->as;?>&nbsp;<span class="verde"><?php echo $this->user->name; ?></span></p>
+			</td>
+	
+			<td width="18" class="userPadding">
+				<a href="<?php echo $this->baseUrl . USER_CONTROLLER . '/' .DEFAULT_VIEW_CHANGE_PASSWORD_ACTION ?>"><img border="0" src="<?php echo $this->baseUrl;?>/public/images/cadeado.png"></a>
+			</td>
+			
+			<td width="118" class="userPadding">
+				<a href="<?php echo $this->baseUrl . USER_CONTROLLER . '/' .DEFAULT_VIEW_CHANGE_PASSWORD_ACTION ?>" style="padding: 0 0 0 5px;"><?php echo $this->labels->auth->alter->password;?>?</a>
+			</td>
+			
+			<td width="19" class="userPadding">
+				<img border="0" src="<?php echo $this->baseUrl;?>/public/images/sair.png">
+			</td>
+			
+			<td width="38" align="right" class="userPadding">
+				<a href="<?php echo $this->baseUrl . AUTH_CONTROLLER . '/logout' ?>"><?php echo $this->labels->auth->logout;?>?</a>
+			</td>	
+
+		</tr>
+	</table>
+<?php endif;?>

@@ -1,0 +1,48 @@
+<?php	
+	header("Content-type:text/octect-stream");
+    header("Content-Disposition:attachment;filename=".$this->classes->{CLS_NAME}.".csv");
+?>	Turma: ;<?php echo ' '.$this->classes->{CLS_NAME}?>;
+	
+	Total de Vagas: ;<?php echo $this->classes->{CLS_VACANCY}?>;
+	
+	Vagas Disponíveis: ;<?php if($this->vacancy > 0)
+								echo ' '.$this->vacancy;
+							 else
+							 {
+								echo ' 0';
+							 }
+						?>;
+						
+	Fila de Espera: ;<?php 
+						if($this->wait == 0){
+							echo ' '.($this->wait);
+						}
+						else{
+							echo ' '.($this->wait).'    '.$this->controller->classtemplate->text->waitMsg;
+						}
+						
+						
+					?>;
+	
+	Pessoas na Turma
+	Nome:;Inclusão
+	<?php $i = 0?>
+	<?php foreach($this->person as $persons) : ?>
+	<?php if($persons['id_status'] == 1):?>
+				<?php echo $this->escape($persons['name']);?>; <?php echo $this->date[$i];?>
+	<?php $i++?>			
+	<?php endif;?>
+	<?php endforeach;?>;
+	
+	
+	Pessoas na fila de espera da Turma
+	Nome:;Inclusão
+	<?php $size = sizeof($this->person);?>
+	<?php foreach($this->person as $persons) : ?>
+	<?php if($persons['id_status'] == 2):?>
+				<?php echo $this->escape($persons['name']);?>; <?php echo $this->date[$size-1];?>
+				
+	<?php $size--?>
+	<?php endif;?>
+	<?php endforeach;?>;
+	

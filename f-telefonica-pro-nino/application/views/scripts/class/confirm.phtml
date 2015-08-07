@@ -1,0 +1,29 @@
+<?php
+/*
+ * 
+ * Created on 19/02/2008 
+ * S2it Solutions by Fabricio Meireles Monteiro
+ * 
+ */
+?>
+ 
+<?php echo $this->render('header/headerClass.phtml');?>
+
+	<div class="inputBox">
+		<table width="548" cellpadding="0" cellspacing="0">
+			<?php 
+				if(!$this->errorMessages)
+				{
+					echo $this->render('class/migrate.phtml');
+				}
+				else
+				{
+					echo $this->render('class/invalidParam.phtml');
+				}
+			?>
+		</table>
+	</div>
+
+<?php echo $this->render('footer/footerSearch.phtml');?>
+ 
+

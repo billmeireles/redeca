@@ -1,0 +1,81 @@
+<?php echo $this->render('header/header.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+</div>
+
+<?php 
+	$total = (int) 0;
+?>
+	
+<div class="rel">
+	<h3>Filtro Selecionado: Número de Atendimentos: <?php echo $this->initial ?> até <?php echo $this->final ?></h3>
+	<!-- Listando entidades -->
+	<?php foreach ($this->view as $entity): ?>
+		<div class='title'><strong>Entidade:</strong> <?php echo $entity->getName() ?></div>
+		
+		<?php $top = true ?>
+		<!-- Listando ("Categoria") -->
+		<?php foreach ($entity->getCategorys() as $category): ?>
+		
+			<?php if($category->getTotal() > 0) { ?>
+				
+				<?php if((count($category->getPersons()) > 0) && ($top === true)) { ?>
+					<?php $top = false; ?>
+					<div class="gridTop">
+						<div style="width:330px;">
+							<strong>Pessoa</strong>
+						</div>
+						<div style="width:120px;">
+							<strong>Sexo</strong>
+						</div>
+						<div style="width:120px;">
+							<strong>Nascimento</strong>
+						</div>
+					</div>
+				<?php } ?>
+				
+				<div class="category"><strong><?php echo $category->getName() ?></strong></div>
+				
+				<?php foreach ($category->getPersons() as $person): ?>
+					<div class="grid">
+						<div class="cell" style="width:310px; margin-right: 20px;">
+							<?php echo $person->getName() ?>
+						</div>
+						<div class="cell" style="width:110px; margin-left: 10px;">
+							<?php echo strtoupper($person->getSex()); ?>
+						</div>
+						<div class="cell" style="width:120px;">
+							<?php
+								$date = new DateTime($person->getBirthDate());
+								echo $date->format('d/m/Y');
+							?>
+						</div>
+					</div>
+				<?php endforeach ?>
+				
+				<div class="subTotal"><strong>Subtotal atendimentos:</strong> <?php echo $category->getTotal() ?></div>
+				
+				<?php $total = $total + $category->getTotal() ?>
+			<?php } ?>
+			
+		<?php endforeach ?>
+		<?php if($total < 1){?>
+			<div class="registro">Nenhum registro encontrado.</div>
+		<?php }else{ ?>
+			<div class="total"><strong>Total da entidade:</strong> <?php echo $total ?></div>
+			<?php $total = 0; ?>
+		<?php } ?>
+		
+	<?php endforeach ?>
+	<input class="button" type="button" value="Voltar" onclick="window.location = '<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/attendanceperiod';"/>
+</div>
+	
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+<?php echo $this->render('footer/footer.phtml');?>

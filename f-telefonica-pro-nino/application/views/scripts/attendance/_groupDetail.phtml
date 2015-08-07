@@ -1,0 +1,64 @@
+<?php $ast = $this->assistance;?>
+
+<tr>
+	<td colspan="2">
+		<table width="100%" cellpadding="0" cellspacing="0">
+
+			<tr class="write">
+				<td width="15%"> 
+					<b><?php echo $this->controller->attendance->text->class;?></b>
+				</td>
+				<td width="15%" >
+					<b><?php echo $this->controller->attendance->text->activity;?></b>
+				</td>
+				<td width="10%">
+					<b><?php echo $this->controller->attendance->text->vacancy;?></b>
+				</td>
+				<td width="20%">
+					<b><?php echo $this->controller->attendance->text->hour;?></b>
+				</td>
+				<td width="12%">
+					<b><?php echo $this->controller->attendance->text->period;?></b>
+				</td>
+				<td width="18%">
+					<b><?php echo $this->controller->attendance->text->hourLoad;?></b>
+				</td>
+				<td width="10%">
+					<b><?php echo $this->controller->attendance->text->category;?></b>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+
+<tr>
+	<td colspan="2">
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<?php for($i = 0; $i < sizeof($ast[CLS_NAME]); $i++):?>
+			<tr>
+				<td width="15%">
+					<?php ($ast[CLS_NAME][$i])? $name= $ast[CLS_NAME][$i]: $name= $this->labels->text->nodata; echo $name;?>
+				</td>
+				<td width="15%">
+					<?php ($ast[ACD_ACTIVITY_DETAIL][$i])? $activity = $ast[ACD_ACTIVITY_DETAIL][$i]: $activity = $this->labels->text->nodata; echo $activity;?>
+				</td>
+				<td width="10%">
+					<?php ($ast[CLS_VACANCY][$i])? $vacancy = $ast[CLS_VACANCY][$i]: $vacancy = $this->labels->text->nodata;; echo $vacancy;?>
+				</td>
+				<td width="20%">
+					<?php ($ast[CLS_SCHEDULE][$i])? $schedule = $ast[CLS_SCHEDULE][$i]: $schedule = $this->labels->text->nodata;; echo $schedule;?>
+				</td>
+				<td width="12%">
+					<?php ($ast[CLS_PERIOD][$i])? $period = $ast[CLS_PERIOD][$i]: $period = $this->labels->text->nodata;; echo $period;?>
+				</td>
+				<td width="18%">
+					<?php ($ast[ACD_HOURLY_LOAD][$i])? $hourly = $ast[ACD_HOURLY_LOAD][$i]."h": $hourly = $this->labels->text->nodata;; echo $hourly;?>
+				</td>
+				<td width="10%">
+					<?php ($ast[CAT_CATEGORY][$i])? $cat = $ast[CAT_CATEGORY][$i]: $cat = $this->labels->text->nodata;; echo $cat;?>
+				</td>
+			</tr>
+			<?php endfor;?>
+		</table>
+	</td>
+</tr>

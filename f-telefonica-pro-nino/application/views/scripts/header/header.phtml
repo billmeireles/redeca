@@ -1,0 +1,388 @@
+<?php $random = Zend_Registry::get(CONFIG)->container->random;?>
+<?php if($random):?>
+	<?php echo $this->render('header/header_random.phtml');?>
+<?php else:?>
+
+<?php echo $this->render('header/head.phtml');?>
+<body>
+
+	<div class="alignDivCenter"> 
+	
+	<table width="970" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+	
+	<?php echo $this->render('header/authBar.phtml');?>
+	
+	<?php echo $this->render('menu/menu.phtml');?>
+	<table width="970" cellpadding="0" cellspacing="0">
+		<tr>			
+			<td width="200" style="vertical-align: top;">			
+			<?php if(!$this->errorMessages[$this->form->personId()] && !is_null($this->form->getPersonId())):?>
+			<?php if(ResourcePermission::showContainers($this->request)){?>
+				<script>
+					$().ajaxSend(
+						function()
+						{
+							<?php if(ResourcePermission::isAllowResource(PERSON_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->identification;?>
+								<?php if($show):?>
+									$('#loading0').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(EDUCATION_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->education;?>
+								<?php if($show):?>
+									$('#loading1').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(HEALTH_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->health;?>
+								<?php if($show):?>
+									$('#loading2').show();
+								<?php endif;?>
+							<?php }?>	
+							
+							<?php if(ResourcePermission::isAllowResource(INCOME_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->income;?>
+								<?php if($show):?>
+									$('#loading3').show();
+								<?php endif;?>
+							<?php }?>		
+							
+							<?php if(ResourcePermission::isAllowResource(PERSON_LOG_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->personlog;?>
+								<?php if($show):?>
+									$('#loading4').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(FAMILYRELATIONSHIP_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->family;?>
+								<?php if($show):?>
+									$('#loading5').show();
+								<?php endif;?>
+							<?php }?>						
+							
+							<?php if(ResourcePermission::isAllowResource(RESIDENCE_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->residence;?>
+								<?php if($show):?>
+									$('#loading6').show();
+								<?php endif;?>
+							<?php }?>			
+							
+							<?php if(ResourcePermission::isAllowResource(ATTENDANCE_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->lastattendance;?>
+								<?php if($show):?>
+									$('#loading7').show();
+								<?php endif;?>
+							<?php }?>			
+							
+							<?php if(ResourcePermission::isAllowResource(NETWORK_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->network;?>
+								<?php if($show):?>
+									$('#loading8').show();
+								<?php endif;?>
+							<?php }?>				
+						}
+					);
+					
+					$.post('<?php echo $this->baseUrl;?><?php echo PERSON_CONTROLLER;?>/<?php echo DEFAULT_CONTAINER_MAIN_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>', 
+						function(data)
+						{ 
+							$('#containerMain').append(data);
+							
+							<?php if(ResourcePermission::isAllowResource(PERSON_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->identification;?>
+								<?php if($show):?>					
+									$('#personMain').append($('#personDiv'));
+									$('#loading0').hide();
+									$('#personMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(EDUCATION_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->education;?>
+								<?php if($show):?>					
+									$('#educationMain').append($('#educationDiv'));
+									$('#loading1').hide();
+									$('#educationMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(HEALTH_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->health;?>
+								<?php if($show):?>					
+									$('#healthMain').append($('#healthDiv'));
+									$('#loading2').hide();
+									$('#healthMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(INCOME_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->income;?>
+								<?php if($show):?>					
+									$('#incomeMain').append($('#incomeDiv'));
+									$('#loading3').hide();
+									$('#incomeMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(PERSON_LOG_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->personlog;?>
+								<?php if($show):?>					
+									$('#personLogMain').append($('#personLogDiv'));
+									$('#loading4').hide();
+									$('#personLogMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(FAMILYRELATIONSHIP_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->family;?>
+								<?php if($show):?>					
+									$('#familyMain').append($('#familyDiv'));
+									$('#loading5').hide();
+									$('#familyMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(RESIDENCE_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->residence;?>
+								<?php if($show):?>					
+									$('#residenceMain').append($('#residenceDiv'));
+									$('#loading6').hide();
+									$('#residenceMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(ATTENDANCE_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->lastattendance;?>
+								<?php if($show):?>					
+									$('#attendanceMain').append($('#attendanceDiv'));
+									$('#loading7').hide();
+									$('#attendanceMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							<?php if(ResourcePermission::isAllowResource(NETWORK_CONTROLLER)){?>
+								<?php $show = Zend_Registry::get(CONFIG)->container->network;?>
+								<?php if($show):?>					
+									$('#netMain').append($('#netDiv'));
+									$('#loading8').hide();
+									$('#netMain').show();
+								<?php endif;?>
+							<?php }?>
+							
+							$('#containerMain').hide();
+						}
+					);
+				</script>
+				<div id="containerMain"></div>
+				<?php if(ResourcePermission::isAllowResource(PERSON_CONTROLLER)){?>
+					<?php $show = Zend_Registry::get(CONFIG)->container->identification;?>
+					<?php if(!$show):?>
+						<?php echo $this->render('container/containerIdentification.phtml');?><br>
+					<?php else:?>
+					<!-- Antigo
+						<table class="identification" width="100%">
+							<tr>
+								<td class="container">											
+									<table width="187" class="tableContainer">
+										<tr>
+											<td width="10%" class="fontContainer">								
+											</td>				
+											<td width="90%" class="fontContainer">
+												<b>< ?php echo $this->labels->title->identification;?></b>
+											</td>
+										</tr>
+									</table><br>
+									<div id="loading0"><center><img src="< ?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>
+									<div id="personMain"></div>
+								</td>
+							</tr>
+						</table><br>
+						-->
+					
+						<div class="container containerMarginTop">
+							<div class="imgTitle"></div>
+							<div class="borderTitle"></div>
+							<div class="textTitle">
+								<?php echo $this->labels->title->identification;?>
+							</div>
+							<div id="loading0" class="loading"></div>
+							<div id="personMain"></div>
+							<div class="borderBottom"></div>
+						</div>
+					
+					<?php endif;?>
+				<?php }?>
+				
+				<?php if(ResourcePermission::isAllowResource(EDUCATION_CONTROLLER)){?>
+					<?php $show = Zend_Registry::get(CONFIG)->container->education;?>
+					<?php if(!$show):?>
+						<?php $hideHeader = true;?>
+						<?php echo $this->render('container/containerEducation.phtml');?><br>
+					<?php else:?>
+						<!-- Antigo --
+						<table class="education" width="100%">
+							<tr>
+								<td class="container">
+									<table width="100%" class="tableContainer">
+										<tr>
+											<td width="10%" class="fontContainer">								
+											</td>				
+											<td width="90%" class="fontContainer">
+												<b>< ?php echo $this->labels->title->education;?></b>
+											</td>
+										</tr>
+									</table><br>
+									<div id="loading1"><center><img src="< ?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>
+									<div id="educationMain"></div>
+								</td>
+							</tr>
+						</table><br>
+						-->
+						<div class="container">
+							<div class="imgTitle"></div>
+							<div class="borderTitle"></div>
+							<div class="textTitle">
+								<?php echo $this->labels->title->education;?>
+							</div>
+							<div id="loading1" class="loading"></div>
+							<div id="educationMain"></div>
+							<div class="borderBottom"></div>
+						</div>
+
+					<?php endif;?>
+				<?php }?>
+				
+				<?php if(ResourcePermission::isAllowResource(HEALTH_CONTROLLER)){?>
+					<?php $show = Zend_Registry::get(CONFIG)->container->health;?>
+					<?php if(!$show):?>
+						<?php $hideHeader = true;?>
+						<?php echo $this->render('container/containerHealth.phtml');?><br>
+					<?php else:?>
+						<!-- Antigo --
+						<table class="health" width="100%">
+							<tr>
+								<td class="container">
+									<table width="100%" class="tableContainer">
+										<tr>
+											<td width="10%" class="fontContainer">								
+											</td>				
+											<td width="90%" class="fontContainer">
+												<b>< ?php echo $this->labels->title->health;?></b>
+											</td>
+										</tr>
+									</table><br>
+									<div id="loading2"><center><img src="< ?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>
+									<div id="healthMain"></div><br>
+								</td>
+							</tr>
+						</table><br>
+						-->
+						<div class="container">
+							<div class="imgTitle"></div>
+							<div class="borderTitle"></div>
+							<div class="textTitle">
+								<?php echo $this->labels->title->health;?>
+							</div>
+							<div id="loading2" class="loading"></div>
+							<div id="healthMain"></div>
+							<div class="borderBottom"></div>
+						</div>
+						
+					<?php endif;?>					
+				<?php }?>
+				
+				<?php if(ResourcePermission::isAllowResource(INCOME_CONTROLLER)){?>
+					<?php $show = Zend_Registry::get(CONFIG)->container->income;?>
+					<?php if(!$show):?>
+						<?php $hideHeader = true;?>
+						<?php echo $this->render('container/containerIncome.phtml');?><br>
+					<?php else:?>
+						<!-- Antigo --
+						<table class="income" width="100%">
+							<tr>
+								<td class="container">
+									<table width="100%" class="tableContainer">
+										<tr>
+											<td width="10%" class="fontContainer">								
+											</td>				
+											<td width="90%" class="fontContainer">
+												<b>< ?php echo $this->labels->title->income;?></b>
+											</td>
+										</tr>
+									</table><br>
+									<div id="loading3"><center><img src="< ?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>
+									<div id="incomeMain"></div><br>
+								</td>
+							</tr>
+						</table><br>
+						-->
+						
+						<div class="container">
+							<div class="imgTitle"></div>
+							<div class="borderTitle"></div>
+							<div class="textTitle">
+								<?php echo $this->labels->title->income;?>
+							</div>
+							<div id="loading3" class="loading"></div>
+							<div id="incomeMain"></div>
+							<div class="borderBottom"></div>
+						</div>
+						
+					<?php endif;?>
+				<?php }?>
+				
+				<?php if(ResourcePermission::isAllowResource(PERSON_LOG_CONTROLLER)){?>
+					<?php $show = Zend_Registry::get(CONFIG)->container->personlog;?>
+					<?php if(!$show):?>
+						<?php $hideHeader = true;?>
+						<?php echo $this->render('container/containerPersonLog.phtml');?><br>
+					<?php else:?>
+						<!-- Antigo --
+						<table class="income" width="100%">
+							<tr>
+								<td class="container">
+									<table width="100%" class="tableContainer">
+										<tr>
+											<td width="10%" class="fontContainer">								
+											</td>				
+											<td width="90%" class="fontContainer">
+												<b>< ?php echo $this->labels->title->personsLog;?></b>
+											</td>
+										</tr>
+									</table><br>
+									<div id="loading4"><center><img src="< ?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>	
+									<div id="personLogMain"></div><br>
+								</td>
+							</tr>
+						</table><br>
+						-->
+						
+						<div class="container">
+							<div class="imgTitle"></div>
+							<div class="borderTitle"></div>
+							<div class="textTitle">
+								<?php echo $this->labels->title->personsLog;?>
+							</div>
+							<div id="loading4" class="loading"></div>
+							<div id="personLogMain"></div>
+							<div class="borderBottom"></div>
+						</div>
+						
+					<?php endif;?>
+				<?php }?>	
+				
+			<?php }?>
+			<?php endif;?>
+			</td>
+			
+			<td width="570" style="vertical-align: top;">
+<?php endif;?>
+<!-- =========================================================================== -->
+<!-- ============================= fim do header =============================== -->
+<!-- =========================================================================== -->

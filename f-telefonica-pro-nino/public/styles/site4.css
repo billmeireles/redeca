@@ -1,0 +1,579 @@
+/* =================================================================== */									 
+/* TABELA BASE. TODAS AS OUTRAS TABELAS HERDAM OS ESTILOS DESSA TABELA */
+/* =================================================================== */									 
+table 
+{
+	border:1px solid #BFBFBF; 
+}
+
+/* =========================== */									 
+/* Estilo de tabela sem bordas */
+/* =========================== */
+table.withoutEdge
+{
+	border:0px;
+}
+
+/* ================================== */									 
+/* Estilo de tabela com bordas pretas */
+/* ================================== */
+table.borderBlack 
+{
+	border:1px solid #000000; 
+}
+
+/* ====================================================== */  
+/* Estilo aplicado para tag " H1 " - escrito centralizado */
+/* ====================================================== */
+h1
+{						
+	letter-spacing: 2px;
+	font: bold 11px verdana, arial, helvetica, sans-serif;
+	text-align:center;
+	background: #ffffff;
+}
+
+/* ==================================================== */  
+/* Estilo aplicado para tag " H1 " - escrito a esquerda */
+/* ==================================================== */
+h1.left
+{				
+	letter-spacing: 2px;
+	font: bold 11px verdana, arial, helvetica, sans-serif;
+	text-align:left;
+}
+
+/* =============================== */  
+/* Estilo aplicado para tag " TR " */
+/* =============================== */
+tr
+{
+	height: 15px;
+}
+
+/* ====================================================================== */  
+/* Estilo aplicado para tag " TR - utilizado na listagem de informações " */
+/* Pode ser usada para intercalar cor de fundo das linhas =============== */
+/* ====================================================================== */
+tr.write
+{
+	height: 15px;
+	background: #ffffff;
+}
+
+/* ================================ */  
+/* Estilo aplicado para tag " TD "  */
+/* ================================ */
+td
+{	
+	vertical-align: top;							 
+	font: 10px verdana, arial, helvetica, sans-serif;
+}
+
+/* ======================================================== */  
+/* Estilo aplicado para tag " TD " - alinhando tag no meio  */
+/* ======================================================== */
+td.middleValign
+{	
+	vertical-align: middle;							 
+	font: 10px verdana, arial, helvetica, sans-serif;
+}
+
+/* ========================================================== */  
+/* Estilo aplicado para tag " TD " - alinhando tag no rodapé  */
+/* ========================================================== */
+td.valignBottom
+{	
+	vertical-align: bottom;							 
+	font: 10px verdana, arial, helvetica, sans-serif;
+}
+
+/* ====================================================== */  
+/* Estilo aplicado para tag " TD " com escrito em negrito */
+/* ====================================================== */
+td.bold
+{	
+	vertical-align: top;							 
+	font: bold 10px verdana, arial, helvetica, sans-serif;
+}
+
+/* =========================================================================================== */  
+/* Estilo aplicado para tag " TD " com cor background e escrito verticalmente alinhado no meio */
+/* =========================================================================================== */
+td.boldWithBackground
+{
+	height: 15px;
+	vertical-align: middle;							 
+	font: bold 11px verdana, arial, helvetica, sans-serif;
+	background: #C2C2E0;
+}
+
+/* =============================================================================== */  
+/* Estilo aplicado para tag " TD " com cor background e escrito alinhado no centro */
+/* =============================================================================== */
+td.alignCenter
+{
+	text-align:center;
+}
+
+/* ================================================================================ */  
+/* Estilo aplicado para tag " TD " com cor background e escrito alinhado à esquerda */
+/* ================================================================================ */
+td.alignLeft
+{
+	text-align:left;
+}
+
+/* ======================================================= */  
+/* Estilo aplicado para tag " TD " com escrito em vermelho */
+/* ======================================================= */
+td.writeRed
+{
+	font: bold 11px verdana, arial, helvetica, sans-serif;
+	color: #FF0000;
+	background: #C2C2E0;
+}
+							   
+/* ========================================================= */  
+/* Estilo aplicado para tag " TD " dos containers carregados */
+/* ========================================================= */
+td.container
+{	
+	vertical-align: top;							 
+	font: 10px verdana, arial, helvetica, sans-serif;
+}
+	
+/* =========================== */  
+/* Estilo aplicado no menu PAI */
+/* =========================== */
+table.menuParent
+{
+	border:0px;
+}	
+
+/* ============================= */  
+/* Estilo aplicado no menu FILHO */
+/* ============================= */
+table.menuChild
+{
+	border:0px;
+}
+ 
+/* ==================================== */									 
+/* IDENTIFICAÇÃO : estilos relacionados */
+/* ==================================== */									 
+table.identification 
+{
+	background-color:#FFFFE8;
+}
+
+/* ============================= */									 
+/* PESSOA : estilos relacionados */
+/* ============================= */									 
+table.person 
+{
+	background-color:#FFFFE8;
+}	 		
+
+/* =============================== */									 
+/* EDUCAÇÃO : estilos relacionados */
+/* =============================== */									 
+table.education 
+{
+	background-color:#B3D8A6; 
+}																 
+
+/* ============================== */									 
+/* NETWORK : estilos relacionados */
+/* ============================== */									 
+table.network 
+{
+	background-color:#87CEEB;
+}	
+
+/* ============================ */									 
+/* SAÚDE : estilos relacionados */
+/* ============================ */									 
+table.health 
+{
+	background-color:#FFFFFF; 
+}		
+					  
+/* ============================ */									 
+/* RENDA : estilos relacionados */
+/* ============================ */									 
+table.income 
+{
+	background-color:#DFDFEE; 
+}
+	
+/* ============================== */									 
+/* FAMÍLIA : estilos relacionados */
+/* ============================== */									 
+table.familyRelationship 
+{
+	background-color:#E2F0D5; 
+}	
+ 
+/* ============================== */									 
+/* MORADIA : estilos relacionados */
+/* ============================== */									 
+table.residence 
+{
+	background-color:#E6E6CC; 
+}
+	
+/* =================================== */									 
+/* ATENDIMENTOS : estilos relacionados */
+/* =================================== */									 
+table.attendance 
+{
+	background-color:#D7EBFF; 
+}	   
+ 
+/* ================================= */
+/* ATIVIDADES : estilos relacionados */
+/* ================================= */									 
+table.activity 
+{
+	background-color:#DADADA; 
+}
+
+/* ================================ */
+/* ENTIDADE : estilos relacionados */
+/* ================================ */									 
+table.entity 
+{
+	background-color:#CBCBB1;
+}
+
+/* ============================== */
+/* USUÁRIO : estilos relacionados */
+/* ============================== */									 
+table.user 
+{
+	background-color:#FFBA8A;
+}	
+
+/* ================================= */
+/* BENEFICIOS : estilos relacionados */
+/* ================================= */									 
+table.benefit 
+{
+	background-color:#EEDD82; 
+}	
+
+/* ================================= */
+/* HISTORICO : estilos relacionados  */
+/* ================================= */									 
+table.history 
+{
+	background-color:#D3D3D3; 
+}
+
+/* ================================ */									 
+/* RELATORIO : estilos relacionados */
+/* ================================ */									 
+table.report 
+{
+	background-color:#F8F8FF;
+}	 
+
+/* ======================================= */   
+/* Estilo para tags " INPUT " e " BUTTON " */
+/* ======================================= */   
+input, button 
+{ 
+	background-color: #F8F8F8; 
+	font: 10px verdana, arial, helvetica, sans-serif;
+	border:1px solid #BFBFBF;
+} 
+
+/* =================================================== */   
+/* Estilo para tag "INPUT" utilizado pelos containers  */
+/* =================================================== */
+input.small 
+{ 	
+	width: 100%;
+}
+
+/* ============================================ */   
+/* Estilo para tag "INPUT" com tamanho reduzido */
+/* ============================================ */
+input.age 
+{ 	
+	width: 15%;
+}
+
+/* ============================ */   
+/* Estilo para tag " TEXTAREA " */
+/* ============================ */   
+textarea { 
+	background-color: #F8F8F8; 
+	font: 10px verdana, arial, helvetica, sans-serif;
+	border:1px solid #BFBFBF;
+} 
+
+/* =============================================================================================== */   
+/* Estilo para tag " TEXTAREA com tamanho máximo (dompleta totalmente uma coluna com a tag select) */
+/* =============================================================================================== */
+textarea.small 
+{ 	
+	width: 100%;
+}
+
+/* ========================== */   
+/* Estilo para tag " SELECT " */
+/* ========================== */   
+select { 
+	background-color: #F8F8F8;
+	font:10px verdana, arial, helvetica, sans-serif;
+	color:#000000;
+	width: 100%;
+}
+/* =============================================================================== */
+/* Estilos utilizados no id "menuParent" que é referenciado dentro de "menu/menu.phtml" */
+/* =============================================================================== */
+#menuParent 
+{
+    float:left;
+    width:100%;
+    background:#DAE0D2 url("bg.gif")
+    repeat-x bottom;
+    font-size:93%;
+    line-height:normal;
+}
+
+#menuParent ul 
+{
+    margin:0;
+    padding:10px 10px 0;
+    list-style:none;
+}
+	
+#menuParent li 
+{
+    float:left;
+    background:url("left.gif")
+    no-repeat left top;
+    margin:0;
+    padding:0 0 0 9px;
+}
+
+#menuParent a, #menuParent strong, #menuParent span 
+{
+    display:block;
+    background:url("right.gif")
+    no-repeat right top;
+    padding:5px 15px 4px 6px;
+}
+	
+#menuParent li 
+{
+    float:left;
+    background:url("norm_right.gif")
+    no-repeat right top;
+    margin:0;
+    padding:0;
+}
+	
+#menuParent a 
+{
+	display:block;
+	background:url("norm_left.gif")
+	no-repeat left top;
+	padding:5px 15px 4px;
+}
+
+#menuParent #current 
+{
+	background-image:url("left_on.gif");
+}
+
+#menuParent #current a 
+{
+	background-image:url("right_on.gif");
+	padding-bottom:5px;
+}
+	
+#menuParent a 
+{
+    float:left;
+    display:block;
+    padding:5px 15px 4px 6px;
+    text-decoration:none;
+    font-weight:bold;
+    color:#000000;
+}
+/* Commented Backslash Hack
+    esconde para o IE5-Mac \*/
+#menuParent a 
+{
+	float:none;
+}
+/* End IE5-Mac hack */
+
+
+/* ================================================================================= */
+/* Estilos utilizados no id "menuChild" que é referenciado dentro de "submenu/menu.phtml" */
+/* ================================================================================= */
+#menuChild 
+{
+    float:left;
+    width:100%;
+    background:#DAE0D2 url("bg.gif")
+    repeat-x bottom;
+    font-size:93%;
+    line-height:normal;
+}
+
+#menuChild ul 
+{
+    margin:0;
+    padding:10px 10px 0;
+    list-style:none;
+}
+	
+#menuChild li 
+{
+    float:left;
+    background:url("left.gif")
+    no-repeat left top;
+    margin:0;
+    padding:0 0 0 9px;
+}
+
+#menuChild a, #menuChild strong, #menuChild span 
+{
+    display:block;
+    background:url("right.gif")
+    no-repeat right top;
+    padding:5px 15px 4px 6px;
+}
+	
+#menuChild li 
+{
+    float:left;
+    background:url("norm_right.gif")
+    no-repeat right top;
+    margin:0;
+    padding:0;
+}
+	
+#menuChild a 
+{
+	display:block;
+	background:url("norm_left.gif")
+	no-repeat left top;
+	padding:5px 15px 4px;
+}
+
+#menuChild #current 
+{
+	background-image:url("left_on.gif");
+}
+
+#menuChild #current a 
+{
+	background-image:url("right_on.gif");
+	padding-bottom:5px;
+}
+	
+#menuChild a 
+{
+    float:left;
+    display:block;
+    padding:5px 15px 4px 6px;
+    text-decoration:none;
+    font-weight:bold;
+    color:#000000;
+}
+/* Commented Backslash Hack
+    esconde para o IE5-Mac \*/
+#menuChild a 
+{
+	float:none;
+}
+/* End IE5-Mac hack */
+
+/* ================================================ */
+/* ======== Estilo aplicado na tag <a href> ======= */
+/* ================================================ */
+a
+{
+	font: bold 9px verdana, arial, helvetica, sans-serif;
+	color: #000000;
+}
+
+/* ================================================================================================== */
+/* Estilos utilizados nas linhas e colunas do relatório exibido em html - template export/index.phtml */
+/* ================================================================================================== */
+
+.COL, .LIN {
+	background:#CCCCCC none repeat scroll 0%;
+	border-color:#FFFFFF rgb(0, 0, 0) rgb(0, 0, 0) rgb(255, 255, 255);
+	border-style:solid;
+	border-width:1px;
+	color:#000000;
+	font-size:80%;
+	font-weight:bold;
+	padding:2px;
+	text-align:center;
+}
+
+.CEL {
+	border-bottom:1px dotted #CCCCCC;
+	border-right:1px dotted #CCCCCC;
+	font-size:90%;
+	padding:2px;
+}
+.divStyle
+{
+	border: 1px solid #000000; 
+	background: #FFFFFF;
+	overflow: scroll; 
+	height: 300px;
+	width: 100%;
+}
+.inputText
+{
+	width:400px;
+	text-align:center;
+}
+
+/* ======================================================================= */
+/* Estilos utilizados nas bordas das tabelas de informações complementares */
+/* ======================================================================= */
+
+.noBorder
+{
+	border:none;
+}
+.alert
+{	
+	background:#C0FF3E;
+}
+/* ======================================================================= */
+/* Estilos utilizados especificamente no caso de uso Gerenciar Atividades  */
+/* ======================================================================= */
+
+/* ========================== */   
+/* Estilo para tag " SELECT " no template de Gerenciar Atividades*/
+/* ========================== */   
+select.activity { 
+	width: 200px;
+	display: none;
+}
+
+#label_macroactivity{
+	display: none;
+}
+
+.middleValign.labelHeight{
+	height:20px;
+}
+
+input.small.activity 
+{ 	
+	width: 40%;
+}

@@ -1,0 +1,58 @@
+<?php $case = false;?>
+<?php $show = Zend_Registry::get(CONFIG)->container->family;?>
+<?php if(!$show):?>
+	<?php echo $this->render('header/head.phtml');?>
+<?php endif;?>
+<?php $random = Zend_Registry::get(CONFIG)->container->random;?>
+<?php if($random && $case == false):?>
+	<?php echo $this->render('header/head.phtml');?>
+<?php endif;?>
+<?php $rf = $this->relationshipByPerson;?>
+<?php if($rf && sizeof($rf) > 0):?>
+		
+		<table class="icontainer" cellpadding="0" cellspacing="0" >
+		<?php foreach($rf as $kingship):?>
+			<?php $collType = $kingship->findDependentRowset(CLS_FAMILY);?>
+			<?php foreach($collType as $unique):?>	
+				<?php if($this->form->getPersonId() != $unique->findParentRow(CLS_PERSON)->{PRS_ID_PERSON}):?>		
+					<tr>
+						<td>
+							<a href='<?php echo $this->baseUrl;?><?php echo PERSON_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php echo $unique->findParentRow(CLS_PERSON)->{PRS_ID_PERSON};?>'>							
+								<?php echo abbreviate($unique->findParentRow(CLS_PERSON)->{PRS_NAME}, 25);?>
+							</a>
+						</td>
+					</tr>
+				<?php elseif(sizeof($collType) == 1) : ?>
+					<tr>
+						<td>
+							<?php echo $this->controller->fRelationship->text->notFamily;?>
+						</td>
+					</tr>
+				<?php endif; ?>				
+			<?php endforeach;?>			
+		<?php endforeach;?>
+			<tr>
+				<td class="alignCenter">
+					<form action="<?php echo $this->baseUrl;?><?php echo FAMILYRELATIONSHIP_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>" method="post">
+						<input type="hidden" name="<?php if($this->form)echo $this->form->personId();?>" value="<?php if($this->form)echo $this->form->getPersonId();?>">	
+						<input type="submit" value="<?php echo $this->labels->button->showDetail;?>"/>
+					</form>
+				</td>
+			</tr>		
+		</table>
+	 	
+		
+<?php else : ?>
+	<table class="icontainer" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<?php echo $this->controller->fRelationship->text->notAssociated;?>
+			</td>
+		</tr>
+		<tr>
+			<td class="alignCenter">
+				<input type="submit" onclick="parent.document.location='<?php echo $this->baseUrl;?><?php echo FAMILYRELATIONSHIP_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php if($this->form)echo $this->form->personId();?>/<?php if($this->form)echo $this->form->getPersonId();?>'" value="<?php echo $this->labels->button->showDetail;?>"/>
+			</td>
+		</tr>
+	</table>
+<?php endif; ?>

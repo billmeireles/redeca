@@ -1,0 +1,123 @@
+<table width="548" cellpadding="0" cellspacing="0" >
+	<form action="<?php echo $this->baseUrl;?><?php echo SEARCH_CONTROLLER;?>/<?php echo DEFAULT_SEARCH_BY_NAME_ACTION;?>" method="post">
+		<tr>
+			<td colspan="4"><h1 class="title"><?php echo $this->controller->search->text->bynamedescription;?></h1></td>
+		</tr>
+		
+		<tr>
+			<td colspan="4"><?php echo $this->helpcontroller->text3;?></td>
+		</tr>
+		
+		<tr>
+			<td width="25%">&nbsp;</td>
+			<td width="25%">&nbsp;</td>
+			<td width="25%">&nbsp;</td>
+			<td width="25%">&nbsp;</td>
+		</tr>
+		
+		<tr>
+			<td colspan="4" >
+				<table width="100%" cellpadding="0" cellspacing="0"> 
+					<tr>
+						<td class="label" width="12%" >
+							<?php echo $this->controller->search->text->name;?>
+						</td>
+						
+						<td width="40%">
+							<input class="middleInput" type="text" name="<?php echo $this->form->prsName();?>" value="<?php echo $this->form->getPrsName();?>"/>
+						</td>			
+	
+						<td class="label" width="19%">
+							Ou <?php echo $this->controller->search->text->alias;?>
+						</td>
+						
+						<td width="29%">
+							<input style="width: 100% !important;" type="text" name="<?php echo $this->form->prsNickname();?>" value="<?php echo $this->form->getPrsNickname();?>"/>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="4">
+				<?php 
+					printErrorsByField($this->form->prsName(), $this->errorMessages);
+					printErrorsByField($this->form->prsNickname(), $this->errorMessages);
+				?>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="4">
+				&loz;&nbsp;<?php echo $this->helpcontroller->text4;?><br />
+				&loz;&nbsp;<?php echo $this->helpcontroller->text5;?><br /><br />
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="ajuda" colspan="4" ><?php echo $this->controller->search->text->options;?><hr /></td>
+		</tr>
+		
+		<tr>
+			<td class="label" ><?php echo $this->controller->search->text->sex;?></td>
+			<td colspan="3">
+				<select  name="<?php echo $this->form->prsSex();?>">
+					<option value=""><?php echo $this->controller->search->text->both;?></option>
+					<option value="<?php echo Constants::WOMAN;?>" <?php if($this->form->getPrsSex() == Constants::WOMAN) echo "selected";?>>Feminino</option>
+					<option value="<?php echo Constants::MAN;?>" <?php if($this->form->getPrsSex() == Constants::MAN) echo "selected";?>>Masculino</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="4">
+					<?php printErrorsByField($this->form->prsSex(), $this->errorMessages);?>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="label"><?php echo $this->controller->search->text->age;?></td>
+			<td colspan="3">
+				<input size="3" class="tinyInput" type="text" name="<?php echo $this->form->prsFirstAge();?>" value="<?php echo $this->form->getPrsFirstAge();?>"/>
+				<span class="label" style=" float: left; margin: 0 15px"><?php echo $this->controller->search->text->descriptionand;?></span>
+				<input size="3" class="tinyInput" type="text" name="<?php echo $this->form->prsSecondAge();?>" value="<?php echo $this->form->getPrsSecondAge();?>"/>
+				<span class="label" style="float: left; margin: 0 15px"><?php echo $this->controller->search->text->years;?></span>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="4" class="adjustHeight">
+				
+					<?php printErrorsByField($this->form->prsFirstAge(), $this->errorMessages);
+						printErrorsByField($this->form->prsSecondAge(), $this->errorMessages);
+					?>
+				
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="label" >
+				<?php echo $this->controller->search->text->region;?>
+			</td>
+			
+			<td colspan="3">
+				<select name="<?php echo $this->form->prsRegion();?>">
+					<option value=""><?php echo $this->controller->search->text->select;?></option>
+					<?php foreach($this->region as $region):?>
+						<option value="<?php echo $region->{RGN_ID_REGION};?>" <?php if($this->form->getPrsRegion() == $region->{RGN_ID_REGION}) echo "selected";?>><?php echo $region->{RGN_REGION};?></option>
+					<?php endforeach;?>
+				</select>
+				<?php printErrorsByField($this->form->prsRegion(), $this->errorMessages);?><br>
+			</td>
+		</tr>
+		
+		<tr>&nbsp;</tr>
+		
+		<tr>
+			<td align="left">
+				<input class="button" type="submit" value="<?php echo $this->controller->search->button->search;?>"/><br><br>
+			</td>
+		</tr>
+	</form>
+</table>

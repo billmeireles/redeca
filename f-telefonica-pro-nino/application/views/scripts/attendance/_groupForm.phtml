@@ -1,0 +1,254 @@
+			<h1 class="title"><?php echo $this->controller->attendance->text->complement;?></h1>
+			
+			<div class="inputBox">
+				<table width="548" cellpadding="0" cellspacing="0">
+
+						<tr class="write">
+							<td colspan="5" height="40" style="vertical-align: middle; text-align: center;">	
+								<a href="<?php echo $this->baseUrl;?><?php echo ATTENDANCE_CONTROLLER;?>/<?php echo GROUP_VIEW_ACTION;?>/<?php echo $this->form->assistanceId();?>/<?php echo $this->form->getAssistanceId();?>">
+									<?php echo $this->controller->attendance->text->group;?>&nbsp;|
+								</a>
+								
+								<a href="<?php echo $this->baseUrl;?><?php echo ATTENDANCE_CONTROLLER;?>/<?php echo GROUP_GENERAL_VIEW_ACTION;?>/<?php echo $this->form->assistanceId();?>/<?php echo $this->form->getAssistanceId();?>">
+									<?php echo $this->controller->attendance->tab->general;?>
+								</a>
+							</td>
+						</tr>
+						
+						<form action="<?php echo $this->baseUrl;?><?php echo ATTENDANCE_CONTROLLER;?>/<?php echo GROUP_ADD_ACTION;?>" method="post">
+						<input type="hidden" name="<?php if($this->form)echo $this->form->personId();?>" value="<?php echo $this->form->getPersonId();?>"/>
+						<input type="hidden" name="<?php if($this->form)echo $this->form->assistanceId();?>" value="<?php echo $this->form->getAssistanceId();?>"/>
+						<input type="hidden" name="<?php if($this->form)echo $this->form->programType();?>" value="<?php echo $this->form->getProgramType();?>"/>
+						<?php printErrorsByField($this->form->personId(), $this->errorMessages);?>
+						<?php printErrorsByField($this->form->assistanceId(), $this->errorMessages);?>
+						<?php printErrorsByField($this->form->programType(), $this->errorMessages);?>
+						<?php printErrorsByField(Constants::NOT_ALLOWED_TO_CLOSE, $this->errorMessages);?>
+						
+						<tr>
+							<td  colspan="5" class="middleValign">
+								<center><table bgcolor=yellow>
+						    <tr>
+							<td colspan=2><b><font color =red>Para turmas sem vaga o checkbox "Espera" é marcado automaticamente.</font></b>
+						  	</td>
+							</tr>	
+						  </table></center>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="5">
+								<?php echo $this->controller->attendance->text->selectClass;?>
+							</td>
+						</tr>
+						
+						<tr>
+							<td width="30%" class="middleValign">
+								<b><?php echo $this->controller->attendance->text->class;?></b>
+							</td>
+							<td width="10%">
+								<b><?php echo $this->controller->attendance->text->period;?></b>
+							</td>
+							<td width="10%">
+								<b><?php echo $this->controller->attendance->text->hour;?></b>
+							</td>
+							<td width="15%">
+								<b><?php echo $this->controller->attendance->text->vacancy;?></b>
+							</td>
+							<td width="10%">
+								<b><?php echo $this->controller->attendance->text->wait;?></b>
+							</td>
+						</tr>
+						
+						<?php if(count($this->classes) > 0):?>
+							<?php foreach($this->classes as $class):?>
+								<tr>
+									<td width="25%">
+										<input type="radio" name="<?php echo $this->form->classId();?>" value="<?php echo $class->{CLS_ID_CLASS};?>"/>
+										<?php echo $class->{CLS_NAME};?>
+									</td>
+									<td width="10%">
+										<?php echo $this->periodMap[$class->{CLS_PERIOD}];?>
+									</td>
+									<td width="15%">
+										<?php echo $class->{CLS_SCHEDULE};?>
+									</td>
+									<td width="15%">
+										<?php 
+											if($class->{CLS_VACANCY} > 0)
+												echo $class->{CLS_VACANCY};
+											else
+											{
+												$vacancy = -($class->{CLS_VACANCY}*2)+$class->{CLS_VACANCY};
+												echo $vacancy.' '.$this->escape($this->controller->attendance->text->waitlist);
+											}
+										?>
+									</td>
+									<td width="10%">
+									<?php if($class->{CLS_VACANCY} > 0):?>
+										<input  type="checkbox" name="<?php echo $this->form->idStatus();?>" value="<?php echo Constants::WAIT_LIST;?>"/>
+									<?php else :?>
+										<input checked="checked" type="checkbox" name="<?php echo $this->form->idStatus();?>" value="<?php echo Constants::WAIT_LIST;?>"/>
+									<?php endif;?>
+									</td>
+								</tr>
+							<?php endforeach;?>
+							<tr>
+								<td>
+									<input class="button" type="submit" value="<?php echo $this->labels->button->save;?>">
+								</td>
+							</tr>
+						<?php else:?>
+							<tr>
+								<td width="25%">
+									-
+								</td>
+								<td width="15%">
+									-
+								</td>
+								<td width="15%">
+									-
+								</td>
+								<td width="15%">
+									-
+								</td>
+								<td width="10%">
+									-
+								</td>
+							</tr>
+						<?php endif;?>
+					</form>
+					<tr>
+						<td colspan="5" height="20" style="vertical-align: middle;">
+							<hr>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="5">
+							<h1 class="left"><?php echo $this->controller->attendance->text->registerAttendance;?></h1>
+						</td>
+					</tr>
+					<?php $isEmpty=true; ?>
+					<?php if(count($this->assistances) > 0):?>
+						<!-- verifica se tem ao menos um registro para ser exibido -->
+						<?php foreach($this->assistances as $uniqueAssistance):?>
+							<?php foreach($uniqueAssistance as $unique):?>
+								<?php if($unique[CLA_ID_STATUS] != Constants::FINISHED):?>
+									<?php $isEmpty=false; break;?>
+								<?php endif;?>
+							<?php endforeach; ?>
+							<?php if(!$isEmpty)break; ?>
+						<?php endforeach; ?>
+						
+						<?php if(!$isEmpty):?>
+							<form action="<?php echo $this->baseUrl;?><?php echo ATTENDANCE_CONTROLLER;?>/<?php echo DEFAULT_CONFIRM_ACTION;?>" method="post">
+							<input type="hidden" name="<?php if($this->form)echo $this->form->personId();?>" value="<?php echo $this->form->getPersonId();?>"/>
+							<input type="hidden" name="<?php if($this->form)echo $this->form->assistanceId();?>" value="<?php echo $this->form->getAssistanceId();?>"/>
+							<input type="hidden" name="<?php if($this->form)echo $this->form->programType();?>" value="<?php echo $this->form->getProgramType();?>"/>
+							<?php printErrorsByField($this->form->personId(), $this->errorMessages);?>
+							<?php printErrorsByField($this->form->assistanceId(), $this->errorMessages);?>
+							<?php printErrorsByField($this->form->programType(), $this->errorMessages);?>
+							<tr>
+								<td colspan="5">
+									<?php echo $this->controller->attendance->text->selectClass;?>
+								</td>
+							</tr>
+							<tr>
+								<td width="30%">
+									<b><?php echo $this->controller->attendance->text->class;?></b>
+								</td>
+								<td width="10%">
+									<b><?php echo $this->controller->attendance->text->period;?></b>
+								</td>
+								<td width="10%">
+									<b><?php echo $this->controller->attendance->text->hour;?></b>
+								</td>
+								<td width="15%">
+									<b><?php echo $this->controller->attendance->text->vacancy;?></b>
+								</td>
+								<td width="15%">
+									<b><?php echo $this->controller->attendance->text->wait;?></b>
+								</td>
+							</tr>
+							<?php foreach($this->assistances as $current):?>
+								<?php foreach($current as $class):?>
+									<?php if($class[CLA_ID_STATUS] != Constants::FINISHED):?>
+									<tr>									
+										<td width="25%">
+											<input type="radio" name="<?php echo $this->form->classId();?>" value="<?php echo $class[CLS_ID_CLASS];?>"/>
+											<?php echo $class[CLS_NAME];?>
+										</td>
+										<td width="15%">
+											<?php echo $this->periodMap[$class[CLS_PERIOD]];?>
+										</td>
+										<td width="20%">
+											<?php echo $class[CLS_SCHEDULE];?>
+										</td>
+										<td width="15%">
+											<?php 
+												if($class[CLS_VACANCY] > 0)
+													echo $class[CLS_VACANCY];
+												else
+												{
+													$vacancy = -($class[CLS_VACANCY]*2)+$class[CLS_VACANCY];
+													echo $vacancy.' '.$this->escape($this->controller->attendance->text->waitlist);
+												}
+											?>
+										</td>
+										<td width="10%">
+											<?php
+												if($class[CLA_ID_STATUS] == Constants::WAIT_LIST)
+												{												
+													echo $this->labels->button->yes;
+												}
+												else
+												{
+													echo $this->labels->button->not;
+												}										
+											?>
+										</td>
+									</tr>								
+									<?php endif;?>
+								<?php endforeach;?>
+							<?php endforeach;?>
+							
+								<tr>
+									<td>
+										<input class="button" type="submit" value="<?php echo $this->labels->button->drop;?>">
+									</td>
+								</tr>
+								
+								<tr>
+									<td colspan="5" height="20" style="vertical-align: middle;">
+										<hr>
+									</td>
+								</tr>
+								
+								<tr>
+									<form action="<?php echo $this->baseUrl;?><?php echo ATTENDANCE_CONTROLLER;?>/<?php echo DEFAULT_CONFIRM_ACTION;?>" method="post">
+										<td>
+											<input type="hidden" name="<?php echo $this->form->assistanceId();?>" value="<?php echo $this->form->getAssistanceId(); ?>" >
+											<input type="hidden" name="<?php if($this->form)echo $this->form->personId();?>" value="<?php echo $this->form->getPersonId(); ?>"/>
+											<input class="button" type="submit" value="<?php echo $this->labels->button->close;?>"/>
+										</td>
+									</form>
+								</tr>
+							<?php else:?>
+								<tr>
+									<td width="25%">
+										-
+									</td>
+									<td width="15%">
+										-
+									</td>
+									<td width="20%">
+										-
+									</td>
+									<td width="15%">
+										-
+									</td>
+								</tr>
+							<?php endif;?>
+							</form>
+						<?php endif;?>						
+				</table>
+			</div>

@@ -1,0 +1,41 @@
+<?php echo $this->render('header/headerSearch.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+	<table width="570" cellpadding="0" cellspacing="0">		
+		<tr>
+			<td align="center">
+				<h1 class="title" style="margin-top:33px;"><?php echo $this->controller->search->text->resulttitle;?></h1>
+			</td>
+		</tr> 		
+	</table>
+	
+	<div class="inputBox">
+		
+		<table width="548" cellpadding="0" cellpadding="0" >
+			<tr>
+				<td height="20" valign="middle" align="center">
+					<p style="margin: 10px auto; text-align: center;">
+						<?php echo $this->escape($this->controller->search->text->empty);?>
+					</p> 
+				</td>
+			</tr>
+		</table>
+																  
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<input class="button" type="button" value="<?php echo $this->labels->button->back;?>" onClick="document.location='<?php echo $this->baseUrl;?><?php echo SEARCH_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>'" />				
+					<input class="button" style="margin-left: 5px;" type="button" onClick="document.location='<?php echo $this->baseUrl;?><?php echo PERSON_CONTROLLER;?>/<?php echo DEFAULT_NEW_ACTION;?>'" value="<?php echo $this->controller->search->text->newregister;?>"/>
+				</td>
+			</tr>
+		</table>
+		
+	</div>	
+	
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+
+<?php echo $this->render('footer/footerSearch.phtml');?>

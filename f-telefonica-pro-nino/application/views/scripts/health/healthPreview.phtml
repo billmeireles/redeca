@@ -1,0 +1,109 @@
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuPerson.phtml');?>
+
+	<!-- ============================================================================================== -->
+	<!-- É necessário informar o nome class da tabela em questão para carregar a cor background correta -->
+	<!-- Opções: 
+				#identification
+				#person
+				#education
+				#health
+				#income
+				#familyRelationship
+				#residence
+				#attendance
+				#activity -->
+	<!-- ============================================================================================== -->
+	<style>
+		table.health td { padding: 3px 0; }
+	</style>
+	
+	<table width="570" cellpadding="0" cellspacing="0">
+		<tr>
+			<td align="center">
+				<table width="570" cellpadding="0" cellspacing="0">
+					<tr>
+						<td colspan="3" align="right">
+							<div class="menuEdit">
+								<?php if(!$this->history_view):?>
+									<?php if($this->readOnly == FALSE):?>
+										<div class="buttonGreen edit">
+											<a href="<?php echo $this->baseUrl . HEALTH_CONTROLLER;?>/<?php echo DEFAULT_VIEW_ACTION;?>/<?php echo $this->form->idPerson();?>/<?php echo $this->form->getIdPerson();?>"><?php echo $this->labels->button->edit;?></a>
+										</div>
+									<?php endif;?>
+								<?php endif; ?>
+								<div class="buttonGreen changesHistory">
+									<?php printHistoryLink($this, $this->resource_key, HEALTH_CONTROLLER); ?>
+								</div>
+								<?php if(sizeof($this->pregnancyByPerson) > 0 )
+									{
+										if($this->pregnancyByPerson->findParentRow(CLS_PERSON)->{PRS_SEX} == Constants::WOMAN)
+										{			
+											$showPregnancy = TRUE;
+										}
+									}
+								?>
+							</div>
+						</td>
+					</tr>
+				</table>
+				
+				<div class="inputBox">
+					<table width="548" cellpadding="0" cellspacing="0">					
+						<tr>
+							<td colspan="3" class="middleValign">
+								<?php echo $this->helpcontroller->text1;?>						
+							</td>
+						</tr>
+						
+						<?php
+							if(!$this->history_view || sizeof($this->healthByPerson) > 0)
+								echo $this->render('health/unitCareView.phtml');
+						
+							if($showPregnancy == TRUE)
+							{
+								if($this->history_view)
+								{
+									if(sizeof($this->pregnancyByPerson) > 0)
+									{
+										echo $this->render('health/pregnancyView.phtml');	
+									}
+								}
+								else
+								{								
+									echo $this->render('health/pregnancyView.phtml');
+								}
+							}
+						?>
+						
+						<?php
+							if($this->history_view)
+							{
+								if(sizeof($this->vaccinationByPerson) > 0)
+								{
+									echo $this->render('health/vaccinationView.phtml');
+								}
+								
+								if(sizeof($this->healthByPerson) > 0)
+								{
+									echo $this->render('health/healthView.phtml');	
+								}
+							}
+							else
+							{
+								echo $this->render('health/healthView.phtml');
+							}
+						?>
+						
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>																  
+<!-- =================================== -->
+<!-- fim : específico para cada template -->					
+<!-- =================================== -->

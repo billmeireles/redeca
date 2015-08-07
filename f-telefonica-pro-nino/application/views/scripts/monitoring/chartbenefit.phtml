@@ -1,0 +1,161 @@
+<?php echo $this->render('header/header.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<?php if(UserLogged::isAdministrator() && (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 7.0') === false)){?>						  
+	<div>
+<?php } else {?>
+	<div style="margin-left:123px;">
+<?php }?>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+</div>
+
+<div class="graphic">
+	<form name="opcoes" id="opcoes" action="<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/benefit" method="post">
+		<?php foreach ($this->checks as $key => $check): ?>
+			<input type="hidden" name="check[]" id="check" value="<?php echo $check ?>" />
+		<?php endforeach ?>
+		
+		<input type="hidden" name="pg" id="pg" value=""/>
+		<input type="hidden" name="opcao" id="opcao" value="graphic"/>
+	</form>
+		
+	<div id="container" class="div" style="height: <?php echo $this->height; ?>px;">
+	
+	</div>
+	<script type="text/javascript">
+		$(function () {
+		    var chart;
+		    $(document).ready(function() {
+		        chart = new Highcharts.Chart({
+		            chart: {
+		                renderTo: 'container',
+		                type: 'bar'
+		            },
+		            title: {
+	                text: 'Quantidade Pessoas: Entidade x Benefício'
+		            },
+		            xAxis: {
+		            	categories: [<?php foreach ($this->benefits as $key => $nei): ?>
+							'<?php echo $nei['benefit'] ?>'
+							<?php if (count($this->benefits) > ($key+1)){ ?>
+								,
+							<?php } ?>	
+						<?php endforeach ?>],
+		                title: {
+		                    text: null
+		                }
+		            },
+		            yAxis: {
+		            	allowDecimals: false,
+		                min: 0,
+		                title: {
+		                    text: 'Número Pessoas',
+		                    align: 'high'
+		                }
+		            },
+		            tooltip: {
+		                formatter: function() {
+		                    return ''+
+		                        this.series.name +': '+ this.y +' pessoa(s)';
+		                }
+		            },
+		            plotOptions: {
+		                bar: {
+		                    dataLabels: {
+		                        enabled: true
+		                    }
+		                }
+		            },
+		            legend: {
+		            	width: 200,
+		            	itemStyle: {
+			                width: '180px'
+			            },
+		                layout: 'vertical',
+		                align: 'right',
+		                verticalAlign: 'top',
+		                x: -70,
+		                y: 70,
+		                floating: true,
+		                borderWidth: 1,
+		                backgroundColor: '#FFFFFF',
+		                shadow: true
+		            },
+		            credits: {
+		                enabled: false
+		            },
+		            series: [
+		            <?php foreach ($this->view as $key => $entity): ?>
+					    {
+					        name: '<?php echo $entity->getName() ?>',
+					        data: [
+								<?php foreach ($entity->getCategorys() as $keyC => $category): ?>
+									<?php echo $category->getTotal() ?>
+									<?php if (count($entity->getCategorys()) > ($keyC+1)){ ?>
+										,
+									<?php } ?>
+								<?php endforeach ?>
+								]
+					    }
+					    <?php if (count($this->view) > ($key+1)){ ?>
+							,
+						<?php } ?>	
+					<?php endforeach ?>
+		            ],
+		            exporting: {
+	                	url: 'http://export.highcharts.com/index-utf8-encode.php'
+	                }
+		        });
+		    });
+	    
+		});
+	</script>
+	
+	<div class="nav">
+		<div class="page">Página atual: <?php echo $this->atual ?> de <?php echo $this->contar; ?></div>
+		<div class="navs">
+			<p> 
+				<a
+				<?php if($this->atual != 1){ ?>
+					href="#"
+					onclick="document.opcoes.pg.value = '1'; document.opcoes.submit();"
+				<?php } else {?>
+					class="disable"
+				<?php }?>> Primeira< </a> 
+				<a
+				<?php if($this->atual != 1){ ?>
+					href="#"
+					onclick="document.opcoes.pg.value = '<?php echo $this->atual - 1 ?>'; document.opcoes.submit();"
+				<?php } else {?>
+					class="disable"
+				<?php }?> > Anterior </a> - 
+				<a
+				<?php if($this->atual != $this->contar){ ?>
+					href="#"
+					onclick="document.opcoes.pg.value = '<?php echo $this->atual + 1 ?>'; document.opcoes.submit();"
+				<?php } else {?>
+					class="disable"
+				<?php }?> > Próxima </a> 
+				<a
+				<?php if($this->atual != $this->contar){ ?>
+					href="#"
+					onclick="document.opcoes.pg.value = '<?php echo $this->contar ?>'; document.opcoes.submit();"
+				<?php } else {?>
+					class="disable"
+				<?php }?> > >Última </a>
+			</p>
+		</div>
+	</div>
+	
+	<div class="back">
+		<input class="button" style="float:left;" type="button" value="Voltar" onclick="window.location = '<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/benefit';"/>
+	</div>
+</div>
+
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+<?php echo $this->render('footer/footer.phtml');?>

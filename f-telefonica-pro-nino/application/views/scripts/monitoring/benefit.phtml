@@ -1,0 +1,44 @@
+<?php echo $this->render('header/header.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+</div>
+<div style="text-align: left; margin-top:15px;">
+	<h3>Filtro Selecionado: Benefício</h3>
+	<form name="opcoes" id="opcoes" action="<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/benefit" method="post">
+		<div style="height: 150px; overflow: auto; margin:8px 0px; border:1px solid #CFCFCF; padding:2px; font-size:15px;">
+			<?php foreach ($this->socialPrograms as $sp): ?>
+				<input type="checkbox" name="check[]" id="check" value="<?php echo $sp->{SCP_ID_SOCIAL_PROGRAM} ?>"> <?php echo $sp->{SCP_BENEFIT} ?><BR>
+			<?php endforeach ?>
+		</div>
+		<?php if($this->msg){ ?>		
+			<div class="error">
+				<span>
+					<?php echo $this->msg ?>
+					<br/>
+				</span>	
+			</div>
+		<?php } ?>
+		<div style="height:50px">
+			<div style="float:right;">
+				<input class="button" style="font-size:12px; width:100px; height:30px;" type="button" name="CheckAll" value="Marcar Todos" onClick="checkAll(document.opcoes.check)">
+				<input class="button" style="font-size:12px; width:120px; height:30px;" type="button" name="UnCheckAll" value="Desmarcar Todos" onClick="uncheckAll(document.opcoes.check)">
+			</div>
+			<input style="margin-top:10px;;" type="checkbox" name="qtde" id="qtde" value="qtde"> Somente quantidade.
+		</div>
+		<input type="hidden" name="opcao" id="opcao" value=""/>
+		<input class="button" type="button" value="Gerar gráfico" onclick="document.opcoes.opcao.value = 'graphic'; document.opcoes.submit();"/>
+		<input class="button" type="button" value="Visualizar na Tela" onclick="document.opcoes.opcao.value = 'view'; document.opcoes.submit();"/>
+		<input class="button" type="button" value="Download Planilha" onclick="document.opcoes.opcao.value = 'csv'; document.opcoes.submit();"/>
+		<input class="button" type="button" value="Voltar" onclick="window.location = '<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>';"/>
+	</form>
+</div>
+
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+<?php echo $this->render('footer/footer.phtml');?>

@@ -1,0 +1,498 @@
+<?php $error = false;
+foreach($this->errorMessages as $k=>$v):
+	if($k == $this->form->tableName()) $error = true;
+endforeach;
+
+if($error == false)
+{ 
+	$cols = 5;
+	if ($this->form->getTableName() == TBL_VACCINE)
+		$cols = 7;
+	?>
+	<div>
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<td colspan="<?php echo $cols; ?>">
+					<h1 class="title" style="margin-top: 33px;">
+						<?php 
+							foreach($this->tableName as $key=>$name):
+								if($key == $this->form->getTableName()) echo $name;
+							endforeach;
+						?>
+					</h1>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="<?php echo $cols; ?>" style="height: 50px; vertical-align: middle;"><?php echo $this->helpcontroller->text2;?></td>
+			</tr>
+			
+			<tr class="write">
+			<?php if ($this->form->getTableName() == TBL_AGE_GROUP) { ?>
+					<td align="center" class="bold" width="4%">		
+						<?php echo $this->controller->additional->text->id;?>		
+					</td>
+					
+					<td align="center" class="bold" width="40%" >
+						Faixa Etária
+					</td>
+					
+					<td align="center" class="bold">
+						<?php echo $this->controller->additional->text->status;?>
+					</td>
+					
+					<td colspan="2">
+						&nbsp;
+					</td>
+				<?php } elseif ($this->form->getTableName() == TBL_VACCINE) { ?>
+					<td align="center" class="bold" width="4%">		
+						<?php echo $this->controller->additional->text->id;?>		
+					</td>
+					
+					<td align="center" class="bold" width="24%" >
+						<?php echo $this->controller->additional->text->name;?>
+					</td>
+					
+					<td align="center" class="bold" width="15%" >
+						<?php echo $this->controller->additional->text->type;?>
+					</td>
+					
+					<td align="center" class="bold" width="19%" >
+						<?php echo $this->controller->additional->text->period;?>
+					</td>
+					
+					<td align="center" class="bold" width="15%" >
+						<?php echo $this->controller->additional->text->status;?>
+					</td>
+					
+					<td colspan="2" width="23%">
+						&nbsp;
+					</td>
+					
+				<?php } else { ?>
+					<td align="center" class="bold" width="4%">		
+						<?php echo $this->controller->additional->text->id;?>		
+					</td>
+					
+					<td align="center" class="bold" width="40%" >
+						<?php echo $this->controller->additional->text->value;?>
+					</td>
+					
+					<td align="center" class="bold">
+						<?php echo $this->controller->additional->text->status;?>
+					</td>
+					
+					<td colspan="2">
+						&nbsp;
+					</td>
+				<?php } ?>
+			</tr>
+		</table>
+	</div>
+	<?php $id = $this->form->getTableId();
+		if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE))
+		{				
+			$value1 = $this->form->getTableSecondValue();		
+			$value2 = $this->form->getTableFirstValue();
+		}
+		else
+		{
+			$value = $this->form->getTableValue();
+		}
+		$class = 1;		
+		foreach($this->result as $result):			
+			if($class == 0)
+			{
+				$type = 'write';
+				$class= 1;
+			}
+			else
+			{
+				$type='';
+				$class= 0;
+			}
+		?>
+			<div id="view<?php echo $result->$id;?>" style="display:block;">
+				<table width="100%" cellpadding="0" cellspacing="0" >	
+					<form action="<?php echo $this->baseUrl;?><?php echo ADDITIONALINFORMATION_CONTROLLER;?>/<?php echo DEFAULT_CONFIRM_ACTION;?>" method="post">
+						<tr class="<?php echo $type;?> tdMiddle">
+						
+							<td align="center" width="4%" class="bold">
+								<?php $count += 1; echo $count;?>
+								<input type="hidden" name="<?php echo $this->form->id();?>" value="<?php echo $result->$id;?>">
+							</td>
+							
+							<?php if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){?>
+							<td align="center" width="40%" >
+							
+								<table width="100%" cellpadding="0" cellspacing="0">
+								
+									<tr>
+										<td align="center" width="60%" valign="top">
+											<?php echo $result->$value1;?>
+										</td>
+										
+										<td align="center" width="40%" valign="top">
+											<?php if($this->form->getTableName() == TBL_PROGRAM_TYPE){
+													foreach($this->targetMarket as $targetMarket):
+														if($result->$value2 == $targetMarket->{TMK_ID_TARGET_MARKET}) echo $targetMarket->{TMK_TARGET_MARKET};
+													endforeach;
+												}?>
+											<?php if($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE){
+													foreach($this->socialProgramOrigen as $socialProgramOrigen):
+														if($result->$value2 == $socialProgramOrigen->{SPO_ID_ORIGIN}) echo $socialProgramOrigen->{SPO_ORIGIN};
+													endforeach;
+												}?>
+										</td>
+									</tr>
+									
+								</table>
+								
+							</td>
+							
+							<?php } elseif ($this->form->getTableName() == TBL_VACCINE) { ?>
+								<td align="center" width="24%">
+									<?php echo $result->name;?>
+								</td>
+								
+								<td align="center" width="15%">
+									<?php echo $result->type_description;?>
+								</td>	
+								
+								<td align="center" width="19%">
+									<?php echo $result->period_description;?>
+								</td>
+								
+							<?php } elseif ($this->form->getTableName() == TBL_AGE_GROUP) { ?>
+								<td align="center" width="40%">
+									<?php echo "De ". $result->begin_age. " a ". $result->end_age. " ano(s)"?>
+								</td>
+								
+							<?php } else { ?>
+								<td align="center" width="40%" style="vertical-align: middle;">
+									<?php echo $result->$value;?>
+								</td>
+							<?php } ?>
+							
+							<td align="center" width="25%" style="vertical-align: middle;">
+								<?php if($result->{F_STATUS} == Constants::DISABLE) echo $this->labels->text->disable; else echo $this->labels->text->enable;?>
+							</td>
+							
+							<td align="center" width="10%">
+								<input class="button" style="margin-top: 5px;" type="button" onClick="javascript: showOrHideEdit(<?php echo $result->$id;?>,'view')" value="<?php echo $this->labels->button->edit;?>" style="margin:0;">
+							</td>
+							
+							<td align="left" width="">
+								<input type="hidden" value="<?php echo $this->form->getTableName();?>" name="<?php echo $this->form->tableName();?>"/>
+								<input type="hidden" value="<?php echo $this->form->getTableId();?>" name="<?php echo $this->form->tableId();?>"/>
+								<?php if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){?>
+									<input type="hidden" value="<?php echo $this->form->getTableFirstValue();?>" name="<?php echo $this->form->tableFirstValue();?>"/>
+									<input type="hidden" value="<?php echo $this->form->getTableSecondValue();?>" name="<?php echo $this->form->tableSecondValue();?>"/>
+								<?php } elseif ($this->form->getTableName() == TBL_VACCINE) {?>
+									<input type="hidden" value="<?php echo $result->name; ?>" name="values_1"/>
+									<input type="hidden" value="<?php echo $result->id_vaccine_type; ?>" name="values_2"/>
+									<input type="hidden" value="<?php echo $result->id_period; ?>" name="values_3"/>
+								<?php } else {?>
+									<input type="hidden" value="<?php echo $this->form->getTableValue();?>" name="<?php echo $this->form->tableValue();?>"/>
+								<?php }?>
+								<input class="button" style="margin: 5px 0 0 5px;" type="submit" value="<?php echo $this->labels->button->disable;?>" style="margin:0;">
+							</td>
+							
+						</tr>
+					</form>
+				</table>
+			</div>
+			
+			<div id="edit<?php echo $result->$id;?>" style="display:none;">
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<form action="<?php echo $this->baseUrl;?><?php echo ADDITIONALINFORMATION_CONTROLLER;?>/<?php echo DEFAULT_EDIT_ACTION;?>" method="post">	
+						<tr>
+							<td align="center" width="4%" class="bold" style="vertical-align: middle;">
+								<?php echo $count;?>			
+								<input type="hidden" name="<?php echo $this->form->id();?>" value="<?php echo $result->$id;?>">		
+							</td>
+							<?php if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){?>
+								<td align="center" width="25%" class="bold" style="vertical-align: middle;">
+									<input type="text" name="<?php echo $this->form->firstValue();?>" value="<?php echo $result->$value1;?>" />
+								</td>
+								
+								<?php if($this->form->getTableName() == TBL_PROGRAM_TYPE){?>
+									<td align="center" width="20%" class="bold">									
+										<select name="<?php echo $this->form->secondValue();?>">
+											<?php foreach($this->targetMarket as $targetMarket):?>
+												<option	<?php if($result->$value2 == $targetMarket->{TMK_ID_TARGET_MARKET}){echo "selected";}?> value="<?php echo $targetMarket->{TMK_ID_TARGET_MARKET}; ?>"><?php echo $targetMarket->{TMK_TARGET_MARKET};?></option>
+											<?php endforeach;?>
+										</select>
+									</td>
+								<?php }?>	
+								
+								<?php if($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE){?>
+									<td align="center" width="20%" class="bold" style="vertical-align: middle;">	
+										<select name="<?php echo $this->form->secondValue();?>">
+											<?php foreach($this->socialProgramOrigen as $socialProgramOrigen):?>
+												<option	<?php if($result->$value2 == $socialProgramOrigen->{SPO_ID_ORIGIN}){echo "selected";}?>	value="<?php echo $socialProgramOrigen->{SPO_ID_ORIGIN}; ?>"><?php echo $socialProgramOrigen->{SPO_ORIGIN};?></option>
+											<?php endforeach;?>
+										</select>
+									</td>
+								<?php }?>
+								
+							<?php } elseif ($this->form->getTableName() == TBL_VACCINE) { ?>
+								<td width="24%" style="vertical-align: middle;">
+									<input type="text" name="values_1" value="<?php echo $result->name; ?>" style="width:100%;"/>
+								</td>
+								<td width="15%" style="vertical-align: middle;">
+									<select name="values_2" style="width:100%;">
+										<?php foreach($this->vaccineTypes as $vaccineType):?>
+											<option value="<?php echo $vaccineType->{VCT_ID_VACCINE_TYPE}; ?>" <?php if($vaccineType->{VCT_ID_VACCINE_TYPE} == $result->{VAC_ID_VACCINE_TYPE}) echo "selected"; ?>><?php echo $vaccineType->{VCT_DESCRIPTION};?></option>
+										<?php endforeach;?>
+									</select>
+								</td>
+								<td width="19%" style="vertical-align: middle;">
+									<select name="values_3" style="width:100%;">
+										<?php foreach($this->periods as $period):?>
+											<option value="<?php echo $period->{PER_ID_PERIOD}; ?>" <?php if($period->{PER_ID_PERIOD} == $result->{VAC_ID_PERIOD}) echo "selected"; ?>><?php echo $period->{PER_DESCRIPTION};?></option>
+										<?php endforeach;?>
+									</select>
+								</td>
+							<?php } elseif ($this->form->getTableName() == TBL_AGE_GROUP) { ?>
+								<?php $count += 0;?>
+								<input type="hidden" name="values_4" value="<?php echo $result->$id;?>">
+								<td width="5%" style="vertical-align: middle; height: 50px;">
+									De
+								</td>
+								<td width="10%" style="vertical-align: middle; height: 50px;">
+									<select class="smallInput" name="values_1" style="width: 56px !important;">
+										<?php for($i=0; $i<=120; $i++):?>
+											<option value="<?php echo $i; ?>" <?php if($i == $result->begin_age) echo "selected"; ?>><?php echo $i;?></option>
+										<?php endfor;?>
+									</select>
+								</td>
+								<td width="3%" style="vertical-align: middle; height: 50px;">
+									a
+								</td>
+								<td width="10%" style="vertical-align: middle; height: 50px;">
+									<select class="smallInput" name="values_2" style="width: 56px !important;">
+										<?php for($i=0; $i<=120; $i++):?>
+											<option value="<?php echo $i; ?>" <?php if($i == $result->end_age) echo "selected"; ?>><?php echo $i;?></option>
+										<?php endfor;?>
+									</select>
+								</td>
+								<td width="10%" style="vertical-align: middle; height: 50px;">
+									ano(s)
+							</td>
+							<?php } else { ?>
+							
+								<td align="center" width="39%" style="vertical-align: middle;">
+									<input class="middleInput" type="text" name="<?php echo $this->form->value();?>" value="<?php echo $result->$value;?>" >
+								</td>
+							<?php } ?>							
+							<td width="20%" style="vertical-align: middle;">
+								<select class="smallInput" name="<?php echo $this->form->status();?>">
+									<option value="<?php echo Constants::ENABLE;?>"><?php echo $this->labels->text->enable;?></option>
+									<option value="<?php echo Constants::DISABLE;?>" <?php if($this->form->getStatus() == Constants::DISABLE || $result->status == Constants::DISABLE) echo "selected";?>><?php echo $this->labels->text->disable;?></option>
+								</select>
+							</td>
+							
+							<td style="vertical-align: middle;">
+								<input class="button" style="margin: 0;" type="button" onClick="javascript: showOrHideEdit(<?php echo $result->$id;?>,'edit')" value="<?php echo $this->labels->button->no;?>">
+							</td>
+							
+							<td align="left" width="" style="vertical-align: middle; padding: 2px 0;">
+								<input type="hidden" value="<?php echo $this->form->getTableName();?>" name="<?php echo $this->form->tableName();?>"/>
+								<input type="hidden" value="<?php echo $this->form->getTableId();?>" name="<?php echo $this->form->tableId();?>"/>
+								<?php if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){?>
+									<input type="hidden" value="<?php echo $this->form->getTableFirstValue();?>" name="<?php echo $this->form->tableFirstValue();?>"/>
+									<input type="hidden" value="<?php echo $this->form->getTableSecondValue();?>" name="<?php echo $this->form->tableSecondValue();?>"/>
+								<?php } elseif ($this->form->getTableName() == TBL_VACCINE) { ?>
+									<input type="hidden" value="<?php echo $result->id_vaccine; ?>" name="values_0"/>
+								<?php }else{?>
+									<input type="hidden" value="<?php echo $this->form->getTableValue();?>" name="<?php echo $this->form->tableValue();?>"/>
+								<?php }?>								
+								<input class="button" style="margin: 0 0 0 5px" type="submit" value="<?php echo $this->labels->button->save;?>">
+							</td>
+							
+						</tr>
+					</form>	
+				</table>
+			</div>
+	<?php endforeach;
+	if($class == 0)
+	{
+		$type = 'write';
+		$class= 1;
+	}
+	else
+	{
+		$type='';
+		$class= 0;
+	}
+	?>
+	<div>
+		<table id="row-create-new" width="100%" cellpadding="0" cellspacing="0">			
+			<form action="<?php echo $this->baseUrl;?><?php echo ADDITIONALINFORMATION_CONTROLLER;?>/<?php echo DEFAULT_ADD_ACTION;?>" method="post">
+			<tr class="<?php echo $type;?>">
+				<td align="center" width="4%" class="bold" style="vertical-align: middle; height: 50px;">					
+					<?php $count += 1; echo $count;?>					
+				</td>
+				<?php if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){?>
+					<td align="center" width="25%" style="vertical-align: middle; height: 50px;">
+						<input type="text" name="<?php echo $this->form->firstValue();?>" value="" style="width:92%;">
+					</td>
+					<td align="center" width="20%" style="vertical-align: middle; height: 50px;">
+						<?php if($this->form->getTableName() == TBL_PROGRAM_TYPE){?>
+							<select name="<?php echo $this->form->secondValue();?>" style="width:95%;">
+								<?php foreach($this->targetMarket as $targetMarket):?>
+									<option value="<?php echo $targetMarket->{TMK_ID_TARGET_MARKET}; ?>"><?php echo $targetMarket->{TMK_TARGET_MARKET};?></option>
+								<?php endforeach;?>
+							</select>
+						<?php }?>
+						<?php if($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE){?>
+							<select name="<?php echo $this->form->secondValue();?>" style="width:95%;">
+								<?php foreach($this->socialProgramOrigen as $socialProgramOrigen):?>
+									<option value="<?php echo $socialProgramOrigen->{SPO_ID_ORIGIN}; ?>"><?php echo $socialProgramOrigen->{SPO_ORIGIN};?></option>
+								<?php endforeach;?>
+							</select>
+						<?php }?>
+					</td>
+				<?php } elseif ($this->form->getTableName() == TBL_VACCINE) {?>	
+					<td width="20%" style="vertical-align: middle; height: 50px;">
+						<input class="smallInput" type="text" name="values_1" value="" style="width:95%;" />
+					</td>
+					<td width="20%" style="vertical-align: middle; height: 50px;">
+						<select class="smallInput" name="values_2" style="width:95%;">
+							<?php foreach($this->vaccineTypes as $vaccineType):?>
+								<option value="<?php echo $vaccineType->{VCT_ID_VACCINE_TYPE}; ?>"><?php echo $vaccineType->{VCT_DESCRIPTION};?></option>
+							<?php endforeach;?>
+						</select>
+					</td>
+					<td width="20%" style="vertical-align: middle; height: 50px;">
+						<select class="smallInput" name="values_3" style="width:95%;">
+							<?php foreach($this->periods as $period):?>
+								<option value="<?php echo $period->{PER_ID_PERIOD}; ?>"><?php echo $period->{PER_DESCRIPTION};?></option>
+							<?php endforeach;?>
+						</select>
+					</td>
+					
+				<?php } elseif ($this->form->getTableName() == TBL_AGE_GROUP) {?>	
+					<td width="5%" style="vertical-align: middle; height: 50px;">
+						De
+					</td>
+					<td width="10%" style="vertical-align: middle; height: 50px;">
+						<select class="smallInput" name="values_1" style="width: 56px !important;">
+							<?php for($i=0; $i<=120; $i++):?>
+								<option value="<?php echo $i; ?>"><?php echo $i;?></option>
+							<?php endfor;?>
+						</select>
+					</td>
+					<td width="3%" style="vertical-align: middle; height: 50px;">
+						a
+					</td>
+					<td width="10%" style="vertical-align: middle; height: 50px;">
+						<select class="smallInput" name="values_2" style="width: 56px !important;">
+							<?php for($i=0; $i<=120; $i++):?>
+								<option value="<?php echo $i; ?>"><?php echo $i;?></option>
+							<?php endfor;?>
+						</select>
+					</td>
+					<td width="10%" style="vertical-align: middle; height: 50px;">
+						ano(s)
+				</td>
+					
+				<?php } else { ?>
+					<td align="center" width="40%" style="vertical-align: middle; height: 50px;">
+						<input class="middleInput" type="text" name="<?php echo $this->form->value();?>" />
+					</td>
+				<?php }?>
+				
+				<td width="20%" style="vertical-align: middle; height: 50px;" >
+					<select name="values_3" style="width:95%;">
+						<option value="<?php echo Constants::ENABLE;?>"><?php echo $this->labels->text->enable;?></option>
+						<option value="<?php echo Constants::DISABLE;?>" <?php if($this->form->getStatus() == Constants::DISABLE) echo "selected";?>><?php echo $this->labels->text->disable;?></option>
+					</select>
+				</td>
+				
+				<td align="right" colspan="2" width="" style="vertical-align: middle; height: 50px;">
+					<input type="hidden" value="<?php echo $this->form->getTableName();?>" name="<?php echo $this->form->tableName();?>"/>
+					<input type="hidden" value="<?php echo $this->form->getTableId();?>" name="<?php echo $this->form->tableId();?>"/>
+					<?php if(($this->form->getTableName() == TBL_PROGRAM_TYPE) || ($this->form->getTableName() == TBL_SOCIAL_PROGRAM_TYPE)){?>
+						<input type="hidden" value="<?php echo $this->form->getTableFirstValue();?>" name="<?php echo $this->form->tableFirstValue();?>"/>
+						<input type="hidden" value="<?php echo $this->form->getTableSecondValue();?>" name="<?php echo $this->form->tableSecondValue();?>"/>
+					<?php } elseif ($this->form->getTableName() == TBL_VACCINE) {?>
+						<input type="hidden" value="<?php echo $this->form->getTableValue();?>" name="<?php echo $this->form->tableValue();?>"/>
+						<input type="hidden" value="<?php echo $this->form->getTableFirstValue();?>" name="<?php echo $this->form->tableFirstValue();?>"/>
+						<input type="hidden" value="<?php echo $this->form->getTableSecondValue();?>" name="<?php echo $this->form->tableSecondValue();?>"/>
+					<?php }else{?>
+						<input type="hidden" value="<?php echo $this->form->getTableValue();?>" name="<?php echo $this->form->tableValue();?>"/>
+					<?php }?>
+					<input class="button" style="margin: 0;" type="submit" value="<?php echo $this->labels->button->save;?>">					
+				</td>
+			</tr>
+			
+			</form>
+		</table>
+	</div>
+	
+	<div>
+		<table id="errors" width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<?php $error = false;
+					foreach($this->errorMessages as $k=>$v):
+						if($k == $this->form->id())$error = true;
+					endforeach;				
+					if($error == true){
+						if ($this->form->getTableName() != TBL_VACCINE) : ?>
+				<td align="center" width="100%" class="bold">
+					<?php echo $this->controller->additional->text->id;?>	
+				</td>
+			</tr>
+						<?php endif; ?>
+			<tr>
+				<td align="100%">
+					<?php printErrorsByField($this->form->id(), $this->errorMessages);?>
+				</td>
+			</tr>						
+				<?php }	$error = false;?>
+			<tr>
+				<?php foreach($this->errorMessages as $k=>$v):
+						if($k == $this->form->value())$error = true;
+					endforeach;				
+					if($error == true){
+						if ($this->form->getTableName() != TBL_VACCINE) : ?>
+				<td align="center" width="100%" class="bold">
+					<?php echo $this->controller->additional->text->value;?>
+				</td>
+			</tr>
+			
+					<?php endif; ?>
+			<tr>
+				<td align="100%">
+					<?php printErrorsByField($this->form->value(), $this->errorMessages);?>
+				</td>
+			</tr>
+				<?php }	$error = false;?>
+			<tr>
+				<?php foreach($this->errorMessages as $k=>$v):
+						if($k == $this->form->status())$error = true;
+					endforeach;				
+					if($error == true){?>
+				<td align="center" width="100%" class="bold">
+					<?php echo $this->controller->additional->text->status;?>
+				</td>
+			</tr>
+			
+			<tr>
+				<td align="100%">
+					<?php printErrorsByField($this->form->status(), $this->errorMessages);?>
+				</td>			
+				<?php }?>
+			</tr>
+			<?php if ($this->form->getTableName() == TBL_AGE_GROUP && $this->errorMessages['age_group'] != null) : ?>
+			<tr>
+				<td align="100%">
+				<div class="error"><font color="red"><?php echo $this->errorMessages['age_group']?></font></div>
+				</td>
+			</tr>
+			<?php endif;?>
+		</table>
+	</div>
+<?php }?>

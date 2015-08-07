@@ -1,0 +1,115 @@
+<tr>
+	<td>
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<!-- ========================================================= -->
+			<!-- ============= form que busca pelo nome ================== -->
+			<!-- ========================================================= -->
+			<form action="<?php echo $this->baseUrl;?><?php echo FAMILYRELATIONSHIP_CONTROLLER;?>/<?php echo DEFAULT_SEARCH_BY_NAME_ACTION;?>" method="post">
+				<input type="hidden" name="<?php echo SearchForm::idPerson();?>" value="<?php echo $this->form->getIdPerson();?>"/>
+				<?php printErrorsByField($this->form->idPerson(), $this->errorMessages);?>
+				<!-- ========================================================= -->
+				<!-- ======================= nome ============================ -->
+				<!-- ========================================================= -->
+				<tr>
+					<td colspan="2">
+						<h1 class="title"><?php echo $this->controller->fRelationship->search->typeName;?></h1>
+					</td>
+				</tr>
+
+				<tr>
+					<td width="18%" class="label">
+						<?php echo $this->controller->fRelationship->text->name;?>
+					</td>
+					<td>
+						<input class="middleInput" size="100" type="text" name="<?php echo $this->form->prsName();?>" value="<?php echo $this->form->getPrsName();?>"/><br>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2"><?php printErrorsByField($this->form->prsName(), $this->errorMessages);?></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" class="middleValign label">
+						<i><?php echo $this->controller->fRelationship->text->option;?></i>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2"><hr><br /></td>
+				</tr>
+				
+				<!-- ============================================================= -->
+				<!-- ======================= sexo ================================ -->
+				<!-- ============================================================= -->
+				<tr>
+					<td class="label">
+						<?php echo $this->controller->fRelationship->text->sex;?>
+					</td>
+					<td class="middleValign">
+						<select class="middleInput" name="<?php echo $this->form->prsSex();?>">
+							<option value=""><?php echo $this->controller->fRelationship->text->both;?></option>
+							<option value="<?php echo Constants::WOMAN;?>" <?php if($this->form->getPrsSex() == Constants::WOMAN) echo "selected";?>>Feminino</option>
+							<option value="<?php echo Constants::MAN;?>" <?php if($this->form->getPrsSex() == Constants::MAN) echo "selected";?>>Masculino</option>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td><?php printErrorsByField($this->form->prsSex(), $this->errorMessages);?></td>
+				</tr>
+				
+				<!-- ========================================================== -->
+				<!-- ======================= idade ============================ -->
+				<!-- ========================================================== -->
+				<tr>
+					<td colspan="2">
+						<table cellpadding="0" cellspacing="0" width="100%">
+							<tr>
+								<td class="label" width="18%">
+									<?php echo $this->controller->fRelationship->text->age1;?>
+								</td>
+								
+								<td width="40%">
+									<input class="middleInput" size="5" type="text" name="<?php echo $this->form->prsFirstAge();?>" value="<?php echo $this->form->getPrsFirstAge();?>"/>
+								</td>
+								
+								<td class="label" width="5%">
+									<?php echo $this->controller->fRelationship->text->age2;?>
+								</td>
+								
+								<td width="13%">
+									<input class="tinyInput" size="5" type="text" name="<?php echo $this->form->prsSecondAge();?>" value="<?php echo $this->form->getPrsSecondAge();?>"/>
+								</td>
+								
+								<td class="label">
+									<?php echo $this->controller->fRelationship->text->age3;?>
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<?php printErrorsByField($this->form->prsFirstAge(), $this->errorMessages);?>
+									<?php printErrorsByField($this->form->prsSecondAge(), $this->errorMessages);?>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				
+				<!-- ========================================================= -->
+				<!-- ======================= botoes ========================== -->
+				<!-- ========================================================= -->
+				<tr>
+					<td colspan="2">
+						<input class="button" type="submit" value="<?php echo $this->labels->button->filter;?>" />
+						<input class="button" style="margin-left: 5px;" type="button" value="<?php echo $this->labels->button->back;?>" onClick="document.location='<?php echo $this->baseUrl;?><?php echo FAMILYRELATIONSHIP_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php echo SearchForm::idPerson();?>/<?php echo $this->form->getIdPerson();?>'"/>
+					</td>
+				</tr>
+			</form>
+			<!-- ======================================================== -->
+			<!-- ============= fim do form que busca pelo nome ========== -->
+			<!-- ======================================================== -->
+		</table>
+	</td>
+</tr>

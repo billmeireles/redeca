@@ -1,0 +1,182 @@
+<?php $random = Zend_Registry::get(CONFIG)->container->random;?>
+<?php if($random):?>
+	<?php echo $this->render('footer/footer_random.phtml');?>
+<?php else:?>
+<!-- =========================================================================== -->
+<!-- ============================= começo do footer ============================ -->
+<!-- =========================================================================== -->
+
+				</td>
+				<td width="200" style="vertical-align: top;" cellpadding="0" cellspacing="0">
+				<?php if(!$this->errorMessages[BasicForm::personId()] && !is_null($this->form->getPersonId())):?>
+				<?php if(ResourcePermission::showContainers($this->request)){?>
+					
+					<?php if(ResourcePermission::isAllowResource(FAMILYRELATIONSHIP_CONTROLLER)){?>
+						<?php $show = Zend_Registry::get(CONFIG)->container->family;?>
+						<?php if(!$show):?>
+							<?php $hideHeader = true;?>
+							<?php echo $this->render('container/containerFamilyRelationship.phtml');?><br>
+						<?php else:?>
+							<!-- Antigo --
+							<table class="familyRelationship" width="100%">
+								<tr>
+									<td class="container">
+										<table width="100%" class="tableContainer">
+											<tr>
+												<td width="10%" class="fontContainer">								
+												</td>				
+												<td width="90%" class="fontContainer">
+													<b><?php echo $this->labels->title->family;?></b>
+												</td>
+											</tr>
+										</table><br>
+										<div id="loading5"><center><img src="<?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>
+										<div id="familyMain"></div>
+									</td>
+								</tr>
+							</table><br>
+							-->
+							
+							<div class="container containerMarginLeft containerMarginTop">
+								<div class="imgTitle"></div>
+								<div class="borderTitle"></div>
+								<div class="textTitle">
+									<?php echo $this->labels->title->family;?>
+								</div>
+								<div id="loading5" class="loading"></div>
+								<div id="familyMain"></div>
+								<div class="borderBottom"></div>
+							</div>
+							
+						<?php endif;?>
+					<?php }?>
+					
+					<?php if(ResourcePermission::isAllowResource(RESIDENCE_CONTROLLER)){?>
+						<?php $show = Zend_Registry::get(CONFIG)->container->residence;?>
+						<?php if(!$show):?>
+							<?php $hideHeader = true;?>
+							<?php echo $this->render('container/containerResidence.phtml');?><br>
+						<?php else:?>
+							<!-- Antigo --
+							<table class="residence" width="100%">
+								<tr>
+									<td class="container">
+										<table width="100%" class="tableContainer">
+											<tr>
+												<td width="10%" class="fontContainer">								
+												</td>				
+												<td width="90%" class="fontContainer">
+													<b><?php echo $this->labels->title->residence;?></b>
+												</td>
+											</tr>
+										</table><br>
+										<div id="loading6"><center><img src="<?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>		
+										<div id="residenceMain"></div><br>
+									</td>
+								</tr>
+							</table><br>
+							-->
+							
+							<div class="container containerMarginLeft">
+								<div class="imgTitle"></div>
+								<div class="borderTitle"></div>
+								<div class="textTitle">
+									<?php echo $this->labels->title->residence;?>
+								</div>
+								<div id="loading6" class="loading"></div>
+								<div id="residenceMain"></div>
+								<div class="borderBottom"></div>
+							</div>
+							
+							
+						<?php endif;?>
+					<?php }?>
+					
+					<?php if(ResourcePermission::isAllowResource(ATTENDANCE_CONTROLLER)){?>
+						<?php $show = Zend_Registry::get(CONFIG)->container->lastattendance;?>
+						<?php if(!$show):?>
+							<?php $hideHeader = true;?>
+							<?php echo $this->render('container/containerAttendance.phtml');?><br>
+						<?php else:?>
+							<!-- Antigo --
+							<table class="attendance" width="100%">
+								<tr>
+									<td class="container">
+										<table width="100%" class="tableContainer">
+											<tr>
+												<td width="10%" class="fontContainer">								
+												</td>				
+												<td width="90%" class="fontContainer">
+													<b><?php echo $this->labels->title->lastAttendance;?></b>
+												</td>
+											</tr>
+										</table><br>
+										<div id="loading7"><center><img src="<?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>
+										<div id="attendanceMain"></div><br>
+									</td>
+								</tr>
+							</table><br> -->
+							
+							<div class="container containerMarginLeft">
+								<div class="imgTitle"></div>
+								<div class="borderTitle"></div>
+								<div class="textTitle">
+									<?php echo $this->labels->title->lastAttendance;?>
+								</div>
+								<div id="loading7" class="loading"></div>
+								<div id="attendanceMain"></div>
+								<div class="borderBottom"></div>
+							</div>
+							
+						<?php endif;?>
+					<?php }?>
+					
+					<?php if(ResourcePermission::isAllowResource(NETWORK_CONTROLLER)){?>
+						<?php $show = Zend_Registry::get(CONFIG)->container->network;?>
+						<?php if(!$show):?>
+							<?php $hideHeader = true;?>
+							<?php echo $this->render('container/containerNetworkEntity.phtml');?><br>
+						<?php else:?>
+							<!-- Antigo --
+							<table class="activity" width="100%">
+								<tr>
+									<td class="container">
+										<table width="100%" class="tableContainer">
+											<tr>
+												<td width="10%" class="fontContainer">								
+												</td>				
+												<td width="90%" class="fontContainer">
+													<b><?php echo $this->labels->title->netEntity;?></b>
+												</td>
+											</tr>
+										</table><br>
+										<div id="loading8"><center><img src="<?php echo $this->baseUrl;?>/public/images/loading.gif"/></center></div>										
+										<div id="netMain"></div><br>
+									</td>
+								</tr>
+							</table><br>
+							-->
+							
+							<div class="container containerMarginLeft">
+								<div class="imgTitle"></div>
+								<div class="borderTitle"></div>
+								<div class="textTitle">
+									<?php echo $this->labels->title->netEntity;?>
+								</div>
+								<div id="loading8" class="loading"></div>
+								<div id="netMain"></div>
+								<div class="borderBottom"></div>
+							</div>
+							
+						<?php endif;?>
+					<?php }?>
+					
+				<?php }?>
+				<?php endif;?>
+				</td>
+			</tr>
+		</table>
+
+		<?php echo $this->render('footer/footerInfo.phtml');?>		
+<?php echo $this->render('footer/foot.phtml');?>
+<?php endif;?>

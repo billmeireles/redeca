@@ -1,0 +1,67 @@
+<?php echo $this->render('header/header.phtml');?>										 		  						
+									  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+
+	<!-- ============================================================================================== -->
+	<!-- É necessário informar o nome class da tabela em questão para carregar a cor background correta -->
+	<!-- Opções: 
+				#identification
+				#person
+				#education
+				#health
+				#income
+				#familyRelationship
+				#residence
+				#attendance
+				#activity	-->
+	<!-- ============================================================================================== -->
+	<table width="570" cellpadding="0" cellspacing="0">
+		<tr>
+			<td align="center">
+				<?php echo $this->render('navigation/navigationSetup.phtml');?>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				<h1 class="title" style="margin-top: 33px;">
+					<?php echo ($this->labels->confirm->delete->title);?>
+				</h1>			
+			</td>
+		</tr>
+	</table>
+	
+	<div class="inputBox">
+		<table width="548" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="center">
+
+					<form action="<?php echo $this->baseUrl;?><?php echo REGION_CONTROLLER;?>/<?php echo DEFAULT_DROP_ACTION;?>" method="post">
+						<p style="margin-top: 10px;">
+							<?php echo $this->labels->confirm->delete->text;?>&nbsp;?
+							<?php 
+									echo "<br>".$this->controller->region->title->name.":&nbsp;";								
+									echo '<b>'. $this->region->{RGN_REGION}.'<b>';
+							?>
+							<input type="hidden" name="<?php echo $this->form->idRegion();?>" value="<?php echo $this->region->{RGN_ID_REGION};?>"/>
+						</p>
+						<div>
+							<input class="button" type="submit" value="<?php echo $this->labels->button->drop;?>"/>
+							<input class="button" style="margin-left: 5px;" type="button" value="<?php echo $this->labels->button->no;?>" onClick="document.location='<?php echo $this->baseUrl;?><?php echo REGION_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>'">
+						</div>					
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+</div>																  
+<!-- =================================== -->
+<!-- fim : específico para cada template -->					
+<!-- =================================== -->		
+					
+<?php echo $this->render('footer/footer.phtml');?>	

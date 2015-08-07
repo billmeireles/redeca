@@ -1,0 +1,27 @@
+<?php
+/*
+ * 
+ * Created on 19/02/2008 
+ * S2it Solutions by Fabricio Meireles Monteiro
+ * 
+ */
+?>
+ 
+<?php echo $this->render('header/header.phtml');?>
+
+<table width="570" cellpadding="0" cellspacing="0">
+	<?php 
+		if(!$this->errorMessages)
+		{
+			echo $this->render('classification/previewDrop.phtml');
+		}
+		else
+		{
+			echo $this->render('classification/invalidParam.phtml');
+		}
+	?>
+</table>
+
+<?php echo $this->render('footer/footer.phtml');?>
+ 
+

@@ -1,0 +1,571 @@
+	<h1 class="title"><?php echo $this->controller->health->edit->title;?></h1>
+	
+	<div class="inputBox">
+		<table width="548" cellpadding="0" cellspacing="0" style="margin-top: 10px;">
+			<form action="<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_EDIT_ACTION;?>" method="post" id="healthForm">
+				<?php
+					//---------------------------------------------------------------------------
+					//bloco PHP utilizado somente para manter estado das informações do template 
+					//ou carregar objetos do tipo programa social e situação de saúde
+					//---------------------------------------------------------------------------
+					if($this->form->getCollFrameworkHealth())
+					{
+						$frameworkHealth = $this->form->getCollFrameworkHealth();
+					}
+					else
+					{
+						if($this->healthByPerson && sizeof($this->healthByPerson) > 0)
+						{
+							if( sizeof($this->healthByPerson->findDependentRowset(CLS_FRAMEWORKHEALTH)) > 0)
+							{
+								foreach($this->healthByPerson->findDependentRowset(CLS_FRAMEWORKHEALTH) as $healthPerson)
+								{
+									$hp = array();
+									$hp[FHL_ID_FRAMEWORK_HEALTH] = $healthPerson->{FHL_ID_FRAMEWORK_HEALTH};
+									$hp[FHL_FRAMEWORK_HEALTH_DESCRIPTION] = $healthPerson->{FHL_FRAMEWORK_HEALTH_DESCRIPTION};
+									
+									$objectsFrameworkHealth[] = $hp;
+								}
+								
+								$frameworkHealth = $objectsFrameworkHealth;	
+							}	
+						}
+					}
+						
+					if($frameworkHealth && sizeof($frameworkHealth) > 0)
+					{
+						foreach($frameworkHealth as $unique)
+						{
+							$idFrameworkHealth = array();
+							$idFrameworkHealth = $unique[FHL_ID_FRAMEWORK_HEALTH];
+							
+							$collIdFramework[] = $idFrameworkHealth; 
+						}	
+					}
+					//---------------------------------------------------------------------------
+					//------------------------------ fim do bloco -------------------------------
+					//---------------------------------------------------------------------------
+				?>
+				<input id="idPerson" type="hidden" name="<?php echo HealthForm::idPerson();?>" value="<?php echo $this->form->getIdPerson();?>"/>
+				<?php printErrorsByField($this->form->idPerson(), $this->errorMessages);?>
+				
+				<tr>
+					<td>
+						<table width="548" cellpadding="0" cellpadding="0">
+							<tr>
+								<td width="35%">
+									<div class="label">
+										<?php echo $this->controller->health->text->careUnit;?>
+									</div>
+								</td>
+								<td class="inputMiddle">
+									<select name="entity" id="medicalRecord">
+										<option value="0">Selecione</option>
+										<?php foreach($this->careUnits as $careUnit): ?>
+											<option value="<?php echo $careUnit->{ENT_ID_ENTITY}; ?>" title="<?php echo $careUnit->{ENT_NAME}; ?>" 
+											<?php if($careUnit->{ENT_ID_ENTITY} == $this->form->getEntity()) echo "selected"; ?>	>
+												<?php echo $careUnit->{ENT_NAME}; ?>
+											</option>
+											
+										<?php endforeach; ?>
+									</div>
+								</td>
+							</tr>
+							
+							<tr>
+								<td>
+									<div id="medicalRecordNum">
+										<div class="label"><?php echo $this->controller->health->text->num;?></div>
+									</div>
+								</td>
+								<td>
+									<div class="inputs">
+										<input class="smallInput" id="prontValue" type="text" name="<?php echo HealthForm::prontuary();?>" value="<?php echo $this->escape($this->form->getProntuary())?>" size="20px"/>
+										<?php printErrorsByField($this->form->prontuary(), $this->errorMessages);?>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<?php printErrorsByField($this->form->entity(), $this->errorMessages);?>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				 
+				<tr>
+					<td>
+						<?php if($this->person->{PRS_SEX} == 'm'):?>
+											
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tr>
+									<td width="35%">
+										<div class="label"><?php echo $this->controller->health->text->pregnant;?></div>
+									</td>
+									<td>
+										<div class="radioCenter">
+											<input type="radio" onClick="javascript: show('dataPregnancy');" name="<?php echo HealthForm::pregnancy();?>" value="1" <?php if(($this->form->getPregnancy() == 1) || sizeof($this->pregnancyByPerson) > 0) echo "checked";?>/><?php echo $this->controller->health->text->yes;?>&nbsp;&nbsp;
+											<input type="radio" onClick="javascript: hide('dataPregnancy');" name="<?php echo HealthForm::pregnancy();?>" value="2" <?php if(($this->form->getPregnancy() == 2) && sizeof($this->pregnancyByPerson) <= 0)  echo "checked";?>/><?php echo $this->controller->health->text->no;?>&nbsp;&nbsp;
+											<input type="radio" onClick="javascript: hide('dataPregnancy');" name="<?php echo HealthForm::pregnancy();?>" value="0" <?php if(($this->form->getPregnancy() == 0) && sizeof($this->pregnancyByPerson) <= 0)  echo "checked";?>/><?php echo $this->controller->health->text->noinfo;?>
+										</div>
+									</td>	
+								</tr>
+								<tr>
+									<td><?php printErrorsByField($this->form->pregnancy(), $this->errorMessages);?></td>
+								</tr>
+							</table>
+							
+							<div id="dataPregnancy" style="display: <?php if(($this->form->getPregnancy() == 1) || sizeof($this->pregnancyByPerson) > 0) 'inline'; else echo 'none';?>">
+								
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+										<td width="35%">
+											<div class="label">
+												<?php echo $this->controller->health->text->startpregnant;?>
+											</div>
+										</td>
+										<td>
+											<table width="100%" cellpadding="0" cellspacing="0">
+												<tr>
+													<td>
+														<div class="label">
+															<?php 
+																if(strlen($this->form->getPregnancyBegin()) > 0)
+																{
+																	$dateBegin = $this->form->getPregnancyBegin();	
+																}
+																elseif(strlen($this->pregnancyByPerson->{PRG_BEGINNING_PREGNANCY}) > 0)
+																{
+																	$dateBegin = HealthForm::dateFormatForm($this->pregnancyByPerson->{PRG_BEGINNING_PREGNANCY});
+																}
+															?>
+														</div>
+													</td>
+													<td>
+														<div class="inputs">
+															<input class="smallInput" size="12" type="text" name="<?php echo HealthForm::pregnancyBegin();?>" value="<?php echo $dateBegin; ?>"/>
+														</div>
+													</td>
+												</tr>
+												<tr>
+													<td colspan="2"><?php printErrorsByField($this->form->pregnancyBegin(), $this->errorMessages);?></td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+									<tr>
+										<td width="40%">
+											<div class="label">
+												<?php echo $this->controller->health->text->answered;?>
+											</div>
+										</td>
+										<td colspan="2">
+											<table width="100%" cellpadding="0" cellspacing="0">
+												<tr>
+													<td>
+														<div class="radioCenter">
+															<input type="radio" onClick="javascript: show('sisPregnancy');" name="<?php echo HealthForm::met();?>" value="1" <?php if($this->form->getMet() == 1) echo "checked";?>/>&nbsp;<?php echo $this->controller->health->text->yes;?>&nbsp;&nbsp;
+															<input type="radio" onClick="javascript: hide('sisPregnancy');" name="<?php echo HealthForm::met();?>" value="2" <?php if($this->form->getMet() == 2) echo "checked";?>/>&nbsp;<?php echo $this->controller->health->text->no;?>&nbsp;&nbsp;
+															<input type="radio" onClick="javascript: hide('sisPregnancy');" name="<?php echo HealthForm::met();?>" value="0" <?php if($this->form->getMet() == 0) echo "checked";?>/>&nbsp;<?php echo $this->controller->health->text->noinfo;?>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</td>	
+									</tr>
+									<tr>
+										<td colspan="2"><?php printErrorsByField($this->form->met(), $this->errorMessages);?></td>
+									</tr>
+								</table>	
+								
+								<div id="sisPregnancy" style="display: <?php if( ($this->form->getMet() == 1) || $this->pregnancyByPerson->{PRG_MET} == 1) 'inline'; else echo 'none';?>">
+									<table width="100%" cellpadding="0" cellspacing="0">
+										<tr>
+											<td width="35%">
+												<div class="label">
+													<?php echo $this->controller->health->text->sis;?>
+												</div>
+											</td>
+											<td>
+												<div class="inputs">
+													<input class="smallInput" type="text" name="<?php echo HealthForm::pregnancySis();?>" value="<?php echo $this->escape($this->form->getPregnancySis())?><?php echo $this->pregnancyByPerson->{PRG_PRENATAL_SIS};?>" size="20px"/>
+												</div>
+											</td>	
+										</tr>
+										<tr>
+											<td colspan="2"><?php printErrorsByField($this->form->pregnancySis(), $this->errorMessages);?></td>
+										</tr>
+									</table>
+								</div>
+							</div>				
+						<?php endif;?>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<!-- EXIBE/ESCONDE OS CAMPOS DE USO E ABUSO DE DROGAS -->
+						<?php if(Zend_Registry::get(CONFIG)->drugs->user->show == "true"){ ?>				
+							<div id="drugs">
+								<table width="548" cellpadding="0" cellspacing="0">
+									<tr>
+										<td width="35%">
+											<div class="label">
+												<?php echo $this->controller->health->text->drugs;?>
+											</div>
+										</td>
+										<td>
+											<div class="radioCenter">
+												<input type="radio" name="<?php echo HealthForm::userDrug();?>" value="1" <?php if($this->form->getUserDrug() == 1) echo "checked";?> /><?php echo $this->controller->health->text->yes;?>&nbsp;&nbsp;
+												<input type="radio" name="<?php echo HealthForm::userDrug();?>" value="2" <?php if($this->form->getUserDrug() == 2) echo "checked";?> /><?php echo $this->controller->health->text->no;?>&nbsp;&nbsp;
+												<input type="radio" name="<?php echo HealthForm::userDrug();?>" value="0" <?php if($this->form->getUserDrug() == 0) echo "checked";?> /><?php echo $this->controller->health->text->noinfo;?>
+											</div>	
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2"><?php printErrorsByField($this->form->userDrug(), $this->errorMessages);?></td>
+									</tr>
+								</table>
+							</div>
+						<?php } ?>
+											
+						<table  width="548" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="35%" align="left">
+									<div class="label">
+										<?php echo $this->controller->health->text->vaccination;?>
+									</div>
+								</td>
+								<td>
+									<div class="radioCenter">
+										<input type="radio" name="<?php echo HealthForm::vaccine();?>" value="1" <?php if($this->form->getVaccine() == 1) echo "checked";?>/><?php echo $this->controller->health->text->yes;?>&nbsp;&nbsp;
+										<input type="radio" name="<?php echo HealthForm::vaccine();?>" value="2" <?php if($this->form->getVaccine() == 2) echo "checked";?>/><?php echo $this->controller->health->text->no;?>&nbsp;&nbsp;
+										<input type="radio" name="<?php echo HealthForm::vaccine();?>" value="0" <?php if($this->form->getVaccine() == 0) echo "checked";?>/><?php echo $this->controller->health->text->noinfo;?>
+									</div>
+								</td>
+							</tr>
+							
+						</table>
+						
+						<!-- 
+						---------------------------------------------------------------------------------------
+						Inicio do bloco utilizado para salvar / editar / habilitar / desabilitar vacinações em dia 
+						---------------------------------------------------------------------------------------
+						-->
+						<div  style="width: 528px; border: 1px solid #BFBFBF; padding: 10px;">
+						
+							<!--EDITA AS VACINAÇÕES -->
+							<table width="528" cellpadding="0" cellspacing="0">
+							<?php foreach($this->vaccination as $vaccination): ?>
+							<?php $count = $count+1; ?>
+							<?php if($vaccination->{VCN_STATUS} == 1){ ?>
+							
+									<tr id="view<?php echo $count; ?>">
+										<td style="width:220px">
+											<div class="label"><?php echo $this->controller->health->text->vaccin ?></div>
+											<?php 
+												foreach($this->vaccines as $vaccine)
+												{
+													if($vaccine->{VAC_ID_VACCINE} == $vaccination->{VCN_ID_VACCINE}) echo $vaccine->{VAC_NAME} . ' <br><img src="/f-telefonica-pro-nino-varzea/public/styles/seta.png" width="10px" style="padding-left: 5px;"> (' . $vaccination->description . ')';
+												}
+											?>
+										</td>
+										<td style="width:130px;">
+											<class="label"><?php echo $this->controller->health->text->date ?></div> 
+											<?php echo $this->form->dateFormatForm($vaccination->{VCN_DATE});?>
+										</td>
+										<td style="width:130px;">
+											<div class="label"><?php echo $this->controller->health->text->lot ?></div>
+											<?php echo $vaccination->{VCN_LOT}; ?>
+										</td>
+										<td style="width:54px;">
+											<input class="button" type="button" value="Editar" onclick="javascript: showOrHideEdit(<?php echo $count; ?>,'view')" />
+										</td>
+										<td style="width:79px;" align="center">
+											<input class="button" type="button" value="Excluir" onclick="javascript: confirma(<?php echo $vaccination->{VCN_ID_VACCINATION}; ?>, '<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_DISABLE_VACCINATION_ACTION;?>');" />
+										</td>
+									</tr>
+										
+							<?php } ?>
+									<tr id="edit<?php echo $count; ?>" style="display:none;">
+										<td>
+											<input id="idVaccination<?php echo $count; ?>" type="hidden" name="<?php echo HealthForm::idVaccination();?>" value="<?php echo $vaccination->{VCN_ID_VACCINATION}; ?>" />
+											<span class="label"><?php echo $this->controller->health->text->vaccin ?></span> 
+										</td>
+										<td class="inputMiddle">
+											<select id="idVaccine<?php echo $count; ?>" style="width:150px;">
+												<option value="0">Selecione</option>
+												<?php 
+													foreach($this->vaccines as $vaccine)
+													{
+														if($vaccine->{VAC_STATUS} && $vaccine->{VAC_STATUS} == 'e'){
+															echo "<option value='".$vaccine->{VAC_ID_VACCINE}."'";
+															
+															if($vaccine->{VAC_ID_VACCINE} == $vaccination->{VCN_ID_VACCINE})
+																echo "selected ";
+																
+															echo "title='".$vaccine->{VAC_NAME}." (" . $vaccine->description .")'>" . $vaccine->{VAC_NAME} . " (" . $vaccine->description .")";
+															
+															echo "</option>";
+														}
+													}
+												?>
+											</select>
+										</td>
+										<td>
+											<div class="label">
+												<?php echo $this->controller->health->text->date ?>
+											</div> 
+										</td>
+										<td>
+											<input id="date<?php echo $count; ?>" type="text" value="<?php echo $this->form->dateFormatForm($vaccination->{VCN_DATE});?>" style="width:70px;" maxlength="10"/>
+										</td>
+										<td>
+											<div class="label">
+												<?php echo $this->controller->health->text->lot ?>
+											</div>
+										</td>
+										<td>
+											<input id="lot<?php echo $count; ?>" type="text" value="<?php echo $vaccination->{VCN_LOT}; ?>" style="width:70px;"/>
+											<input id="status<?php echo $count; ?>" type="hidden" value="<?php echo $vaccination->{VCN_STATUS}; ?>" size="15px"/>
+										</td>
+										<td>
+											<input class="button" type="button" value="Salvar" onclick="javascript: editVaccination(<?php echo $count; ?>, '<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_EDIT_VACCINATION_ACTION;?>', 'edit');" />
+										</td>
+										<td style="width:79px;" align="center">
+											<input class="button" type="button" value="Cancelar" onclick="javascript: showOrHideEdit(<?php echo $count; ?>,'edit')" />
+										</td>
+									</tr>
+									
+							<?php endforeach; ?>
+							
+							<!-- CRIA AS VACINAÇÕES -->
+									<tr>
+										<td>
+											<div class="label">
+												<?php echo $this->controller->health->text->vaccin ?>
+											</div>
+										</td>
+										<td class="inputMiddle">
+											<select id="idVaccine" style="width:110px;">
+												<option value="0">Selecione</option>
+												<?php 
+													foreach($this->vaccines as $vaccine)
+													{
+														if($vaccine->{VAC_STATUS} && $vaccine->{VAC_STATUS} == 'e'){
+															echo "<option value='".$vaccine->{VAC_ID_VACCINE}."' title='".$vaccine->{VAC_NAME}." (" . $vaccine->description .")'>".$vaccine->{VAC_NAME} . " (" . $vaccine->description .")";
+															echo "</option>";
+														}
+													}
+												?>
+											</select>
+										</td>
+										<td>
+											<div class="label">
+												<?php echo $this->controller->health->text->date ?>
+											</div> 
+										</td>
+										<td>
+											<input id="date" type="text" value="" maxlength="10" style="width:70px;"/>
+										</td>
+										<td>
+											<div class="label">
+												<?php echo $this->controller->health->text->lot ?>
+											</div>
+										</td>
+										<td>
+											<input id="lot" type="text" value="" style="width:70px;"/>
+											<input id="status" type="hidden" value="1" size="15px"/>
+										</td>
+										<td style="text-align:center;">
+											<input class="button" style="margin: 0px;" type="button" value="Salvar" onclick="javascript: editVaccination('', '<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_EDIT_VACCINATION_ACTION;?>', 'save');" />
+										</td>
+									</tr>
+							</table>
+						</div>
+						<table width="548" cellpadding="0" cellspacing="0">
+							<tr>
+								<td colspan="2" id="showErrors">
+									<?php printErrorsByField($this->form->idVaccination(), $this->errorMessages);?>
+								</td>
+							</tr>
+						</table>
+						<div id="err">
+							<?php printErrorsByField($this->form->idVaccination(), $this->errorMessages);?>
+						</div>
+						<!-- 
+						---------------------------------------------------------------------------------------
+						Fim do bloco utilizado para salvar / editar / habilitar / desabilitar vacinações em dia 
+						---------------------------------------------------------------------------------------
+						-->
+						
+						<table width="548" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="35%">
+									<div class="label">
+										<?php echo $this->controller->health->text->agreement;?>
+									</div>
+								</td>
+								<td>
+									<div class="radioCenter">
+										<input type="radio" onClick="javascript: show('dataPlanHealth');" name="<?php echo HealthForm::checkedHealthPlan();?>" <?php if($this->form->getCheckedHealthPlan() == 1) echo "checked";?> value="1"/><?php echo $this->controller->health->text->yes;?>&nbsp;&nbsp;
+										<input type="radio" onClick="javascript: hide('dataPlanHealth');" name="<?php echo HealthForm::checkedHealthPlan();?>" <?php if($this->form->getCheckedHealthPlan() == 2) echo "checked";?> value="2"/><?php echo $this->controller->health->text->no;?>&nbsp;&nbsp;
+										<input type="radio" onClick="javascript: hide('dataPlanHealth');" name="<?php echo HealthForm::checkedHealthPlan();?>" <?php if($this->form->getCheckedHealthPlan() == 0) echo "checked";?> value="0"/><?php echo $this->controller->health->text->noinfo;?>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td><?php printErrorsByField($this->form->checkedHealthPlan(), $this->errorMessages);?></td>
+							</tr>
+						</table>
+						
+						<div id="dataPlanHealth" style="display: <?php if($this->form->getCheckedHealthPlan() == 1) 'inline'; else echo 'none';?>">
+							<table width="548" cellpadding="0" cellspacing="0">
+								<tr>
+									<td width="35%">
+										<div class="label">
+											<?php echo $this->controller->health->text->name;?>
+										</div>
+									</td>
+									<td width="65%" class="inputMiddle">
+										<select id="idHealthPlan" name="idHealthPlan" onchange="showOrHideHealthPlan();">
+											<option value="0">Selecione</option>
+											<?php 
+												foreach($this->healthPlans as $hltPlan)
+												{
+													echo "<option value='".$hltPlan->{HLP_ID_HEALTHPLAN}."'";
+													
+													if($this->form->getIdHealthPlan() > 0 ){
+														if($hltPlan->{HLP_ID_HEALTHPLAN} == $this->form->getIdHealthPlan())
+														echo "selected ";
+													}else{
+														if($hltPlan->{HLP_ID_HEALTHPLAN} == $this->healthByPerson->{HLT_ID_HEALTH_PLAN})
+														echo "selected ";
+													}
+														
+													echo "title='".$hltPlan->{HLP_NAME}."'>".$hltPlan->{HLP_NAME};
+
+													echo "</option>";
+												}
+											?>
+											<option value="outro" <?php if(($this->form->getIdHealthPlan() == 'outro') || (($this->healthByPerson->{HLT_HEALTH_PLAN}) && ($this->healthByPerson->{HLT_HEALTH_PLAN} != 'Não'))) echo "selected"; ?> >Outro</option>
+										</select>
+									</td>
+									<td>
+										<input id="otherHealthPlan" style="display:block;" type="text" name="<?php echo HealthForm::healthPlan();?>" value="<?php echo $this->escape($this->form->getHealthPlan())?><?php if($this->healthByPerson->{HLT_HEALTH_PLAN} == 'Não'){echo "";}else{echo $this->healthByPerson->{HLT_HEALTH_PLAN};} ?>" size="30px"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<?php printErrorsByField($this->form->idHealthPlan(), $this->errorMessages);?>
+										<?php printErrorsByField($this->form->healthPlan(), $this->errorMessages);?>
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+						<table width="548" cellpadding="0" cellspacing="0">
+							<?php if(count($this->healthTypes) > 0):?>
+								<tr>
+									<td width="35%">
+										<div class="label">
+											<?php echo $this->controller->health->text->situation;?>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<?php
+											foreach($this->healthTypes as $ht)
+											{	
+												$objChecked = false;
+												echo "<table width='100%' cellpadding='0' cellspacing='0'>";
+												echo "<tr>";
+												echo "<td><div class='checkCenter'>";
+												echo "<input id='htCheck_";
+												echo $ht->{FHT_ID_FRAMEWORK_HEALTH};
+												echo "' type='checkbox'";
+												echo " name='";
+												echo HealthForm::idTypeHealth();
+												echo "[]'";
+												echo " value='";
+												echo $ht->{FHT_ID_FRAMEWORK_HEALTH};
+												echo "'";
+												if(in_array($ht->{FHT_ID_FRAMEWORK_HEALTH}, $collIdFramework))
+												{	
+													echo "checked";
+													$objChecked = true;
+												}
+												echo ' onchange="disabledField(';
+												echo "'htCheck_".$ht->{FHT_ID_FRAMEWORK_HEALTH}."','".HealthForm::descrTypeHealth()."_".$ht->{FHT_ID_FRAMEWORK_HEALTH}."'";
+												echo ');" />';
+												echo '<span>&nbsp;&nbsp;'.$ht->{FHT_FRAMEWORK_HEALTH}.'</span>';
+												echo "</div></td>";
+												echo "</tr>";
+												echo "</table>";
+												echo "<div id='htDescription_";
+												echo $ht->{FHT_ID_FRAMEWORK_HEALTH};
+												echo "' style='display: inline'>";
+												echo "<table width='100%' cellpadding='0' cellspacing='0'>";
+												echo "<tr>";
+												echo "<td>";
+												echo "<i>";
+												echo $this->controller->health->text->status;
+												echo "&nbsp;";
+												echo $ht->{FHT_FRAMEWORK_HEALTH};
+												echo ": </i>";
+												echo "<textarea class='small'";
+												if(!$objChecked)
+													echo  " disabled='disabled'";
+												echo "name='";
+												echo HealthForm::descrTypeHealth()."_".$ht->{FHT_ID_FRAMEWORK_HEALTH};
+												echo "' id='";
+												echo HealthForm::descrTypeHealth()."_".$ht->{FHT_ID_FRAMEWORK_HEALTH};
+												echo "' value='";
+												echo "'>";
+												if($objChecked) 
+												{	
+													foreach($frameworkHealth as $fwh)
+													{	
+														if($fwh[FHL_ID_FRAMEWORK_HEALTH] == $ht->{FHT_ID_FRAMEWORK_HEALTH}) 
+														{
+															echo $fwh[FHL_FRAMEWORK_HEALTH_DESCRIPTION];
+															break;
+														}			
+													}					
+													$objChecked = false;					
+												}
+												echo "</textarea>";
+												echo "</td>";
+												echo "</tr>";
+												echo "</table>";
+												echo "</div>";
+											}
+										?>
+									</td>
+								</tr>
+							<?php endif;?>
+							<tr>
+								<td>&nbsp;</td>
+								<td colspan="2"><?php printErrorsByField($this->form->idTypeHealth(), $this->errorMessages);?></td>
+							</tr>
+							<tr>
+								<td colspan="3"><?php printErrorsByField($this->form->descrTypeHealth(), $this->errorMessages);?></td>
+							</tr>
+						</table>
+						<table width="548" cellpadding="0" cellspacing="0">
+							<tr>
+								<td>
+									<?php if($this->readOnly == FALSE):?>
+										<input class="button" type="submit" value="<?php echo $this->labels->button->save;?>">
+									<?php endif; ?>
+									<input class="button" style="margin-left:5px;" style="float: none;" type="button" value="<?php echo $this->labels->button->back;?>" onClick="document.location='<?php echo $this->baseUrl;?><?php echo HEALTH_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>/<?php echo $this->form->personId();?>/<?php echo $this->form->getPersonId();?>'">
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</form>
+			<script>showOrHideHealthPlan();</script>
+		</table>
+	</div>

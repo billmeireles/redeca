@@ -1,0 +1,7 @@
+<?php 
+	header('Content-Type: text/html; charset=iso-8859-1');
+
+	require_once "scripts/global.phtml";
+	$error = printErrorsByField($this->form->idVaccination(), $this->errorMessages);
+	if (!$error) echo "1";
+?>

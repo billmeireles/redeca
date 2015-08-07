@@ -1,0 +1,50 @@
+
+<?php echo $this->render('header/header.phtml');?>	
+									  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div >
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+
+	<!-- ============================================================================================== -->
+	<!-- É necessário informar o nome class da tabela em questão para carregar a cor background correta -->
+	<!-- Opções: 
+				#identification
+				#person
+				#education
+				#health
+				#income
+				#familyRelationship
+				#residence
+				#attendance
+				#activity	-->
+	<!-- ============================================================================================== -->
+	<table class="entity" width="98%">
+	</table>
+</div>																  
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+
+<?php echo $this->render('footer/footer.phtml');?>
+<!-- ==================================================== -->
+<!-- formulário que visualiza as informações para edição =-->
+<!-- este formulário é visualizado a partir do view.phtml -->
+<!-- ==================================================== -->
+<div id="boxes" >
+<div id="dialog2" class="window" style="top: 314.5px; left: 426.5px; ">
+<div class="inputBox" style="height: 356px;">
+<div align="right" style="margin-right: -9px;">
+				<a title="Fechar" class="close" href="#"><img src="<?php echo $this->baseUrl;?>/public/images/close.png"></a>
+				</div>
+			<center style="margin-top: 70px;"><b><font color="green" size="8">
+			Enviado com sucesso.
+			</font></b></center>
+			
+			<center style="margin-top: 10px;"><input class="close" type="submit" value="Fechar janela" style="width: 100px; margin-left: 225px;"></center>
+</div>
+</div>
+</div>
+<div id="mask"></div>	

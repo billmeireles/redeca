@@ -1,0 +1,35 @@
+<?php
+	header("Content-type:text/octect-stream");
+    header("Content-Disposition:attachment;filename=result.csv");
+?> 
+<?php 
+	$total = (int) 0;
+?>
+Filtro Selecionado: Benefício;;;
+<?php foreach ($this->view as $entity): ?>
+	;;;
+	Entidade: <?php echo $entity->getName() ?>;;;
+	<?php $top = true ?>
+	<?php foreach ($entity->getCategorys() as $category): ?>
+		<?php if($category->getTotal() > 0) { ?>
+			<?php if((count($category->getPersons()) > 0) && ($top === true)) { ?>
+				<?php $top = false; ?>
+				;;;
+				Pessoa;Sexo;Nascimento;
+			<?php } ?>
+			<?php echo $category->getName() ?>;;;
+			<?php foreach ($category->getPersons() as $person): ?>
+				<?php echo $person->getName() ?> ; <?php echo strtoupper($person->getSex()); ?> ; <?php $date = new DateTime($person->getBirthDate()); echo $date->format('d/m/Y'); ?> ;
+			<?php endforeach ?>
+			Subtotal do benefício: <?php echo $category->getTotal() ?>;;;
+			;;;
+			<?php $total = $total + $category->getTotal() ?>
+		<?php } ?>
+	<?php endforeach ?>
+	<?php if($total < 1){?>
+		Nenhum registro encontrado.;;;
+	<?php }else{ ?>
+		Total da entidade: <?php echo $total ?>;;;
+		<?php $total = 0; ?>
+		<?php } ?>
+<?php endforeach ?>

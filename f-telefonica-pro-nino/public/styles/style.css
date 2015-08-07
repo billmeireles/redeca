@@ -1,0 +1,958 @@
+@charset "utf-8";
+
+* { margin: 0; padding: 0; }
+
+html { background: url(../images/background.gif) top left repeat #eeeeee; }
+body { font-family: Arial, Helvetica, Verdana, sans-serif; font-size: 12px; }
+img { border:0 }
+
+/* 
+############################### 
+########## BOX LOGIN ########## 
+############################### 
+*/
+
+/* BOX LOGIN [FUNDO CINZA] */
+.boxLogin {
+	position: absolute;
+	background-color: #DDDDDD;
+	border: solid 1px #D6D6D6;
+	width: 320px;
+	height: 150px;
+	top: 50%;
+	left: 50%;
+	margin-top: -75px;
+	margin-left: -160px;
+}
+
+/* BOX LOGIN [FUNDO BRANCO] */
+.boxWhite {
+	background-color: #FFFFFF;
+	margin: 10px;
+	border: #cccccc 1px solid;
+	height: 130px;
+}
+
+/* POSICIONAMENTO DIV LOGO [ESQUERDA] */
+.logoLogin {
+	background: url(../images/logo.jpg) no-repeat center center transparent;
+	float: left;
+	width: 105px;
+	height: 128px;
+	text-align: center;
+}
+
+/* BOX COM FORM/INPUTS [DIREITA] */
+.fieldsLogin {
+	margin: 18px 15px 0 0;
+	width: 177px;
+	float: right;
+}
+
+/* ESTILOS INPUTS */
+.fieldsLogin input {
+	width: 165px;
+	height: 24px;
+	line-height: 24px;
+	padding: 0 5px;
+	border: #CCCCCC 1px solid;
+	color: #CCCCCC;
+	font-style: italic;
+	margin-bottom: 7px;
+	float: right;
+}
+
+/* ESTILO SENHA INPUT[TYPE=PASSWORD] */
+.fieldsLogin input#pass {
+	color: #000000;
+	font-style: normal;
+}
+
+/* ESTILO BOTÃO LOGIN */
+.fieldsLogin input#btEnter {
+	background: url(../images/enterButtom.png) no-repeat left -1px transparent;
+	border: none;
+	height: 27px;
+	width: 77px;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+/* MOUSEOVER DO BOTÃO */
+.fieldsLogin input#btEnter:hover { text-decoration: underline }
+
+/* 
+############################### 
+########### CONTENT ########### 
+############################### 
+*/
+
+/* Div contendo TUDO */
+.content {
+	width: 960px;
+	margin: 0 auto;
+}
+
+/* Div com todo o HEADER */ 
+.content .header {
+	height: 120px;
+	background: url(../images/separator.png) repeat-x left bottom transparent;
+}
+
+/* Div com a Logo */
+.content .header .logo {
+	float: left;
+	margin: 7px 10px;
+}
+
+/* Div com o Título da Página */
+.content .header .titleHead {
+	float: left;
+	margin: 40px 0 0 125px;
+	position: absolute;
+}
+
+/* Estilo do Título da Página */
+.content .header .titleHead span {
+	font-size: 28px;
+	color: #AAAAAA;
+	font-weight: bold;
+}
+
+/* Box de LogOut / Sair */
+.content .header .logout {
+	float: right;
+	margin-right: 10px;
+}
+.content .header .logout div{
+	float: left;
+}
+
+/* Estilo de cantos arredondaos */
+.content .header .logout .bgLeft,
+.content .header .logout .bgRight {
+	width: 12px;
+	height: 33px;
+	background: url(../images/logoutR.png) left top no-repeat transparent;
+}
+.content .header .logout .bgLeft {
+	background: url(../images/logoutL.png) right top no-repeat transparent;
+}
+
+/* Estilo da div com o Nome do Usuário */
+.content .header .logout .textName_logoutIcon {
+	background: url(../images/logoutC.png) center top repeat-x transparent;
+	height: 33px;
+}
+.content .header .logout .textName_logoutIcon span {
+	line-height: 32px;
+	padding-right: 5px;
+}
+
+/* Estilo do Ícone SAIR */
+.content .header .logout .textName_logoutIcon a,
+.content .header .logout .textName_logoutIcon a img {
+	height: 17px;
+	width: 16px;
+	vertical-align: text-bottom;
+}
+
+/* 
+############################### 
+##### ESTILO DE MENU ROOT #####
+############################### 
+*/
+.content #menu {
+	width: 160px;
+	float: left;
+}
+.content #menu ul {
+	margin-top: 1px;
+	width: 160px;
+}
+.content #menu ul li {
+	background-color: #FFFFFF;
+	margin-top: 2px;
+	list-style: none;
+	width: 120px;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 10px;
+}
+.content #menu ul li a {
+	float: left;
+	width: 120px;
+	height: 100%;
+	text-decoration: none;
+	margin-left: -10px;
+	padding: 0 10px;
+	color: #000000;
+}
+.content #menu ul li a:HOVER {
+	text-decoration: underline;
+}
+
+/* Estilo do ítem do menú ativo */
+.content #menu ul li.active {
+	background-color: #F5F5F5;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 20px;
+}
+.content #menu ul li.active a{
+	background: url(../images/activeMenu.gif) right center no-repeat transparent;
+	font-weight: bold;
+	color: #AAAAAA;
+	margin-left: -20px;
+	padding: 0 20px;
+}
+
+/* 
+#################################### 
+##### ESTILO DO CONTEÚDO/GRIDS #####
+#################################### 
+*/
+.content .gridContent {
+	float: left;
+	width: 770px;
+	margin: 15px 0 0 15px;
+}
+.content .home{
+	float: none;
+	width: 940px;
+	margin: 10px 10px 0 10px;
+}
+
+/* Estilo Tabela */
+.content .gridContent table.gridEdit {
+	width: 100%;
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+}
+
+/* Estilo do Header da Tabela */
+.content .gridContent table.gridEdit thead {
+	background-color: #EEEEEE;
+}
+.content .gridContent table.gridEdit thead tr th {
+	height: 40px;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	padding-top: 3px;
+}
+.content .gridContent table.gridEdit thead tr th.ord {
+	background: url(../images/order.png) no-repeat center 0 #EEEEEE;
+	cursor:pointer;
+}
+.content .gridContent table.gridEdit thead tr th.ordDown {
+	background-position: center -45px;
+	cursor:pointer;
+}
+.content .gridContent table.gridEdit thead tr th.ordUp {
+	background-position: center -90px;
+	cursor:pointer;
+}
+.content .gridContent table.gridEdit thead tr th a{
+	color: #000000;
+	text-decoration: none;
+}
+.content .gridContent table.gridEdit thead tr th a:hover{
+	text-decoration: underline;
+}
+
+/* Estilo do Corpo da Tabela */
+.content .gridContent table.gridEdit tbody {
+	background-color: #FFFFFF;
+}
+.content .gridContent table.gridEdit tbody tr td {
+	height: 30px;
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	padding-left: 5px;
+}
+.content .gridContent table.gridList tbody tr td:first-child {
+	text-align: center;
+	padding-left: 0;
+}
+.content .gridContent table.gridList tbody tr.stepsClose td {
+	border: 0;
+}
+.content .gridContent table.gridList tbody tr.stepsOpen td {
+	border-right: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+}
+.content .gridContent table.gridEdit tbody tr td.icons {
+	text-align: center;
+	padding: 0;
+}
+
+/* Estilo da Paginação */
+.content .gridContent #pagination {
+	text-align: right;
+	margin: 7px 20px 0 0;
+	float: right;
+}
+.content .gridContent #pagination li{
+	text-align: center;
+	list-style: none;
+	float: left;
+	padding: 9px 5px;
+}
+.content .gridContent #pagination li a{
+	font-size: 11px;
+	color: #666666;
+	text-decoration: none;
+}
+.content .gridContent #pagination li a:HOVER{
+	text-decoration: underline;
+}
+
+/* Estilo da Página Ativa */
+.content .gridContent #pagination li.active{
+	background: url(../images/pageActive.png) no-repeat center center transparent;
+	font-size: 14px;
+	color: #000000;
+	font-weight: bold;
+	padding: 8px;
+}
+
+/* Grid Plano Financeiro */
+.content .gridContent table.checkBoxes {
+	margin-top: 10px;
+}
+.content .gridContent table.checkBoxes thead tr th {
+	text-align: left;
+	font-size: 14px;
+	padding-left: 20px;
+}
+.content .gridContent table.checkBoxes tbody tr td {
+	height: 25px;
+}
+.content .gridContent table.checkBoxes tbody tr td:first-child {
+	width: 40px;
+	border-right: 0;
+}
+.content .gridContent table.checkBoxes input[type=checkbox]{
+	margin-left: 16px;
+	cursor: pointer;
+}
+.content .gridContent table.checkBoxes label{
+	vertical-align: text-bottom;
+	cursor: pointer;
+}
+.content .gridContent table.extraMargin {
+	margin-top: 70px;
+}
+
+/* Box Cinza - Plano Financeiro / Editar Usuários */
+.content .plansBox,
+.content .dataUser, 
+.content .stepsAuth {
+	background-color: #EEEEEE;
+	border: 1px solid #CCCCCC;
+	margin-top: 9px;
+	padding: 20px;
+}
+.content .dataUser {
+	padding: 15px 20px;
+}
+.content .stepsAuth {
+	background-color: #FFFFFF;
+}
+.content .stepsAuth table.checkBoxesStep {
+	margin-top: 10px;
+}
+.content .stepsAuth table.checkBoxesStep tr td input[type=checkbox]{
+	cursor: pointer;
+}
+.content .stepsAuth table.checkBoxesStep tr td label {
+	margin-left: 5px;
+	margin-right: 40px;
+	cursor: pointer;
+}
+.content p.titleBox{
+	font-weight: bold;
+	font-size: 14px;
+}
+.content .plansBox select#plans {
+	width: 380px;
+	margin-top: 10px;
+}
+.content .dataUser p{
+	line-height: 20px;
+}
+.content .dataUser p b{
+	padding-left: 10px;
+}
+
+/* 
+####################################### 
+##### ESTILO DO CONTEÚDO/CADASTRO #####
+####################################### 
+*/
+.content .regContent {
+	width: 640px;
+	margin: 20px auto;
+}
+
+/* Botão voltar */
+.content .regContent div#back {
+	margin: 0;
+}
+
+/* Box Cinza */
+.content .regContent .boxGray {
+	margin-top: 10px;
+	background-color: #EEEEEE;
+	border: 1px solid #CCCCCC;
+}
+
+/* Linha divisória dos boxes */
+.content .regContent .boxGray .divisory {
+	height: 2px;
+	background: url(../images/separator.png) repeat-x left top transparent;
+}
+
+/* Classe padrão para os boxes internos */
+.content .regContent .boxGray .boxesForm {
+	margin: 20px;
+}
+
+/* Estilo da combobox Empresa */
+.content .regContent .boxGray .boxesForm #company {
+	margin-left: 10px;
+	width: 530px;
+}
+
+/* Estilo do Box dos Documentos (Centro de Custo/Plano Financeiro/Tipo de Documento) */
+.content .regContent .boxGray .boxesForm .boxesDocs {
+	width: 190px;
+	float: left;
+	margin-left: 13px;
+}
+.content .regContent .boxGray .boxesForm .boxesDocs:first-child {
+	margin: 0;
+}
+.content .regContent .boxGray .boxesForm .boxesDocs select {
+	width: 190px;
+	margin-top: 2px;
+}
+
+/* Box Esquerdo dos dados de pagamento (Fornecedor/CNPJ/Tipo de Pagamento) */
+.content .regContent .boxGray .boxesForm .paymentLeft {
+	width: 350px;
+	float: left;
+}
+.content .regContent .boxGray .boxesForm .paymentLeft div {
+	margin-bottom: 10px;
+}
+.content .regContent .boxGray .boxesForm .paymentLeft div select {
+	width: 270px;
+	margin-left: 10px;
+}
+.content .regContent .boxGray .boxesForm .paymentLeft div select#docCompany {
+	margin-left: 14px;
+}
+
+/* Estilo do Box com o Endereço do fornecedor */
+.content .regContent .boxGray .boxesForm .paymentLeft div#address {
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+	padding: 5px 10px;
+	color: #006600;
+	line-height: 14px;
+	font-style: italic;
+}
+.content .regContent .boxGray .boxesForm .paymentLeft div select#payType {
+	width: 226px;
+}
+
+/* Box Direito dos dados de pagamento (Vencimento/Valor/Desconto/Juros/Total) */
+.content .regContent .boxGray .boxesForm .paymentRight {
+	width: 200px;
+	padding-left: 25px;
+	background: urL(../images/separator-Vert.gif) repeat-y left top transparent;
+	float: right;
+}
+.content .regContent .boxGray .boxesForm .paymentRight div {
+	margin-bottom: 10px;
+	line-height: 20px;
+	height: 20px;
+}
+.content .regContent .boxGray .boxesForm .paymentRight div label{
+	float: left;
+}
+.content .regContent .boxGray .boxesForm .paymentRight div input#expirationDate {
+	width: 67px;
+	float: right;
+}
+.content .regContent .boxGray .boxesForm .paymentRight div input#value,
+.content .regContent .boxGray .boxesForm .paymentRight div input#discount,
+.content .regContent .boxGray .boxesForm .paymentRight div input#interest {
+	width: 130px;
+	float: right;
+}
+.content .regContent .boxGray .boxesForm .paymentRight .total {
+	margin: 15px 0 0 0;
+	height: 25px;
+}
+.content .regContent .boxGray .boxesForm .paymentRight div span#total {
+	font-size: 13px;
+	font-weight: bold;
+	color: #006600;
+	margin-left: 30px;
+}
+
+/* Estilo da combobox da Forma de Pagamento */
+.content .regContent .boxGray  .boxesForm select#payForm {
+	width: 100px;
+	margin-left: 10px;
+}
+
+/* Estilo do Box com os campos para Depósito */
+.content .regContent .boxGray  #deposito {
+	line-height: 30px;
+}
+.content .regContent .boxGray  #deposito input#bank {
+	width: 250px;
+	margin-left: 5px;
+}
+.content .regContent .boxGray  #deposito input#agency,
+.content .regContent .boxGray  #deposito input#account {
+	width: 80px;
+	margin-left: 5px;
+}
+.content .regContent .boxGray  #deposito input#docCompanyPay {
+	width: 140px;
+	margin-left: 5px;
+}
+.content .regContent .boxGray  #deposito input#favored {
+	width: 290px;
+	margin-left: 5px;
+}
+.content .regContent .boxGray  #deposito label {
+	margin-left: 10px;
+}
+.content .regContent .boxGray  #deposito label.nullMargin {
+	margin-left: 0;
+}
+
+/* Estilo do Box com os campos para Outros Pagamentos */
+.content .regContent .boxGray  #outros {
+	color: #FF0000;
+	font-style: italic;
+	margin: -10px 20px;
+}
+
+/* Estilo do TextArea OBSERVAÇÕES */
+.content .regContent .boxGray  .boxesForm textarea {
+	width: 580px;
+	height: 100px;
+	padding: 10px;
+	margin-top: 5px;
+}
+
+/* Estilo do checkbox para acompanhamento por e-mail */
+.content .regContent table.subscribeTable {
+	margin-top: 12px;
+}
+
+
+
+/* 
+##########################################################
+##### ESTILO DO CONTEÚDO/VISUALIZAÇÂO DE SOLICITAÇÃO #####
+##########################################################
+*/
+
+/* Div  que envolve os botões com float */
+.content .buttons {
+	height: 30px;
+}
+
+/* Div que envolve etapas na Visualização de solicitação */
+.content .regContent .viewSolicitation {
+	padding: 5px 0 5px 20px;
+	height: 80px;
+}
+.content .regContent .viewSolicitation div{
+	width: 150px;
+	padding: 15px 0 15px 5px;
+	float: left;
+	border-left: 1px solid #CCCCCC;
+}
+.content .regContent .viewSolicitation div span{
+	color: #FF9900;
+}
+.content .regContent .viewSolicitation div span.true{
+	color: #009900;
+}
+.content .regContent .viewSolicitation div span.false{
+	color: #FF0000;
+}
+
+.content .regContent .viewSolicitation div.step1 {
+	padding-left: 0;
+	border: 0;
+}
+.content .regContent .viewSolicitation p.nameStep {
+	line-height: 18px;
+}
+
+/* Box Branco */
+.content .regContent .boxWhite {
+	margin: 10px 0 0 0;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+	height: auto;
+	padding-top: 5px;
+}
+
+/* Linha divisória dos boxes */
+.content .regContent .boxWhite .divisory {
+	height: 2px;
+	background: url(../images/separator.png) repeat-x left top transparent;
+}
+
+/* Classe padrão para os boxes internos */
+.content .regContent .boxWhite .boxesForm {
+	margin: 15px 20px;
+}
+.content .regContent .boxWhite .boxesForm p {
+	line-height: 16px;
+}
+.content .regContent .boxWhite .boxesForm p span {
+	font-weight: bold;
+	margin-left: 10px;
+}
+.content .regContent .boxWhite .boxesForm p.values {
+	margin-top: 5px;
+	word-wrap: break-word;
+}
+.content .regContent .boxWhite .boxesForm p.values label {
+	margin-left: 20px;
+}
+.content .regContent .boxWhite .boxesForm p.values label:first-child {
+	margin-left: 0;
+}
+
+
+/* 
+#################################################
+##### ESTILO DA PÁGINA INICIAL DOS USUÁRIOS #####
+#################################################
+*/
+
+/* Estilo do Box Filtros */
+.content .filters {
+	margin: 20px 10px 0 10px;
+	height: 37px;
+}
+.content .filters div {
+	float: left;
+}
+.content .filters .bgLeft {
+	height: 37px;
+	width: 10px;
+	background: url(../images/filterLeft.png) no-repeat left top;
+}
+.content .filters .filterContents {
+	height: 35px;
+	background: url(../images/filterDiv.gif) no-repeat right center #EEEEEE;
+	border-top: 1px #CCCCCC solid;
+	border-bottom: 1px #CCCCCC solid;
+	padding: 0 15px;
+}
+.content .filters .first {
+	padding-left: 5px;
+}
+.content .filters .last{
+	background: none #EEEEEE;
+}
+.content .filters .filterContents input,
+.content .filters .filterContents select {
+	margin-top: 8px;
+}
+.content .filters .filterContents input#id {
+	width: 160px;
+}
+.content .filters .date input {
+	width: 70px
+}
+.content .filters .filterContents select {
+	width: 130px;
+}
+.content .filters .date label {
+	color: #999999;
+}
+.content .filters .date label:first-child {
+	color: #000000;
+}
+
+/* Estilo das DIVs que contém os botões (Aprovar/Recusar/Importar/Cadastrar)*/
+.content .buttonsHome {
+	height: 38px;
+	margin: 18px 10px 0 10px;
+}
+.content .bottom{
+	margin: 0;
+}
+.content .buttonsHome div {
+	margin-right: 9px;
+}
+
+/* Estilos da linha que contem as ETAPAS */
+.content .gridContent table.gridList tbody tr.steps,
+.content .gridContent table.gridList tbody tr.steps td{
+	display: none;
+	height: 0;
+}
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps{
+	display: none;
+	background: url(../images/bgSteps.jpg) repeat-x transparent;
+	width: 100%;
+	height: 60px;
+}
+
+/* Estilo das Etapas */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div{
+	float: left;
+	width: 235px;
+	height: 60px;
+}
+/* Cor do texto quando inativa a etapa */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps p{
+	color: #CCCCCC;
+}
+
+/* Etapa 1 e 4 com menos 1px para não quebrar */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.step1,
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.step4 {
+	width: 234px;
+}
+
+/* Estilos das Etapas: Aprovada, Recusada/Cancelada e Pendente */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.approved {
+	background: url(../images/bgStepApproved.jpg) repeat-x transparent;
+}
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.refused {
+	background: url(../images/bgStepRefused.jpg) repeat-x transparent;
+}
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.pending {
+	background: url(../images/bgStepPending.jpg) repeat-x transparent;
+}
+
+/* Setando cor Preta nos textos das Etapas ativas */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.approved div p,
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.pending div p,
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.refused div p{
+	color: #000000;
+}
+
+/* DIV que contém os Parágrafos */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div{
+	width:100%;
+	height: 60px;
+}
+
+/* Estilo das Setas das Etapas anteriores */
+/** Etapa anterior Desativada **/
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div.lastDisabled {
+	background: url(../images/bgLastDisabled.png) no-repeat left top;
+}
+/** Etapa anterior Aprovada **/
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div.lastApproved {
+	background: url(../images/bgLastApproved.png) no-repeat left top;
+}
+/** Etapa anterior Recusada/Cancelada **/
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div.lastRefused {
+	background: url(../images/bgLastRefused.png) no-repeat left top;
+}
+/** Etapa anterior Pendente **/
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div.lastPending {
+	background: url(../images/bgLastPending.png) no-repeat left top;
+}
+
+/* Estilo dos textos/parágrafos */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div p{
+	text-align: left;
+	margin-left: 18px;
+}
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div p.step{
+	font-size: 16px;
+	font-weight: bold;
+	margin: 6px 0 0 18px;
+}
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div.step1 div p{
+	margin-left: 6px;
+}
+.content .gridContent table.gridList tbody tr td.viewSteps a {
+	color: #006600;
+	text-decoration: none;
+	font-weight: bold;
+}
+.content .gridContent table.gridList tbody tr td.viewSteps a:HOVER {
+	text-decoration: underline;
+}
+
+/* Icone Cancelar */
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div a {
+	margin-left: 5px;
+}
+.content .gridContent table.gridList tbody tr.steps td div.fullSteps div div a img {
+	padding-top: 2px;
+	vertical-align: text-top;
+}
+
+
+/* 
+#############################
+##### ESTILO DOS BOTÕES #####
+#############################
+*/
+
+/* Botão Voltar */
+.content div#back {
+	margin-top: 10px;
+	background: url(../images/btBack.png) no-repeat left top;
+	width: 93px;
+	line-height: 29px;
+	font-weight: bold;
+}
+.content div#back a {
+	color: #666666;
+	text-decoration: none;
+	padding: 5px 20px 5px 39px;
+}
+.content div#back a:HOVER {
+	text-decoration: underline;
+}
+.content .btLeft {
+	float: left;
+}
+.content .btRight {
+	float: right;
+	margin-left: 8px;
+}
+
+/* Botão Cadastrar Solicitação */
+.content .regContent table.subscribeTable input[type=submit]{
+	border: 0;
+	background: url(../images/btSubscribe.png) no-repeat;
+	width: 93px;
+	height: 27px;
+	cursor: pointer;
+	font-weight: bold;
+	color: #777000;
+	font-size: 12px;
+}
+.content .regContent table.subscribeTable input[type=submit]:HOVER{
+	text-decoration: underline;
+}
+
+/* Botão Cancelar */
+.content div#cancel {
+	margin-top: 10px;
+	background: url(../images/btCancel.png) no-repeat left top;
+	width: 97px;
+	line-height: 29px;
+	font-weight: bold;
+}
+.content div#cancel a {
+	color: #770000;
+	text-decoration: none;
+	padding: 5px 15px 5px 30px;
+}
+.content div#cancel a:HOVER {
+	text-decoration: underline;
+}
+
+/* Botão Aprovar */
+.content div#approve {
+	margin-top: 10px;
+	background: url(../images/btApprove.png) no-repeat left top;
+	width: 97px;
+	line-height: 27px;
+	font-weight: bold;
+}
+.content div#approve a {
+	color: #006600;
+	text-decoration: none;
+	padding: 5px 15px 5px 34px;
+}
+.content div#approve a:HOVER {
+	text-decoration: underline;
+}
+
+/* Botão Recusar */
+.content div#refuse {
+	margin-top: 10px;
+	background: url(../images/btCancel.png) no-repeat left top;
+	width: 97px;
+	line-height: 29px;
+	font-weight: bold;
+}
+.content div#refuse a {
+	color: #770000;
+	text-decoration: none;
+	padding: 5px 15px 5px 33px;
+}
+.content div#refuse a:HOVER {
+	text-decoration: underline;
+}
+
+/* Botão Importar */
+.content div#import {
+	margin-top: 10px;
+	background: url(../images/btImport.png) no-repeat left top;
+	width: 97px;
+	line-height: 27px;
+	font-weight: bold;
+}
+.content div#import a {
+	color: #006600;
+	text-decoration: none;
+	padding: 5px 15px 5px 33px;
+}
+.content div#import a:HOVER {
+	text-decoration: underline;
+}
+
+/* Botão Imprimir */
+.content a#print {
+	float: right;
+	margin-top: 10px;
+}
+
+/* Botão Cadastrar nova solicitação */
+.content div#new {
+	margin-top: 10px;
+	background: url(../images/btSubscribeNew.png) no-repeat left top;
+	width: 222px;
+	line-height: 27px;
+	font-weight: bold;
+}
+.content div#new a {
+	color: #777000;
+	text-decoration: none;
+	padding: 5px 26px 5px 41px;
+}
+.content div#new a:HOVER {
+	text-decoration: underline;
+}
+
+/* Botão Filtrar */
+.content div#filter input {
+	border: 0;
+	background: url(../images/btFilter.png) no-repeat left top;
+	width: 82px;
+	height: 37px;
+	cursor: pointer;
+	font-weight: bold;
+	color: #FFFFFF;
+	font-size: 14px;
+}
+.content div#filter input:HOVER {
+	text-decoration: underline;
+}

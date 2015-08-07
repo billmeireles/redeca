@@ -1,0 +1,75 @@
+<?php echo $this->render('header/header.phtml');?>	
+</head>
+
+<body>
+
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+
+	<!-- ============================================================================================== -->
+	<!-- É necessário informar o nome class da tabela em questão para carregar a cor background correta -->
+	<!-- Opções: 
+				#identification
+				#person
+				#education
+				#health
+				#income
+				#familyRelationship
+				#residence
+				#attendance
+				#activity	-->
+	<!-- ============================================================================================== -->
+	
+	<table width="570" cellpadding="0" cellspacing="0">
+		<?php if($this->isAdm){ ?>
+		
+		<tr height="35">
+			<td colspan="3" >
+				<h1 class="title"><?php echo $this->controller->entity->admin->networkentity;?></h1>
+			</td>
+		</tr>
+		
+		<tr>
+			<td align="right" colspan="3">
+				<?php echo $this->render('navigation/navigationNetworkEntity.phtml');?>
+				<div class="menuEdit">
+					<div class="buttonGreen edit">
+						<a href="#" onclick="actionName('<?php echo $this->baseUrl . ENTITY_CONTROLLER. '/'. DEFAULT_VIEW_ACTION;?>',document.forms['enable_disable_entity'] );document.forms['enable_disable_entity'].submit();"><?php echo $this->controller->entity->admin->change;?></a>
+					</div>
+					<div class="buttonGreen activate">
+						<a href="#" onclick="actionName('<?php echo $this->baseUrl . ENTITY_CONTROLLER. '/'. DEFAULT_ENABLE_ACTION;?>',document.forms['enable_disable_entity'] );document.forms['enable_disable_entity'].submit();"><?php echo $this->controller->entity->admin->activate;?></a>
+					</div>
+					<div class="buttonGreen deactivate">
+						<a href="#" onClick="actionName('<?php echo $this->baseUrl . ENTITY_CONTROLLER. '/'. DEFAULT_DISABLE_ACTION;?>',document.forms['enable_disable_entity'] );document.forms['enable_disable_entity'].submit();"><?php echo $this->controller->entity->admin->disable;?></a>
+					</div>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<table cellpadding="0" cellspacing="0">
+		<?php } ?>
+		<?php if($this->isAdm): ?>
+		<tr>
+			<td>	
+			<?php echo $this->render('entity/_adm_view.phtml');?>
+			</td>
+		</tr>
+		<?php else: ?>
+			<tr>
+				<td>
+				<?php echo $this->render('entity/_entity_view.phtml');?>
+				</td>
+			</tr>
+		<?php endif; ?>
+	</table>
+</div>		
+
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+
+<?php echo $this->render('footer/footer.phtml');?>

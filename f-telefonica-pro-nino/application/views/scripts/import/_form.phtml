@@ -1,0 +1,47 @@
+<?php if($this->errorMessages[ImportForm::folder().'1']):?>
+	<?php printErrorsByField(ImportForm::folder().'1', $this->errorMessages);?>
+<?php else:?>
+
+<h1 class="title" style="margin-top: 33px;"><?php echo $this->controller->import->title->index;?></h1>
+	
+<div class="inputBox">
+
+	<form id="importFrm" action="<?php echo $this->baseUrl . IMPORT_CONTROLLER.'/'.DEFAULT_INDEX_ACTION;?>" method="post">
+
+		<table width="548" cellpadding="0" cellspacing="0" >
+			<tr>
+				<td width="15%" class="label" style="vertical-align: top !important;">
+					<?php echo $this->controller->import->text->import;?>:
+				</td>
+				<td>
+					<div class="radioCenter">
+						<input type="radio" name="<?php echo $this->form->radioButton()?>" value="<?php echo ImportForm::ZIPCODE_DIV_KEY; ?>" 
+							<?php if($this->form->getRadioButton()== ImportForm::ZIPCODE_DIV_KEY) echo 'checked'; ?> onclick="this.form.submit();" /> <?php echo $this->controller->import->text->zipcode;?><br>
+						<input type="radio" name="<?php echo $this->form->radioButton()?>" value="<?php echo ImportForm::SINGLEREGISTER_DIV_KEY; ?>" 
+							<?php if($this->form->getRadioButton()== ImportForm::SINGLEREGISTER_DIV_KEY) echo 'checked'; ?> onclick="this.form.submit();" /> <?php echo $this->controller->import->text->singleRegister;?><br>
+						<input type="radio" name="<?php echo $this->form->radioButton()?>" value="<?php echo ImportForm::SCHOOL_DIV_KEY; ?>"
+							<?php if($this->form->getRadioButton()== ImportForm::SCHOOL_DIV_KEY) echo 'checked'; ?> onclick="this.form.submit();" /> <?php echo $this->controller->import->text->school;?>
+						<input type="hidden" name="<?php echo $this->form->schoolSuccess();?>" value="<?php echo $this->form->getSchoolSuccess();?>"/>
+					</div>
+				</td>
+			</tr>
+		</table>
+		
+	</form>
+
+<?php 
+if($this->form->getRadioButton() == ImportForm::ZIPCODE_DIV_KEY)
+	echo $this->render('import/_zipcode.phtml');
+
+if($this->form->getRadioButton()== ImportForm::SINGLEREGISTER_DIV_KEY)
+	echo $this->render('import/_singleregister.phtml');
+
+if($this->form->getRadioButton()== ImportForm::SCHOOL_DIV_KEY)
+	if($this->processSchool === true || $this->form->getSchoolSuccess() == DEFAULT_SUCCESS_ACTION)
+		echo $this->render('import/_school-success.phtml');
+	else
+		echo $this->render('import/_school.phtml');
+?>
+
+</div>
+<?php endif;?>

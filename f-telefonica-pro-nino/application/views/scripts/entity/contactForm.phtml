@@ -1,0 +1,75 @@
+<!-- ==================================================== -->
+<!-- formulário que visualiza as informações para edição =-->
+<!-- este formulário é visualizado a partir do view.phtml -->
+<!-- ==================================================== -->
+<div id="boxes" >
+<div id="dialog2" class="window" style="top: 314.5px; left: 426.5px; ">
+
+<div class="inputBox">
+<br />
+<b><font face="arial">Olá,<br />
+			A Fundação Telefônica oferece a você suporte gratuito para o Redeca.<br />
+			Solicitamos que preencha as informações abaixo e clique em enviar.<br/ >
+			Atenciosamente.<br />
+			Equipe Redeca.
+			</font></b>
+<form id="sendform" action="<?php echo $this->baseUrl;?><?php echo ENTITY_CONTROLLER;?>/<?php echo DEFAULT_SEND_FORM_ACTION;?>" method="post"><!-- =========================================-============ -->
+<!-- Conforme validação de usuário carregar includes abaixo --> <!-- ====================================================== -->
+			<div align="right">
+				<input id="close" onclick="closeForm();" style="margin-left: 534px; margin-top: -85px; background-color:#FFFFFF;" title="Fechar" name="botao" type="image" src="<?php echo $this->baseUrl;?>/public/images/close.png" >
+				<input type="hidden" id="hidden" name="hidden" value="">
+				<input type="hidden" id="ip" name="ip" value="<?php echo $this->ip;?>" >
+			</div>
+			<table bgcolor="white">
+			<tr>
+			
+			</tr>
+			<tr></tr>
+			<tr></tr>
+				<tr>
+					<td>Nome:</td>
+					<td><input value="<?php echo $this->param['name']?>" maxlength="65" name="name" id="name" type="text" style="width: 450px; margin-top: -7px; "><font color="red" size="4">*</font></td>
+				</tr>
+				<tr>
+					<td colspan="2"><?php if ($this->error['name'] != null){ echo '<div class="error"><span>' . $this->error['name'] .'</span></div>';}?></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td>Email:</td>
+					<td><input value="<?php echo $this->param['email']?>" maxlength="65" name="email" id="email" type="text" style="width: 450px; margin-top: -7px;"><font color="red" size="4">*</font></td>
+				</tr>
+				<tr>
+					<td colspan="2"><?php if ($this->error['email'] != null){ echo '<div class="error"><span>' . $this->error['email'] .'</span></div>';}?></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td>Telefone:</td>
+					<td><input value="<?php echo $this->param['phone']?>" maxlength="65" name="phone" id="phone" type="text" style="width: 450px; margin-top: -7px;"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><?php if ($this->error['phone'] != null){ echo '<div class="error"><span>' . $this->error['phone'] .'</span></div>';}?></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td>Cidade:</td>
+					<td><input value="<?php echo $this->param['city']?>" maxlength="65" name="city" id="city" type="text" style="width: 450px; margin-top: -7px;"></td>
+				</tr>
+				<tr>
+					<td colspan="2"><?php if ($this->error['city'] != null){ echo '<div class="error"><span>' . $this->error['city'] .'</span></div>';}?></td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td colspan="2"><div class="error"><span>* Campo obrigatório</span></div></td>
+				</tr>
+				<tr></tr>
+				<tr>
+				<td>
+				</td>
+					<td><input type="submit" value="Enviar" style="width: 100px; margin-left: 170px;"></td>
+				</tr>
+			</table>
+</form>
+	</div>
+</div>
+</div>
+<div id="mask"></div>	

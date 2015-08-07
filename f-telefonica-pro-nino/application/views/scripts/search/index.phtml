@@ -1,0 +1,25 @@
+<?php echo $this->render('header/headerSearch.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->	
+
+	<h1 class="title" style="margin: 33px 0 0 0;"><?php echo $this->controller->search->title;?></h1>
+					  
+	<div class="inputBox">
+
+		<table width="548" style="margin-top: 20px;" cellspacing="0" cellpadding="0" >			
+			<tr>
+				<td class="ajuda"> <?php echo $this->controller->search->text->description;?><hr /></td>
+			</tr>
+		</table>
+		
+		<?php echo $this->render('search/_byname_form.phtml');?>
+		<?php echo $this->render('search/_document_form.phtml');?>
+
+	</div>																  
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+
+<?php echo $this->render('footer/footerSearch.phtml');?>

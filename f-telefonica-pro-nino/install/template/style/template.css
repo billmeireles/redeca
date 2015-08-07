@@ -1,0 +1,610 @@
+/* CSS Document */
+
+@font-face {
+	font-family: 'KreonRegular';
+	src: url('../fontes/kreon-regular-webfont.eot');
+	src: url('../fontes/kreon-regular-webfont.eot?#iefix')
+		format('embedded-opentype'),
+		url('../fontes/kreon-regular-webfont.woff') format('woff'),
+		url('../fontes/kreon-regular-webfont.ttf') format('truetype'),
+		url('../fontes/kreon-regular-webfont.svg#KreonRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+
+html {
+	background: #fff url("../images/fundo.jpg") repeat left top;
+	height: 100%;
+	color: #2B4F65;
+	font-family: "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	font-size: 12px;
+}
+
+
+body {
+	background: url("../images/fundo.png") repeat-x left top transparent;
+	text-align: center;
+	height: 100%;
+	width: 100%;	
+}
+
+h1 {
+	font-size: 16px !important;
+}
+
+h1, .step, h2 {
+	text-transform: uppercase;
+	padding-bottom: 30px;
+	font-weight: normal !important;
+	color: #9DCA90 !important;
+	font-family: 'KreonRegular', Helvetica, Verdana, Arial, sans-serif !important;
+}
+
+ul {
+	margin-left: 50px;
+}
+
+
+.centerBox {
+	padding-top: 15px;
+	margin: auto;
+	width: 750px;
+}
+
+/*body, div, p, td, span {
+	font-family: Tahoma, Arial, sans-serif;
+	font-size: 11px;
+}
+
+*/a:link, a:visited {
+	text-decoration: none;
+	color: #0B55C4;
+}
+
+/*h1, h2, h3, h4, h5,
+#header3 span,
+.step-on, .step-off, .step-grey,
+.step,
+.button1-left a,
+.button1-right a {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+*/
+
+.clr {
+	clear: both;
+}
+
+.newsection {
+  height: 20px;
+  clear: both;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+/* installer */
+#header1 {
+	background: url(../images/logo.png) no-repeat;
+	height: 45px;
+	margin-bottom: 33px;
+}
+
+#version {
+	float: right;
+	width: 78%;
+	color: #2B4F65;
+	text-align: right;
+	padding-top: 15px;
+	padding-right: 10px;
+	
+	background: transparent;
+}
+
+#headerBorder1 {
+	border-top: 1px solid #CCCCCC;
+}
+
+/*#headerBorder2 {
+	background: url(../images/j_corner_tl.png) 100% 0 no-repeat transparent;
+}
+
+#headerBorder3 {
+	background: url(../images/j_corner_tr.png) no-repeat transparent;
+	height: 11px;
+}*/
+
+#footer1 {
+	border-bottom: 1px solid #cccccc;
+	
+}
+
+/*#footer2 {
+	background: url(../images/j_corner_br.png) 100% 0 no-repeat;
+}
+
+#footer3 {
+	background: url(../images/j_corner_bl.png) no-repeat;
+	height: 11px;
+}
+*/
+
+#content-box {
+	width: 748px;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	background-color: #FFFFFF !important;
+	padding: 6px 0 6px 0;
+	float: left;
+}
+
+
+#stepbar {
+	float: left;
+	width: 165px;
+	margin: 0 6px;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+#stepbar div.box {
+	background:  url(../images/j_joomla_box.jpg) 50% 20px no-repeat;
+	height: 140px;
+}
+
+#stepbar h1 {
+	margin: 0;
+	padding-bottom: 8px;
+	font-size: 20px;
+	color: #0B55C4;
+	font-weight: bold;
+	background: url(../images/j_divider.png) 0 100% repeat-x;
+}
+
+.step-on, .step-off, .step-grey {
+	padding-top: 10px;
+	padding-bottom: 12px;
+	font-size: 12px;
+	font-weight: bold;
+	background: url(../images/j_divider.png) 0 100% repeat-x;
+}
+
+.step-off {
+	color: #333;
+}
+
+.step-on {
+	color: #0B55C4;
+}
+
+.step-grey {
+  color: #a7a7a7
+}
+
+#right, #warning {
+	margin-left: 180px;
+}
+
+#rightpad {
+	width: 99%;
+	float: left;
+	padding: 0;
+}
+
+#step {
+	width: 562px;
+	margin-bottom: 6px;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	float: left;
+}
+
+span.step {
+	font-size: 20px;
+	line-height: 30px;
+	color: #0B55C4;
+	font-weight: bold;
+	padding-left: 6px;
+}
+
+.far-right {
+	padding-right: 6px;
+	margin-top: 2px;
+	float: right;
+	text-align: right;
+}
+
+.button1-left {
+	background: url(../images/j_button1_left.png) no-repeat;
+	float: left;
+	margin-left: 5px;
+}
+
+.button1-right {
+	background: url(../images/j_button1_right.png) 100% 0 no-repeat;
+	float: left;
+	margin-left: 5px;
+}
+
+.button1-left .refresh {
+	float: left;
+	background: url(../images/j_button1_refresh.png) 100% 0 no-repeat;
+}
+
+.button1-right .prev {
+	float: left;
+	background: url(../images/j_button1_prev.png) no-repeat;
+}
+
+.button1-left .next {
+	float: left;
+	background: url(../images/j_button1_next.png) 100% 0 no-repeat;
+}
+
+.button1-left .site {
+	float: left;
+	background: url(../images/j_button1_site.png) 100% 0 no-repeat;
+}
+
+.button1-left .admin {
+	float: left;
+	background: url(../images/j_button1_admin.png) 100% 0 no-repeat;
+}
+
+.button1-left .collate {
+	float: left;
+	background: url(../images/j_button1_collate.png) 100% 0 no-repeat;
+}
+
+
+
+.button1-left a,
+.button1-right a {
+	display: block;
+	height: 26px;
+	float: left;
+	line-height: 26px;
+	font-size: 11px;
+	font-weight: bold;
+	color: #333;
+	cursor: pointer;
+}
+
+.button1-left a {
+	padding: 0 30px 0 6px;
+}
+
+.button1-right a {
+	padding: 0 6px 0 30px;
+}
+
+#installer {
+	background: transparent !important;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	float: left;
+}
+
+#installer h2.borderBotton {
+	font-size: 14px;
+	line-height: 20px;
+	height: 20px;
+	color: #333;
+	font-weight: bold;
+	margin: 0;
+	border-bottom: 1px solid #ccc !important;
+	margin-bottom: 10px;
+	padding: 5px !important;
+}
+
+.install-text-error {
+	float: left;
+	color: #444;
+}
+
+.install-text {
+	float: left;
+	width: 40%;
+	color: #444;
+}
+
+.install-text .error{
+	font-size: 14px;
+	font-weight: normal;
+	color: #c00;
+}
+
+.install-body {
+	float: right;
+	width: 58%;
+	margin-bottom: 15px !important;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.extra-padding {
+	padding: 0px;
+}
+
+.install-body fieldset {
+  padding: 5px;
+	margin: 0;
+	border: 0;
+}
+
+#copyright {
+	margin: 10px;
+	text-align: center;
+}
+
+.Yes, .Writeable {
+	font-weight: bold;
+	color: #46882B;
+}
+
+.No, .Unwriteable {
+	font-weight: bold;
+	color: #c00;
+}
+
+.item {
+	font-size: 10px;
+}
+
+.content       { width: 100%; }
+.content .item { width: 50%; }
+.content2 .item { width: 30%; }
+
+.license {
+  padding: 0px;
+  width: 100%;
+  height: 500px;
+}
+
+.error {
+	font-size: 14px;
+	font-weight: bold;
+	color: #c00;
+	padding-bottom: 10px;
+}
+
+.errorInstall {
+	font-size: 14px;
+	font-weight: bold;
+	color: #c00;
+	padding-bottom: 10px;
+	background-color: yellow;
+}
+
+h3.title-smenu, h3.moofx-toggler {
+	margin: 0;
+	border: 1px solid #ccc;
+	padding: 4px;
+	background-color: #EBEBEB;
+	margin-bottom: 1px;
+	font-size: 12px;
+	color: #666;
+}
+
+h3.moofx-toggler      { background: #EBEBEB url(../images/j_arrow.png) 5px 50% no-repeat; text-indent: 15px; }
+h3.moofx-toggler-down { background-image: url(../images/j_arrow_down.png); }
+
+/* hack to stop ugly aliasing in IE */
+div.moofx-slider {
+  background: #fbfbfb;
+}
+
+.final-table { width: 100%; }
+
+td em {
+	color: #666;
+}
+
+div#javascript-warning {
+	padding: 1em;
+	border: 1px solid #ccc;
+	background-color: red;
+	margin-bottom: 10px;
+	font-size: 18px;
+	color: white;
+}
+/* form limiting stuff */
+
+#theDefault input {
+	cursor: pointer;
+}
+
+/* corners */
+
+div#stepbar {
+  background: #f7f7f7;
+}
+
+div#installer {
+  background: #fff;
+}
+
+div#installer div.install-body div.m {
+	background: #fbfbfb;
+}
+
+div.t, div.b {
+  height: 6px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+div.m {
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 0 8px;
+	text-align: left;
+}
+
+div#step div.m {
+  padding: 0;
+}
+
+
+
+div#installer div.m {
+  padding-bottom: 1px !important;
+  padding-bottom: 0px;
+}
+
+div#stepbar div.t {
+  background: url(../images/j_border.png) 0 0 repeat-x;
+}
+
+div#stepbar div.t div.t {
+   background: url(../images/j_crn_tr_dark.png) 100% 0 no-repeat;
+}
+
+div#stepbar div.t div.t div.t {
+   background: url(../images/j_crn_tl_dark.png) 0 0 no-repeat;
+}
+
+div#stepbar div.b {
+  background: url(../images/j_border.png) 0 100% repeat-x;
+}
+
+div#stepbar div.b div.b {
+   background: url(../images/j_crn_br_dark.png) 100% 0 no-repeat;
+}
+
+div#stepbar div.b div.b div.b {
+   background: url(../images/j_crn_bl_dark.png) 0 0 no-repeat;
+}
+
+div#step,
+div#installer div.install-body {
+  background: #fbfbfb;
+}
+
+div#installer div.install-body input {
+	border: none;
+	width: 290px;
+	padding: 8px 5px;
+	background-color: #eee;
+	font: 12px "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+	outline: none;
+	color: #2b4f65;
+}
+
+div#installer div.install-body label {
+	width: 100%;
+	border-top: 1px #ccc solid;
+	padding-top: 10px;
+	margin-top: 5px;
+	float: left;
+}
+
+div#installer div.install-body em {
+	font-size: 11px;
+}
+
+div#installer div.install-body .noBorder {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+
+div#step div.t,
+div#installer div.install-body div.t {
+  background: url(../images/j_border.png) 0 0 repeat-x;
+}
+
+div#step div.t div.t,
+div#installer div.install-body div.t div.t {
+   background: url(../images/j_crn_tr_med.png) 100% 0 no-repeat;
+}
+
+div#step div.t div.t div.t,
+div#installer div.install-body div.t div.t div.t {
+   background: url(../images/j_crn_tl_med.png) 0 0 no-repeat;
+}
+
+div#step div.b,
+div#installer div.install-body div.b {
+  background: url(../images/j_border.png) 0 100% repeat-x;
+}
+
+div#step div.b div.b,
+div#installer div.install-body div.b div.b {
+   background: url(../images/j_crn_br_med.png) 100% 0 no-repeat;
+}
+
+div#step div.b div.b div.b,
+div#installer div.install-body div.b div.b div.b {
+   background: url(../images/j_crn_bl_med.png) 0 0 no-repeat;
+}
+
+div#installer div.t {
+  background: url(../images/j_border.png) 0 0 repeat-x;
+}
+
+div#installer div.t div.t {
+   background: url(../images/j_crn_tr_light.png) 100% 0 no-repeat;
+}
+
+div#installer div.t div.t div.t {
+   background: url(../images/j_crn_tl_light.png) 0 0 no-repeat;
+}
+
+div#installer div.b {
+  background: url(../images/j_border.png) 0 100% repeat-x;
+}
+
+div#installer div.b div.b {
+   background: url(../images/j_crn_br_light.png) 100% 0 no-repeat;
+}
+
+div#installer div.b div.b div.b {
+   background: url(../images/j_crn_bl_light.png) 0 0 no-repeat;
+}
+
+.buttonGreen {
+	text-align: center;
+	float: left;
+	cursor: pointer;	
+	margin: 0px 3px;
+	height: 33px;
+}
+
+.refreshPage {
+	background: url("../images/baixo.png") 10px 5px no-repeat #2B4F65;
+}
+
+.previousStep {
+	background: url("../images/voltar.png") 10px 5px no-repeat #2B4F65;
+}
+
+
+.nextStep {
+	background: url("../images/avante.png") 10px 5px no-repeat #2B4F65;
+}
+
+.buttonGreen a {
+	padding: 7px 10px 9px 45px;
+	font-size: 10pt;
+	line-height: 33px;
+	color: #99C78D;
+}
+
+#stepbar div.ativo {
+	font-weight: bold;
+	color: #fff;
+	padding-left: 10px;
+	background: url("../images/seta.gif") no-repeat left center transparent;
+}

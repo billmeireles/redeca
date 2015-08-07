@@ -1,0 +1,46 @@
+	<form name="enable_disable_entity" id="navigation" action="" method="post">
+	<tr>
+		<td class="" colspan="3">
+			<?php if($this->errorMessages) printErrorsByField(EntityForm::id(), $this->errorMessages);?>
+		</td>
+	</tr>
+	<!--<tr class="write">
+		<td class="bold" align="center" width="2%" height="20">&nbsp;</td>
+		<td class="bold" align="center" width="90%">< ?php //echo $this->controller->entity->admin->entity;?></td>
+		<td class="bold" align="center" width="8%">< ?php //echo $this->controller->entity->admin->status;?></td>
+	</tr>-->
+	<?php $indexEntity = 1; foreach($this->entities as $entity): ?>		 
+	<?php  //if($indexEntity++ %2 == 0) $tr = 'write'; else $tr = ''; ?>
+			<!--<tr class="< ?php //echo $tr ?>">-->
+			<tr class="lineGrid">
+				
+				<td class="borderLeft" align="center" width='50' ><input type='checkbox' name='<?php echo EntityForm::id();?>[]' value='<?php echo $entity->{ENT_ID_ENTITY}; ?>'/></td>
+				<td class='gridContent' align='left' valign="center" width='490'> 
+					<p><?php 
+						echo $entity->{ENT_NAME}; 
+						$coordinator = $this->coordinatorMap[$entity->{ENT_ID_ENTITY}];
+						echo '<br />'. $this->controller->entity->admin->coordinator.' : <strong>'. $coordinator->{AUTH_NAME_USER}. '</strong>';
+						?>
+					</p>					
+				</td>
+				<td class='centerObject borderRight' > 
+					<?php 
+					if($entity->{ENT_STATUS}) {
+						echo "<div class='styleGreenWrite'><span>".$this->controller->entity->text->status->enable."</span></div>";
+					} else {
+						echo "<div class='styleRedWrite'><span>".$this->controller->entity->text->status->disable."</span></div>";
+					}
+					?>
+				</td>
+			</tr>
+			<!--<tr class="< ?php //echo $tr ?>"> -->
+		
+			<tr class="space"><td colspan="3">&nbsp;</td></tr>
+	<?php endforeach; ?>
+			<tr>
+				<td align='center' colspan='3'>
+					<?php echo $this->render('/navBar.phtml');?>
+				</td>
+			</tr>
+  	</form>
+  

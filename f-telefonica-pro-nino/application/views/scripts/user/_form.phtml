@@ -1,0 +1,314 @@
+<form action="" method="post">
+	
+	
+	<tr>
+		<td colspan="2">
+			<?php if(!$this->form->getId()){?>
+			<h1 class="title"><?php echo $this->controller->user->text->add->title;?></h1>
+			<?php }else{?>
+			<h1 class="title"><?php echo $this->controller->user->text->edit->title;?></h1>
+			<?php printErrorsByField($this->form->id(), $this->errorMessages);?>
+			<?php }?>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<div class="inputBox">
+				<table width="548" cellpadding="0" cellspacing="0">
+			
+					<tr>
+						<td class="label" width="25%">
+							<?php echo $this->controller->user->text->add->datecreate;?>
+						</td>
+						<td class="bold middleValign">
+							<?php if(!$this->form->getId())	{echo date("d/m/Y");$date = date("Y-m-d");?>
+								<input type="hidden" name="<?php echo $this->form->creationDate();?>" value="<?php echo $date;?>">
+							<?php } else {	
+									if (strlen($this->form->getCreationDate()) == 10)
+									{
+										$arrayDate = explode("-",$this->form->getCreationDate());
+										$date = $arrayDate[2]."/".$arrayDate[1]."/".$arrayDate[0];
+										echo $date;
+									} ?>
+									<input type="hidden" name="<?php echo $this->form->creationDate();?>" value="<?php echo $this->form->getCreationDate();?>">
+							<?php } ?>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->creationDate(), $this->errorMessages);?></td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->add->select;?>:</td>
+						<td>
+							<select name="<?php echo $this->form->idRole();?>" onChange="javascript: actionName('<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_ROLE_ACTION;?>', this.form);this.form.submit();">
+								<option value=""><?php echo $this->controller->user->text->add->select;?>...</option>
+								<!--FOREACH DE TIPO-->
+								<?php 
+									$idRole = $this->form->getIdRole();
+									foreach($this->roles as $group)
+									{
+										if($group->{AUTH_STATUS} != Constants::DISABLE)
+										{
+											if(($this->loggedRole == $this->config->user->role->coordinator) || ($this->loggedRole == $this->config->user->role->manager))
+											{
+												if(($group->{AUTH_ID_ROLE} == $this->config->user->role->technician) || ($group->{AUTH_ID_ROLE} == $this->config->user->role->operator))
+												{
+													if(($group->{AUTH_ID_ROLE} == $idRole))
+													{
+														echo "<option value='".$group->{AUTH_ID_ROLE}."' selected>".$group->{AUTH_ROLE}."</option>";
+													}
+													else
+													{
+														echo "<option value='".$group->{AUTH_ID_ROLE}."'>".$group->{AUTH_ROLE}."</option>";
+													}
+												}
+											}
+											else if($this->loggedRole == $this->config->user->role->administrator)
+											{
+												if(($group->{AUTH_ID_ROLE} == $idRole))
+												{
+													echo "<option value='".$group->{AUTH_ID_ROLE}."' selected>".$group->{AUTH_ROLE}."</option>";
+												}
+												else
+												{
+													echo "<option value='".$group->{AUTH_ID_ROLE}."'>".$group->{AUTH_ROLE}."</option>";
+												}
+											}
+										}						
+									}
+								?>
+							</select>
+						</td>		
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->idRole(), $this->errorMessages);?></td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->admin->entity;?>:</td>
+						<td>
+							<?php if($this->idEntity):?>
+								<input type="hidden" name="<?php echo $this->form->idEntity();?>" value="<?php echo $this->idEntity;?>"/>
+								<?php 
+									foreach($this->entities as $entity):
+										if($entity->{ENT_ID_ENTITY} == $this->idEntity)
+											echo $entity->{ENT_NAME};
+									endforeach;
+								?>
+							<?php else:?>
+								<select name="<?php echo $this->form->idEntity();?>" onChange="javascript: actionName('<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_ENTITY_ACTION;?>', this.form);this.form.submit();">
+									<option value=""><?php echo $this->controller->user->text->admin->entity;?>...</option>
+									<!--FOREACH DE ENTIDADE-->
+									<?php $idEntity = $this->form->getIdEntity();?>
+									<?php foreach($this->entities as $entity): ?>
+										<option value="<?php echo $entity->{ENT_ID_ENTITY};?>"
+											<?php if($entity->{ENT_ID_ENTITY} == $idEntity) echo "selected";?>><?php echo $entity->{ENT_NAME};?></option>
+									<?php endforeach;?>
+								</select>
+							<?php endif;?>
+						</td>
+					</tr>	
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->idEntity(), $this->errorMessages);?></td>
+					</td>
+					
+					<?php if((($this->form->getIdRole() == $this->config->user->role->technician) || ($this->form->getIdRole() == $this->config->user->role->operator))
+							 && ($this->form->getIdEntity())):?>
+						<tr>
+							<td class="label"><?php echo $this->controller->user->text->admin->group;?>:</td>
+							<td>
+								<select name="<?php echo $this->form->idGroup();?>">
+									<option value=""><?php echo $this->controller->user->text->admin->group;?>...</option>
+									<?php if($this->form->getIdRole()):?>
+										<!--FOREACH DE GRUPO-->
+										<?php 
+											$idGroup = $this->form->getIdGroup();
+											foreach($this->groups as $group)
+											{
+												if($group->{AUTH_STATUS} != Constants::DISABLE)
+												{
+													if($group->{AGP_ID_GROUP} == $idGroup)
+													{
+														echo "<option value='".$group->{AGP_ID_GROUP}."' selected>".$group->{AGP_GROUP}."</option>";
+													}
+													else
+													{
+														echo "<option value='".$group->{AGP_ID_GROUP}."' >".$group->{AGP_GROUP}."</option>";
+													}
+												}
+											}
+										?>
+									<?php endif;?>
+								</select>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="2"><?php printErrorsByField($this->form->idGroup(), $this->errorMessages);?></td>
+						</tr>
+					<?php endif;?>
+					
+					<tr>
+						<td class="label">&nbsp;</td>
+						<td><?php echo $this->controller->user->text->add->profiletitle;?></td>
+					</tr>
+					
+					<tr>
+						<td class="label">
+							<div class="tdToTop" style="height: 250px;">
+								<?php echo $this->controller->user->text->add->profile;?>:
+							</div>
+						</td>
+						
+						<td>
+							<select name="<?php echo $this->form->idProfile();?>[]" multiple style="height: 250px;">
+								<!--FOREACH DE PERFIS-->
+								<option value=''
+									<?php if(sizeof($this->userProfile) == 0 ) echo "selected ";?> 
+									title="<?php echo $this->controller->user->text->profile->nenhum; ?>"><?php echo $this->controller->user->text->profile->nenhum; ?></option>
+								<?php 
+									foreach($this->profiles as $profile)
+									{
+										if($profile->{AUTH_STATUS} != Constants::DISABLE){
+								?>		
+										<option 
+										<?php
+											foreach($this->userProfile as $userProfile)
+											{
+												if($userProfile->{AUTH_ID_PROFILE} == $profile->{AUTH_ID_PROFILE})
+												{
+													echo "selected";
+												}
+											} 
+										?> value='<?php echo $profile->{AUTH_ID_PROFILE};?>' title="<?php echo $profile->{AUTH_PROFILE};?>"><?php echo $profile->{AUTH_PROFILE};?></option>
+								<?php
+									}}
+								?>
+							</select>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->idProfile(), $this->errorMessages);?></td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->add->situation?>:</td>
+						<td>
+							<div class="radioCenter">
+								<?php if(!$this->form->getId()){?>
+									<input checked type="radio" name="<?php echo $this->form->active();?>" value="1" /><?php echo $this->controller->user->text->add->enable?>&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="<?php echo $this->form->active();?>" value="0" /><?php echo $this->controller->user->text->add->disable?>
+								<?php }?>
+								<?php if($this->form->getId()){?>
+									<input <?php if($this->form->getActive() == 1){?> checked <?php }?> type="radio" name="<?php echo $this->form->active();?>" value="1" /><?php echo $this->controller->user->text->add->enable?>&nbsp;&nbsp;&nbsp;&nbsp;
+									<input <?php if($this->form->getActive() == 0){?> checked <?php }?> type="radio" name="<?php echo $this->form->active();?>" value="0" /><?php echo $this->controller->user->text->add->disable?>
+								<?php }?>
+							</div>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->active(), $this->errorMessages);?></td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->add->name;?></td>
+						<td>
+							<input type="text" maxlength="100" name="<?php echo $this->form->name();?>" value="<?php echo $this->form->getName();?>"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->name(), $this->errorMessages);?></td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->add->document;?></td>
+						<td align="left">
+							<input maxlength="11" type="text" name="<?php echo $this->form->cpf();?>" value="<?php echo $this->form->getCpf();?>"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->cpf(), $this->errorMessages);?></td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->add->username;?></td>
+						<td>
+							<input type="text" name="<?php echo $this->form->login();?>" value="<?php echo $this->form->getLogin();?>"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->login(), $this->errorMessages);?></td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->add->password;?></td>
+						<?php if(!$this->form->getId()){?>
+						<td>
+							<input type="password" name="<?php echo $this->form->password();?>" value="<?php echo $this->form->getPassword();?>"/>
+						</td>
+						<?php }?>
+						
+						<?php if($this->form->getId()){?>
+						<td>	
+							<div class="radioCenter">
+								<input id="flgPassword" <?php if($this->errorMessages[pass]) echo 'checked'; ?> type="checkbox" name="<?php echo $this->form->flagPassword();?>" value="1" onClick="javascript: showAndHide();">&nbsp;<?php echo $this->controller->user->text->edit->password;?>
+							</div>
+							
+							<div id="password" <?php if($this->errorMessages[pass]) echo 'style=display:block;'; else echo 'style=display:none;'?> >
+								<table width="100%" cellpadding="0" cellspacing="0">
+									<tr>
+										<td>
+											<input type="password" name="<?php echo $this->form->password();?>"/>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</td>
+						<?php }?>
+					</tr>
+					
+					<tr>
+						<td colspan="2">
+							<?php printErrorsByField($this->form->password(), $this->errorMessages);?>
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="label"><?php echo $this->controller->user->text->add->email;?>:</td>
+						<td>
+							<input type="text" name="<?php echo $this->form->email();?>" value="<?php echo $this->form->getEmail();?>"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="2"><?php printErrorsByField($this->form->email(), $this->errorMessages);?></td>
+					</tr>
+
+					<tr>
+						<td align="left" colspan="2" >
+							<?php if(!$this->form->getId()):?>
+								<input class="button" type="submit" value="<?php echo $this->labels->button->save;?>"
+									onClick="javascript: actionName('<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_ADD_ACTION;?>', this.form);"/>
+							<?php else:?>
+								<input class="button" type="hidden" name="<?php echo $this->form->id();?>" value="<?php echo $this->form->getId();?>">
+								<input class="button" style="margin-left: 5px;" type="submit" value="<?php echo $this->labels->button->save;?>"
+									onClick="javascript: actionName('<?php echo $this->baseUrl;?><?php echo USER_CONTROLLER;?>/<?php echo DEFAULT_EDIT_ACTION;?>', this.form);"/>
+							<?php endif;?>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+	
+</form>

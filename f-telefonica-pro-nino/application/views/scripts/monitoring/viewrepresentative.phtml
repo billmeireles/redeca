@@ -1,0 +1,110 @@
+<?php echo $this->render('header/header.phtml');?>								 		  						
+				  
+<!-- ===================================== -->
+<!-- inicio : específico com cada template -->					
+<!-- ===================================== -->						  
+<div>
+	<?php echo $this->render('submenu/submenuAdm.phtml');?>
+	<?php echo $this->render('submenu/submenuEntity.phtml');?>
+</div>
+
+<?php 
+	$total = (int) 0;
+?>
+	
+<div class="rel">
+	<h3>Filtro Selecionado: Representante Legal</h3>
+	<!-- Listando entidades -->
+	<?php foreach ($this->view as $entity): ?>
+		<div class='title'><strong>Entidade:</strong> <?php echo $entity->getName() ?></div>
+		
+		<?php $top = true ?>
+		<!-- Listando listando bairros ("Categoria") -->
+		<?php foreach ($entity->getCategorys() as $category): ?>
+		
+			<?php if($category->getTotal() > 0) { ?>
+				
+				<?php if((count($category->getPersons()) > 0) && ($top === true)) { ?>
+					<?php $top = false; ?>
+					<div class="gridTop">
+						<div style="width:270px;">
+							<strong>Pessoa</strong>
+						</div>
+						<div style="width:60px;">
+							<strong>Sexo</strong>
+						</div>
+						<div style="width:120px;">
+							<strong>Nascimento</strong>
+						</div>
+						<div style="width:120px;">
+							<strong>Relação</strong>
+						</div>
+					</div>
+				<?php } ?>
+				
+				<div class="category"><strong><?php echo $category->getName() ?></strong></div>
+				<div class="category">
+					<?php
+						if($category->getAddress() != ''){
+							echo $category->getAddressType().' '.$category->getAddress();
+						}
+						if($category->getNumber() != ''){
+							echo ', '.$category->getNumber();
+						}
+						if($category->getComplement() != ''){
+							echo ', '.$category->getComplement();
+						}
+						if($category->getNeighborhood() != ''){
+							echo ', '.$category->getNeighborhood();
+						}
+						if($category->getCity() != ''){
+							echo ', '.$category->getCity();
+						}
+						if($category->getUfAbbreviation() != ''){
+							echo '/'.$category->getUfAbbreviation();
+						}
+						//echo $category->getAddressType().' '.$category->getAddress().', '.$category->getNumber().', '.$category->getComplement().', '.$category->getNeighborhood().', '.$category->getCity().'/'.$category->getUfAbbreviation()
+					?>
+				</div>
+				
+				<?php foreach ($category->getPersons() as $person): ?>
+					<div class="grid">
+						<div class="cell" style="width:260px; margin-right: 20px;">
+							<?php echo $person->getName() ?>
+						</div>
+						<div class="cell" style="width:60px; margin-left: 10px;">
+							<?php echo strtoupper($person->getSex()); ?>
+						</div>
+						<div class="cell" style="width:100px;">
+							<?php
+								$date = new DateTime($person->getBirthDate());
+								echo $date->format('d/m/Y');
+							?>
+						</div>
+						<div class="cell" style="width:120px;">
+							<?php echo $person->getKinship(); ?>
+						</div>
+					</div>
+				<?php endforeach ?>
+				
+				<div class="subTotal"><strong>Subtotal do representante legal:</strong> <?php echo $category->getTotal() ?></div>
+				
+				<?php $total = $total + $category->getTotal() ?>
+			<?php } ?>
+			
+		<?php endforeach ?>
+		<?php if($total < 1){?>
+			<div class="registro">Nenhum registro encontrado.</div>
+		<?php }else{ ?>
+			<div class="total"><strong>Total da entidade:</strong> <?php echo $total ?></div>
+			<?php $total = 0; ?>
+		<?php } ?>
+		
+	<?php endforeach ?>
+	<input class="button" type="button" value="Voltar" onclick="window.location = '<?php echo $this->baseUrl;?><?php echo MONITORING_CONTROLLER;?>/representative';"/>
+</div>
+	
+<!-- ================================== -->
+<!-- fim : específico com cada template -->					
+<!-- ================================== -->		
+<?php echo $this->render('footer/footer.phtml');?>

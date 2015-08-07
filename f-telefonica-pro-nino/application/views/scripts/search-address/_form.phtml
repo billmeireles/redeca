@@ -1,0 +1,214 @@
+<!-- <script type="text/javascript">
+
+var cep = document.getElementById("zip");
+var logra = document.getElementById("adress");
+var chk = document.getElementById("chkAddress");
+
+alert(chk.checked);
+
+if (chk.checked)
+  {
+	cep.style.display = '';
+	logra.style.display = 'none';
+  } else {
+	cep.style.display = 'none';
+	logra.style.display = ''; 
+  }
+</script> -->
+
+<form id="navigation" action="<?php echo $this->baseUrl . SEARCHADDRESS_CONTROLLER.'/'?><?php if($this->action == SEARCH_ADDRESS_ACTION)echo SEARCH_ADDRESS_ACTION; else echo SEARCH_ZIPCODE_ACTION;?>" method="post">
+		
+		<table width="528" style="width: 528px !important; padding-bottom: 0;" class="inputBox" cellpadding="0" cellspacing="0">
+	
+			<tr>
+				<td colspan="2">
+					<h1><?php echo $this->labels->title->address->search;?></h1>
+				</td>
+			</tr>
+			
+			<!-- =================================================================================================================== -->
+			<!-- ================================================= Início do Form de Busca de Endereço ============================= -->
+			<!-- =================================================================================================================== -->
+			
+			<tr>
+				<td colspan="2" align="center">
+					<?php echo $this->helpcontroller->text1?>
+				</td>
+			</tr>
+			
+			<tr>
+				<td width="35%">
+					<div class="label">
+						<?php echo $this->controller->postalcode->text->typesearch;?>:
+					</div>
+				</td>
+				
+				<td>
+					<div class="radioCenter">
+						<input id="chkAddress" type="radio" name="<?php echo SearchAddressForm::flgAction();?>" value="<?php echo SearchAddressForm::FLG_ACTION_ZIPCODE_KEY; ?>" onclick="actionName('<?php echo $this->baseUrl.SEARCHADDRESS_CONTROLLER.'/'.SEARCH_ZIPCODE_ACTION;?>',this.form);" checked />
+						<?php echo $this->controller->postalcode->text->typepostal;?>
+						
+						<input type="radio" name="<?php echo SearchAddressForm::flgAction();?>" value="<?php echo SearchAddressForm::FLG_ACTION_ADDRESS_KEY; ?>" onclick="actionName('<?php echo $this->baseUrl.SEARCHADDRESS_CONTROLLER.'/'.SEARCH_ADDRESS_ACTION;?>',this.form);" 
+						<?php if($this->action == Constants::SEARCH_ADDRESS_ACTION_TYPE) echo 'checked' ?> />
+						<?php echo $this->controller->postalcode->text->address;?>
+					</div>	
+				</td>
+			</tr>
+			
+			<tr id="zip">
+				<td>
+					<div class="label">
+						<?php echo $this->controller->search->text->byzipcode;?>:
+					</div>
+				</td>
+				
+				<td>
+					<input class="middleInput" type="text" name="<?php echo SearchAddressForm::zipcode();?>" value="<?php if($this->form)echo $this->escape($this->form->getZipcode());?>" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<?php printErrorsByField(SearchAddressForm::zipcode(), $this->zipcodeErrorMessages);?>				
+				</td>
+			</tr>
+			
+			<tr>				
+				<td colspan="2" style="color:red; font-size:10px">
+					<?php echo $this->controller->description->text->byzipcode;?>
+				</td>
+			</tr>
+			
+			<tr id="adress" >
+				<td>
+					<div class="label">
+						<?php echo $this->controller->search->text->byaddress;?>:
+					</div>
+				</td>
+				
+				<td>
+					<input class="middleInput" size="70" type="text" name="<?php echo SearchAddressForm::address();?>" value="<?php if($this->form)echo $this->escape($this->form->getAddress());?>" />
+				</td>
+			</tr>	
+			
+			<tr>
+				<td colspan="2" style="color:red; font-size:10px"><?php echo $this->controller->description->text->byaddress;?></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" >
+					<?php printErrorsByField(SearchAddressForm::address(), $this->addressErrorMessages); ?>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+					<input class="button" style="margin: 0;" type="submit" name="<?php if($this->form)echo $this->form->filter();?>" value="<?php echo $this->labels->button->filter;?>"/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+
+			<!-- =================================================================================================================== -->
+			<!-- ===================================================== fim do FORM ================================================= -->
+			<!-- =================================================================================================================== -->
+		</table>
+	
+
+
+	<!-- =============================================== Início Resultado da busca ============================================= -->
+	<?php if(count($this->addresses) > 0): //BEGIN IF ?>
+
+	<!-- Seta o tamanho da janela(iframe) -->
+	<script language="JavaScript" type="text/javascript">
+		parent.document.getElementById('iframe_search_address').height = '680px';
+	</script>		
+
+	<table class="inputBox" style="width: 528px;" cellpadding="0" cellspacing="0">	
+		<tr>
+			<td colspan="6">
+				<h1><?php echo $this->labels->title->result->search;?></h1>
+			</td>
+		</tr>
+		<tr>
+			<td align="left">&nbsp;</td>
+			<td align="left"><?php echo $this->controller->search->result->text->address;?></td>
+			<td align="left"><?php echo $this->controller->search->result->text->zipcode;?></td>
+			<td align="left"><?php echo $this->controller->search->result->text->uf;?></td>
+			<td align="left"><?php echo $this->controller->search->result->text->city;?></td>
+			<td align="left"><?php echo $this->controller->search->result->text->neighborhood;?></td>
+		</tr>
+		<?php foreach($this->addresses as $address) {//BEGIN FOREACH ?>
+			<?php $type = $address->findParentRow(CLS_ADDRESSTYPE) ?>
+			<?php $neighborhood = $address->findParentRow(CLS_NEIGHBORHOOD) ?>
+			<?php $city = $neighborhood->findParentRow(CLS_CITY) ?>
+			<?php $uf = $city->findParentRow(CLS_UF) ?>
+					<tr>
+						<td height="30" style="vertical-align: middle;">
+							<input type="radio" name="con_id_address" value="<?php echo $address->{ADR_ID_ADDRESS};?>" onclick="addressHandler('navigation', this.value);"/>
+						</td>
+						<td style="vertical-align: middle;">
+							<input type="hidden" name="<?php echo $address->{ADR_ID_ADDRESS}.$this->form->adr_idAddress();?>" value="<?php echo $address->{ADR_ID_ADDRESS};?>"/>
+							<?php echo $type->{ADT_DESCRIPTION}.' '.$address->{ADR_ADDRESS};?>
+							<input type="hidden" name="<?php echo $address->{ADR_ID_ADDRESS}.$this->form->adr_addressType();?>" value="<?php echo $type->{ADT_DESCRIPTION};?>"/>
+							<input type="hidden" name="<?php echo $address->{ADR_ID_ADDRESS}.$this->form->adr_address();?>" value="<?php echo $address->{ADR_ADDRESS};?>"/>
+						</td>
+						<td style="vertical-align: middle;">
+							<?php echo $address->{ADR_ZIP_CODE} ?>
+							<input type="hidden" name="<?php echo $address->{ADR_ID_ADDRESS}.$this->form->adr_zipcode();?>" value="<?php echo $address->{ADR_ZIP_CODE}; ?>"/>
+						</td style="vertical-align: middle;">
+						<td style="vertical-align: middle;">
+							<?php echo $uf->{UF_ABBREVIATION} ?>
+							<input type="hidden" name="<?php echo $address->{ADR_ID_ADDRESS}.$this->form->adr_uf();?>" value="<?php echo $uf->{UF_ABBREVIATION}; ?>"/>
+						</td>
+						<td style="vertical-align: middle;">
+							<?php echo $city->{CTY_CITY} ?>
+							<input type="hidden" name="<?php echo $address->{ADR_ID_ADDRESS}.$this->form->adr_city();?>" value="<?php echo $city->{CTY_CITY}; ?>"/>
+						</td>
+						<td style="vertical-align: middle;">
+							<?php echo $neighborhood->{NHD_NEIGHBORHOOD}?>
+							<input type="hidden" name="<?php echo $address->{ADR_ID_ADDRESS}.$this->form->adr_neighborhood();?>" value="<?php echo $neighborhood->{NHD_NEIGHBORHOOD}; ?>"/>
+						</td>
+					</tr>
+		<?php }//END FOREACH ?>
+	</table>
+
+	
+	<?php else: ?>
+		<?php if($this->form)$flg = $this->form->getFlgAction();
+		if($flg && ($flg == SearchAddressForm::FLG_ACTION_ZIPCODE_KEY || $flg = SearchAddressForm::FLG_ACTION_ADDRESS_KEY)): ?>
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<tr>
+					<td><hr></td>
+				</tr>
+			</tr>
+			<tr>
+				<td>
+					<b><?php echo $this->controller->search->result->noresults;?></b>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+
+		<!-- Seta o tamanho da janela(iframe) -->
+		<script language="JavaScript" type="text/javascript">
+			parent.document.getElementById('iframe_search_address').height = '690px';
+		</script>
+
+		<?php endif; //END IF ?>
+	<?php endif; //END IF ?>
+	<div style="float: left; margin: 0; width: 100%">
+		<?php echo $this->render('/navBar.phtml');?>
+	</div>
+	
+	<br /><br />
+	
+	<!-- =============================================== Fim Resultado da busca ============================================= -->
+	<?php if($this->form && $this->form->getFlgAction()): //BEGIN IF ?>
+		<?php echo $this->render(SEARCHADDRESS_CONTROLLER.'/descriptionAddress.phtml');?>
+	<?php endif; //END IF ?>	
+		
+</form>	

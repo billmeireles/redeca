@@ -1,0 +1,39 @@
+<?php echo $this->render('header/header.phtml');?>
+
+	<h1 class="title" style="margin-top: 33px;"><?php echo ($this->labels->confirm->disable->title);?></h1>
+
+	<div class="inputBox">
+		<table width="100%" cellpadding="0" cellspacing="0">
+			<tr>
+				<td width="100%" align="center">
+		
+					<?php printErrorsByField($this->form->id(), $this->errorMessages);?>
+					<form action="<?php echo $this->baseUrl;?><?php echo GROUP_CONTROLLER;?>/<?php echo DEFAULT_DROP_ACTION;?>" method="post">
+						<?php if(!$this->errorMessages){?>
+						<p style="margin-top: 10px;">
+							<?php echo $this->labels->confirm->disable->text;?>&nbsp;<?php echo $this->escape($this->form->getId());?>&nbsp;?<br>
+							<?php 
+								foreach($this->result as $result)
+								{
+									echo "<br>".$this->controller->permission->title->group.":&nbsp;";
+									echo "<input type='hidden' name='".$this->form->id()."[]' value='".$result->{AGP_ID_GROUP}."'/>";
+									echo "<b>". $result->{AGP_GROUP}."</b><br>";
+								}
+							?>
+						</p>
+						<?php }?>
+						<div>
+							<?php if(!$this->errorMessages){?>
+							<input class="button" type="submit" name="<?php echo E_CONFIRM; ?>" value="<?php echo $this->labels->confirm->button->yes;?>" />
+							<?php }?>
+							<input class="button" style="margin-left: 5px;" type="button" onClick="document.location='<?php echo $this->baseUrl;?><?php echo GROUP_CONTROLLER;?>/<?php echo DEFAULT_INDEX_ACTION;?>'" value="<?php echo $this->labels->confirm->button->cancel;?>" />
+						</div>
+					</form>			
+				</td>
+			</tr>
+		</table>
+	</div>
+
+<?php echo $this->render('footer/footer.phtml');?>
+ 
+

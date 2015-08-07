@@ -1,0 +1,68 @@
+	
+	<tr>
+		<td><h1 class="title"><?php echo $this->controller->classtemplate->text->newclass;?></h1></td>
+	</tr>	
+
+	<tr><td>
+	<div class="inputBox">
+		<table>
+			<thead>
+				<tr>
+					<td class="label" width="300px">
+						<?php echo $this->controller->classtemplate->text->person;?>
+					</td>
+					<td class="label" width="300px">
+						<?php echo $this->controller->classtemplate->text->includeDate;?>
+					</td>
+					<td class="label" width="300px">
+						<?php echo $this->controller->classtemplate->text->action;?>
+					</td>
+				</tr>
+			</thead>
+			
+			<tbody>
+			<?php $i = 0?>
+				<?php foreach($this->person as $persons) : ?>
+					<?php if($persons['id_status'] == 2):?>
+					<tr>
+						<td >
+							<?php echo $this->escape($persons['name'])?>
+						</td>
+						<td >
+							<?php echo $this->date[$i];?>
+						</td>
+						<td>
+								<?php if($this->vacancy > 0):?>
+								<a href="/class/include/person/<?php echo $this->escape($persons['id_person'])?>/class/<?php echo $this->classes->{CLS_ID_CLASS} ?>"><font size="2"><?php echo $this->controller->classtemplate->text->includeClass;?>&nbsp</font></a>
+								<?php endif;?>
+								<a href="/class/delete/personList/<?php echo $this->escape($persons['id_person'])?>"><font size="2">&nbsp<?php echo $this->controller->classtemplate->text->waitDelete;?></font></a>
+						</td><tr></tr>
+					<?php endif;?>
+					</tr>
+				<?php $i++?>
+				<?php endforeach;?>
+			</tbody>
+		</table>
+		<br />
+		<a href="#" onclick="submitForm('/class/properties','action_<?php echo $iterator?>');">Voltar</a>
+		<?php echo "<form id='";echo "action_"; echo "' method='post'>";
+			echo "<input type='hidden' name='";
+				echo ClassForm::idEntity(); 
+				echo "' value='";
+				echo $this->entity; 
+			echo "'/>";
+			echo "<input type='hidden' name='";
+				echo ClassForm::idClass(); 
+				echo "' value='";
+				echo $this->classes->{CLS_ID_CLASS};
+			echo "'/>";
+			echo "<input type='hidden' name='";
+				echo ClassForm::idProgram(); 
+				echo "' value='";
+				echo $this->classes->{CLS_ID_PROGRAM}; 
+			echo "'/>";
+			echo "";
+			echo "<tr>";
+		echo "</form>";?>
+	</div>
+	
